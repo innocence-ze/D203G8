@@ -4,6 +4,14 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
+    [SerializeField] Vec2Event OnHurt;
+    [SerializeField] Vec2Event OnAttack;
+
+    [Header("HP--血量")]
+    public float maxHp;
+    public float curHp;
+    public float recoverHp;
+
     // Start is called before the first frame update
     void Start()
     {

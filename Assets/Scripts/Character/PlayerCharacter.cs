@@ -11,13 +11,20 @@ public class PlayerCharacter : Character
     [Header("On Ground Trigger--触地判断")]
     public LayerMask groundLayer;
     public bool onGround;
+    public bool nextWall;
+    public bool nextLeftWall;
+    public bool nextRightWall;
     public Vector2 bottomOffset;
+    public Vector2 leftOffset;
+    public Vector2 rightOffset;
     public Vector2 bottomSize;
+    public Vector2 size;
 
     [Header("Jump--跳跃")]
     public bool canJump;
     public float jumpSpeed;
     bool isJumping = false;
+    bool hasJumped = false;
     public bool groundTouched;
     public float bigFallTime;
     float fallTime;
@@ -70,6 +77,7 @@ public class PlayerCharacter : Character
     [SerializeField] FloatEvent onLand;
     [SerializeField] Vec2Event onDash;
     [SerializeField] Vec2Event onMove;
+    [SerializeField] Vec2Event onChangeDir;
     [SerializeField] SimpleEvent onHold;
 
     Rigidbody2D rb;
@@ -89,6 +97,7 @@ public class PlayerCharacter : Character
     private void FixedUpdate()
     {
         onGround = IsOnGround();
+        nextWall = IsNextWall();
 
         frameSpeed = rb.velocity;
         actualDir = GetActualDir(rb.velocity);
@@ -96,10 +105,11 @@ public class PlayerCharacter : Character
         //jump 跳跃相关
         if (jumpCommand && canJump)
         {
-            if (onGround && !isJumping)
+            if (!hasJumped && !isJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
                 isJumping = true;
+                hasJumped = true;
                 onJump?.Invoke();
             }
         }
@@ -114,6 +124,7 @@ public class PlayerCharacter : Character
             if (!jumpCommand)
             {
                 isJumping = false;
+                hasJumped = false;
             }
             if (!groundTouched)
             {
@@ -144,15 +155,14 @@ public class PlayerCharacter : Character
         if (canMove && moveHorCommand != 0)
         {
             onMove?.Invoke(dir);
-            if (moveHorCommand > 0)
+            if (moveHorCommand > 0  && !nextRightWall)
             {
-                onMove?.Invoke(Vector2.right);
                 if (rb.velocity.x < moveSpeed)
                 {
                     rb.velocity = new Vector2(Mathf.SmoothDamp(rb.velocity.x, moveSpeed, ref dampVelocity, accelerateTime), rb.velocity.y);
                 }
             }
-            else if (moveHorCommand < 0)
+            else if (moveHorCommand < 0 && !nextLeftWall)
             {
                 if (rb.velocity.x > -moveSpeed)
                 {
@@ -229,6 +239,7 @@ public class PlayerCharacter : Character
 
     void GetMoveDir()
     {
+        var oldDir = dir;
         if (moveHorCommand > dirOffeset.x) { dir.x = 1; face = 1; }
         else if (moveHorCommand < -dirOffeset.x) { dir.x = -1; face = -1; }
         else dir.x = 0;
@@ -248,11 +259,23 @@ public class PlayerCharacter : Character
                 dir.y = 1;
             }
         }
+
+        if(dir != oldDir)
+        {
+            onChangeDir?.Invoke(dir);
+        }
     }
 
     public bool IsOnGround()
     {
         return Physics2D.OverlapBox((Vector2)transform.position + bottomOffset, bottomSize, 0, groundLayer);
+    }
+
+    public bool IsNextWall()
+    {
+        nextLeftWall = Physics2D.OverlapBox((Vector2)transform.position + leftOffset, size, 0, groundLayer);
+        nextRightWall = Physics2D.OverlapBox((Vector2)transform.position + rightOffset, size, 0, groundLayer);
+        return nextLeftWall || nextRightWall;
     }
 
     Vector2 GetActualDir(Vector2 velocity)
