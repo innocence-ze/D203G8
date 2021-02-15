@@ -50,7 +50,10 @@ public class PlayerCharacter : Character
     public float dashSpeed;
     public float dashDuration;
     public float dashXMultiplier;
+    public float dashDrag;
+    public float dragDuration;
     bool isDashing = false;
+    bool hasDashed = false;
 
     public bool canRecoverEnergy;
     public float dashEnergy;
@@ -113,6 +116,8 @@ public class PlayerCharacter : Character
                 onJump?.Invoke();
             }
         }
+
+        //
         if (!onGround)
         {
             onAir?.Invoke(rb.velocity.y);
@@ -131,6 +136,10 @@ public class PlayerCharacter : Character
                 onLand?.Invoke(fallTime);
                 fallTime = 0;
                 groundTouched = true;
+            }
+            if (!isDashing)
+            {
+                hasDashed = false;
             }
         }
         //jump && gravity optimize  跳跃与重力的优化
@@ -179,13 +188,14 @@ public class PlayerCharacter : Character
         //dash
         if (dashCommand && canDash)
         {
-            if (!isDashing && currentDashEnergy > 0)
+            if (!isDashing && !hasDashed && currentDashEnergy > 0)
             { 
                 onDash?.Invoke(dir);
                 rb.velocity = Vector2.zero;
                 Vector2 dashDir = new Vector2(dir.x * dashXMultiplier, dir.y);
                 rb.velocity += dashDir.normalized * dashSpeed;
                 StartCoroutine(Dashing());
+                hasDashed = true;
             }
         }
 
@@ -221,8 +231,8 @@ public class PlayerCharacter : Character
     IEnumerator Dashing()
     {
         canMove = false;
+        canJump = false;
         isDashing = true;
-
         if (currentDashEnergy > dashEnergy)
         {
             currentDashEnergy -= dashEnergy;
@@ -232,8 +242,13 @@ public class PlayerCharacter : Character
             currentDashEnergy = 0;
         }
 
-        yield return new WaitForSeconds(dashDuration);
+        yield return new WaitForSeconds(dashDuration - dragDuration);
+        rb.drag = dashDrag;
+
+        yield return new WaitForSeconds(dragDuration);
+        rb.drag = 0;
         canMove = true;
+        canJump = true;
         isDashing = false;
     }
 
