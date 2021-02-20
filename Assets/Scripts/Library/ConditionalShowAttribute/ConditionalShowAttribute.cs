@@ -57,6 +57,11 @@ public class ConditionalShowAttribute : PropertyAttribute
             for (int i = 0; i < expectedValues.Length; i++) this.ExpectedValues[i] = (int)expectedValues[i];
         }
     }
+    public ConditionalShowAttribute(bool alwaysShow)
+    {
+        Disabled = true;
+        this.AlwaysShow = alwaysShow;
+    }
 
     public bool Disabled = false;
     /// <summary>

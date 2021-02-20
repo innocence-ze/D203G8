@@ -5,96 +5,107 @@ using UnityEngine;
 public class PlayerCharacter : Character
 {
     [Header("Frame Speed--帧速度")]
-    public Vector2 frameSpeed;
-    public Vector2 actualDir;
+    [ConditionalShow(true)] public Vector2 frameSpeed;
 
     [Header("On Ground Trigger--触地判断")]
+    [ConditionalShow(true)] public bool onGround;
     public LayerMask groundLayer;
-    public bool onGround;
-    public bool nextWall;
-    public bool nextLeftWall;
-    public bool nextRightWall;
     public Vector2 bottomOffset;
+    public Vector2 bottomSize;
+
+    [Header("Next To Wall--贴墙判断")]
+    [ConditionalShow(true)] public bool nextWall;
+    [ConditionalShow(true)] public bool nextLeftWall;
+    [ConditionalShow(true)] public bool nextRightWall;
     public Vector2 leftOffset;
     public Vector2 rightOffset;
-    public Vector2 bottomSize;
-    public Vector2 size;
+    public Vector2 sideSize;
+    public bool canWallJump;
+    public Vector2 wallJumpSpeed;
+    public float wallFallSpeed;
 
     [Header("Jump--跳跃")]
     public bool canJump;
     public float jumpSpeed;
+    public float jumpMoveSpeed;
     bool isJumping = false;
     bool hasJumped = false;
-    public bool groundTouched;
-    public float bigFallTime;
-    float fallTime;
+
+    [Header("Double Jump--二段跳")]
+    public bool canDoubleJump;
+    public float doubleJumpSpeed;
+    public float doubleJumpMoveSpeed;
+    bool hasDoubleJump = false;
 
     [Header("Gravity--引力")]
     public float fallMultiplier;
     public float lowJumpMultiplier;
     public float maxFallSpeed;
-    bool betterJumping = true;
+    public bool betterJumping = true;
 
     [Header("Move--移动")]
     public bool canMove;
     public float moveSpeed;
-    public float accelerateTime;
-    public float decelerateTime;
-    public Vector2 dirOffeset;
-    Vector2 dir;
+    public float accelerate;
+    public float decelerate;
+    [ConditionalShow(true)] public Vector2 moveDir;
+    Vector2 inputDir = Vector2.zero;
     int face = 1;
-    float dampVelocity;     //for smooth
+    float dampVelocity = 0;     //for smooth
 
     [Header("Dash 冲刺")]
     public bool canDash;
     public float dashSpeed;
-    public float dashDuration;
     public float dashXMultiplier;
     public float dashDrag;
-    public float dragDuration;
+    public float withoutDragDuration;
+    public float stopDashSpeed;
     bool isDashing = false;
     bool hasDashed = false;
 
     public bool canRecoverEnergy;
     public float dashEnergy;
     public float maxDashEnergy;
-    public float currentDashEnergy;
-    public float dashEnergyRecoverPerSec;
-    bool dashEnergyRecovering;
+    public float curDashEnergy;
+    public float dashEnergyRecover;
+    bool dashEnergyRecovering = false;
 
+    string curState;
 
 
     [Header("Command--命令")]
     bool jumpCommand = false;
     bool dashCommand = false;
-    float moveHorCommand = 0;
-    float moveVerCommand = 0;
+    bool moveLeftCommand = false;
+    bool moveRightCommand = false;
+    bool moveUpCommand = false;
+    bool moveDownCommand = false;
     public bool JumpCommand { set { jumpCommand = value; } get { return jumpCommand; } }
     public bool DashCommand { set { dashCommand = value; } get { return dashCommand; } }
-    public float MoveHorCommand { set { moveHorCommand = value; } get { return moveHorCommand; } }
-    public float MoveVerCommand { set { moveVerCommand = value; } get { return moveVerCommand; } }
+    public bool MoveLeftCommand { set { moveLeftCommand = value; if (value) moveRightCommand = !value; } get { return moveLeftCommand; } }
+    public bool MoveRightCommand { set { moveRightCommand = value; if (value) MoveLeftCommand = !value; } get { return moveRightCommand; } }
+    public bool MoveUpCommand { set { moveUpCommand = value; if (value) moveDownCommand = !value; } get { return moveUpCommand; } }
+    public bool MoveDownCommand { set { moveDownCommand = value; if (value) moveUpCommand = !value; } get { return moveDownCommand; } }
 
     [Header("Event List")]
     [SerializeField] SimpleEvent onJump;
+    [SerializeField] SimpleEvent onDoubleJump;
+    [SerializeField] SimpleEvent onWallJump;
     [SerializeField] FloatEvent onAir;
     [SerializeField] FloatEvent onLand;
     [SerializeField] Vec2Event onDash;
     [SerializeField] Vec2Event onMove;
     [SerializeField] Vec2Event onChangeDir;
-    [SerializeField] SimpleEvent onHold;
+    [SerializeField] SimpleEvent onIdle;
 
     Rigidbody2D rb;
+    readonly WaitForFixedUpdate continueState = new WaitForFixedUpdate();
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        StartCoroutine(IdleState());
     }
 
     private void FixedUpdate()
@@ -103,100 +114,23 @@ public class PlayerCharacter : Character
         nextWall = IsNextWall();
 
         frameSpeed = rb.velocity;
-        actualDir = GetActualDir(rb.velocity);
+        moveDir = GetMoveDir(rb.velocity);
+        GetInputDir();
 
-        //jump 跳跃相关
-        if (jumpCommand && canJump)
+        if (nextLeftWall && nextRightWall)
         {
-            if (!hasJumped && !isJumping)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-                isJumping = true;
-                hasJumped = true;
-                onJump?.Invoke();
-            }
+            hasJumped = false;
+            hasDoubleJump = false;
         }
 
-        //
-        if (!onGround)
+        if (!jumpCommand)
         {
-            onAir?.Invoke(rb.velocity.y);
-            groundTouched = false;
-            fallTime += Time.fixedDeltaTime;
-        }
-        else
-        {
-            if (!jumpCommand)
-            {
-                isJumping = false;
-                hasJumped = false;
-            }
-            if (!groundTouched)
-            {
-                onLand?.Invoke(fallTime);
-                fallTime = 0;
-                groundTouched = true;
-            }
-            if (!isDashing)
-            {
-                hasDashed = false;
-            }
-        }
-        //jump && gravity optimize  跳跃与重力的优化
-        if (betterJumping)
-        {
-            if (rb.velocity.y < 0)
-            {
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-            }
-            else if (rb.velocity.y > 0 && !jumpCommand)
-            {
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
-            }
-        }
-        if (rb.velocity.y <= maxFallSpeed)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
+            isJumping = false;
         }
 
-        //move
-        GetMoveDir();
-        if (canMove && moveHorCommand != 0)
+        if (!dashCommand)
         {
-            onMove?.Invoke(dir);
-            if (moveHorCommand > 0  && !nextRightWall)
-            {
-                if (rb.velocity.x < moveSpeed)
-                {
-                    rb.velocity = new Vector2(Mathf.SmoothDamp(rb.velocity.x, moveSpeed, ref dampVelocity, accelerateTime), rb.velocity.y);
-                }
-            }
-            else if (moveHorCommand < 0 && !nextLeftWall)
-            {
-                if (rb.velocity.x > -moveSpeed)
-                {
-                    rb.velocity = new Vector2(Mathf.SmoothDamp(rb.velocity.x, -moveSpeed, ref dampVelocity, accelerateTime), rb.velocity.y);
-                }
-            }
-        }
-
-        if ((moveHorCommand == 0 || !canMove) && !isDashing)
-        {
-            rb.velocity = new Vector2(Mathf.SmoothDamp(rb.velocity.x, 0, ref dampVelocity, decelerateTime), rb.velocity.y);
-        }
-
-        //dash
-        if (dashCommand && canDash)
-        {
-            if (!isDashing && !hasDashed && currentDashEnergy > 0)
-            { 
-                onDash?.Invoke(dir);
-                rb.velocity = Vector2.zero;
-                Vector2 dashDir = new Vector2(dir.x * dashXMultiplier, dir.y);
-                rb.velocity += dashDir.normalized * dashSpeed;
-                StartCoroutine(Dashing());
-                hasDashed = true;
-            }
+            isDashing = false;
         }
 
         if (canRecoverEnergy && !dashEnergyRecovering)
@@ -206,94 +140,485 @@ public class PlayerCharacter : Character
 
     }
 
+    IEnumerator IdleState()
+    {
+        curState = "idle";
+        Debug.Log(curState);
+        onIdle?.Invoke();
+        OnGround();
+
+        while (true)
+        {
+            AccelerateSpeed(0, decelerate);
+
+            yield return continueState;
+            if (JumpCondition)
+            {
+                StartCoroutine(JumpState());
+                yield break;
+            }
+            if (DashCondition)
+            {
+                StartCoroutine(DashState());
+                yield break;
+            }
+            if (canMove && (MoveRightCommand || moveLeftCommand))
+            {
+                StartCoroutine(MoveState());
+                yield break;
+            }
+            if (FallCondition)
+            {
+                StartCoroutine(FallState());
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator MoveState()
+    {
+        curState = "move";
+        Debug.Log(curState);
+        onMove?.Invoke(moveDir);
+        OnGround();
+        while (true)
+        {
+            if (canMove && moveRightCommand && !nextRightWall)
+            {
+                if (rb.velocity.x < moveSpeed)
+                {
+                    AccelerateSpeed(moveSpeed, accelerate);
+                }
+            }
+            else if (canMove && moveLeftCommand && !nextLeftWall)
+            {
+                if (rb.velocity.x > -moveSpeed)
+                {
+                    AccelerateSpeed(-moveSpeed, accelerate);
+                }
+            }
+            yield return continueState;
+
+            if (JumpCondition)
+            {
+                StartCoroutine(JumpState());
+                yield break;
+            }
+            if (DashCondition)
+            {
+                StartCoroutine(DashState());
+                yield break;
+            }
+            if (!(moveLeftCommand || moveRightCommand))
+            {
+                StartCoroutine(IdleState());
+                yield break;
+            }
+            if (FallCondition)
+            {
+                StartCoroutine(FallState());
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator DashState()
+    {
+        curState = "dash";
+        Debug.Log(curState);
+        onDash?.Invoke(inputDir);
+
+        canMove = false;
+        isDashing = true;
+        rb.velocity = Vector2.zero;
+        Vector2 dashDir = new Vector2(inputDir.x * dashXMultiplier, inputDir.y);
+        rb.velocity += dashDir.normalized * dashSpeed;
+        yield return new WaitForSeconds(withoutDragDuration);
+
+        while (true)
+        {
+            rb.drag = dashDrag;
+            yield return continueState;
+
+            if (rb.velocity.sqrMagnitude < stopDashSpeed * stopDashSpeed)
+            {
+                if (onGround)
+                {
+                    EndDash(IdleState());
+                    yield break;
+                }
+                else if (NextWallCondition)
+                {
+                    EndDash(NextWallState());
+                    yield break;
+                }
+                else if (FallCondition)
+                {
+                    EndDash(FallState());
+                    yield break;
+                }
+
+                if (JumpCondition)
+                {
+                    EndDash(JumpState());
+                    yield break;
+                }
+                if (DoubleJumpCondition)
+                {
+                    EndDash(DoubleJumpState());
+                    yield break;
+                }
+
+            }
+        }
+    }
+
+    IEnumerator JumpState()
+    {
+        curState = "jump";
+        Debug.Log(curState);
+        onJump?.Invoke();
+        rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        isJumping = true;
+        yield return continueState;
+
+        while (true)
+        {
+            if (!jumpCommand)
+            {
+                hasJumped = true;
+            }
+            BetterJump();
+            MoveInAir(jumpMoveSpeed, accelerate, decelerate);
+
+            yield return continueState;
+
+            if (onGround)
+            {
+                Debug.Log(1);
+                EndJump(IdleState());
+                yield break;
+            }
+            if (NextWallCondition)
+            {
+                EndJump(NextWallState());
+                yield break;
+            }
+            if (FallCondition)
+            {
+                EndJump(FallState());
+                yield break;
+            }
+
+            if (DashCondition)
+            {
+                EndJump(DashState());
+                yield break;
+            }
+
+            if (DoubleJumpCondition)
+            {
+                EndJump(DoubleJumpState());
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator DoubleJumpState()
+    {
+        curState = "doubleJump";
+        Debug.Log(curState);
+        onDoubleJump?.Invoke();
+        isJumping = true;
+        rb.velocity = new Vector2(rb.velocity.x, doubleJumpSpeed);
+
+        while (true)
+        {
+            if (!jumpCommand)
+            {
+                hasDoubleJump = true;
+            }
+            BetterJump();
+            MoveInAir(doubleJumpMoveSpeed, accelerate, decelerate);
+
+            yield return continueState;
+            if (onGround)
+            {
+                EndDoubleJump(IdleState());
+                yield break;
+            }
+            else if (NextWallCondition)
+            {
+                EndDoubleJump(NextWallState());
+                yield break;
+            }
+            else if (FallCondition)
+            {
+                EndDoubleJump(FallState());
+                yield break;
+            }
+
+            if (DashCondition)
+            {
+                EndDoubleJump(DashState());
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator NextWallState()
+    {
+        curState = "nextWall";
+        Debug.Log(curState);
+        hasJumped = false;
+        hasDoubleJump = false;
+        while (true)
+        {
+
+            rb.velocity = new Vector2(rb.velocity.x, wallFallSpeed);
+            if (!nextLeftWall && MoveLeftCommand && canMove)
+            {
+                if (rb.velocity.x > -moveSpeed) AccelerateSpeed(-moveSpeed, accelerate);
+            }
+
+            if (!nextRightWall && MoveRightCommand && canMove)
+            {
+                if (rb.velocity.x < moveSpeed) AccelerateSpeed(moveSpeed, accelerate);
+            }
+
+            yield return continueState;
+            if (onGround)
+            {
+                StartCoroutine(IdleState());
+                yield break;
+            }
+            else if (!nextWall || (nextLeftWall && nextRightWall))
+            {
+                StartCoroutine(FallState());
+                yield break;
+            }
+
+            if (DashCondition)
+            {
+                StartCoroutine(DashState());
+                yield break;
+            }
+            if (canWallJump && jumpCommand && !isJumping)
+            {
+                if (nextLeftWall && !nextRightWall) rb.velocity = wallJumpSpeed;
+                else if (nextRightWall && !nextLeftWall) rb.velocity = new Vector2(wallJumpSpeed.x * -1, wallJumpSpeed.y);
+                StartCoroutine(WallJumpState());
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator WallJumpState()
+    {
+        curState = "wallJump";
+        Debug.Log(curState);
+        isJumping = true;
+        onWallJump?.Invoke();
+        yield return continueState;
+        while (true)
+        {
+            if (!jumpCommand)
+            {
+                hasJumped = true;
+            }
+            BetterJump();
+            //MoveInAir(jumpMoveSpeed, accelerate, 0.1f);
+
+            yield return continueState;
+            if (onGround)
+            {
+                EndJump(IdleState());
+                yield break;
+            }
+            else if (NextWallCondition)
+            {
+                EndJump(NextWallState());
+                yield break;
+            }
+            else if (FallCondition)
+            {
+                EndJump(FallState());
+                yield break;
+            }
+
+            if (DashCondition)
+            {
+                EndJump(DashState());
+                yield break;
+            }
+
+            if (DoubleJumpCondition)
+            {
+                EndJump(DoubleJumpState());
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator FallState()
+    {
+        curState = "fall";
+        Debug.Log(curState);
+        onAir?.Invoke(-1);
+        while (true)
+        {
+            BetterJump();
+            MoveInAir(jumpMoveSpeed, accelerate, decelerate);
+
+            yield return continueState;
+            if (onGround)
+            {
+                StartCoroutine(IdleState());
+                yield break;
+            }
+            else if (NextWallCondition)
+            {
+                StartCoroutine(NextWallState());
+                yield break;
+            }
+
+            if (DashCondition)
+            {
+                StartCoroutine(DashState());
+                yield break;
+            }
+            if (JumpCondition)
+            {
+                StartCoroutine(JumpState());
+                yield break;
+            }
+            if (DoubleJumpCondition)
+            {
+                StartCoroutine(DoubleJumpState());
+                yield break;
+            }
+        }
+    }
+
     IEnumerator DashEnergyRecovery()
     {
         dashEnergyRecovering = true;
-        if (currentDashEnergy < maxDashEnergy)
+        if (curDashEnergy < maxDashEnergy)
         {
             if (isDashing)
             {
                 yield return new WaitForSeconds(1.5f);
             }
-            else if (currentDashEnergy == 0)
+            else if (curDashEnergy == 0)
             {
                 yield return new WaitForSeconds(1.5f);
-                currentDashEnergy += dashEnergyRecoverPerSec * Time.fixedDeltaTime;
+                curDashEnergy += dashEnergyRecover * Time.fixedDeltaTime;
             }
             else
             {
-                currentDashEnergy += dashEnergyRecoverPerSec * Time.fixedDeltaTime;
+                curDashEnergy += dashEnergyRecover * Time.fixedDeltaTime;
             }
         }
         dashEnergyRecovering = false;
     }
 
-    IEnumerator Dashing()
+    bool JumpCondition => !isJumping && jumpCommand && canJump && !hasJumped;
+
+    bool DoubleJumpCondition => canDoubleJump && hasJumped && !hasDoubleJump && jumpCommand && !isJumping;
+
+    bool DashCondition => dashCommand && canDash && !hasDashed && !isDashing;
+
+    bool FallCondition => rb.velocity.y < 0 && !onGround && !nextWall;
+
+    bool NextWallCondition
     {
-        canMove = false;
-        canJump = false;
-        isDashing = true;
-        if (currentDashEnergy > dashEnergy)
+        get
         {
-            currentDashEnergy -= dashEnergy;
-        }
-        else if (currentDashEnergy > 0)
-        {
-            currentDashEnergy = 0;
-        }
+            bool l = nextLeftWall && !nextRightWall;
+            bool r = !nextLeftWall && nextRightWall;
 
-        yield return new WaitForSeconds(dashDuration - dragDuration);
-        rb.drag = dashDrag;
-
-        yield return new WaitForSeconds(dragDuration);
-        rb.drag = 0;
-        canMove = true;
-        canJump = true;
-        isDashing = false;
+            return rb.velocity.y < 0 && (l || r) && !onGround;
+        }
     }
 
-    void GetMoveDir()
+    void EndDash(IEnumerator nextState)
     {
-        var oldDir = dir;
-        if (moveHorCommand > dirOffeset.x) { dir.x = 1; face = 1; }
-        else if (moveHorCommand < -dirOffeset.x) { dir.x = -1; face = -1; }
-        else dir.x = 0;
+        canMove = true;
+        hasDashed = true;
+        rb.drag = 0;
+        StartCoroutine(nextState);
+    }
 
-        if (moveVerCommand > dirOffeset.y) dir.y = 1;
-        else if (moveVerCommand < -dirOffeset.y) dir.y = -1;
-        else dir.y = 0;
+    void EndJump(IEnumerator nextState)
+    {
+        //isJumping = false;
+        hasJumped = true;
+        StartCoroutine(nextState);
+    }
 
-        if (dir == Vector2.zero)
+    void EndDoubleJump(IEnumerator nextState)
+    {
+        //isDoubleJumping = false;
+        hasDoubleJump = true;
+        StartCoroutine(nextState);
+    }
+
+    //x轴的加减速 rb.velocity.x
+    void AccelerateSpeed(float targetSpeed, float accelerate)
+    {
+        float time = Mathf.Abs(targetSpeed - rb.velocity.x) / accelerate;
+        var x = Mathf.SmoothDamp(rb.velocity.x, targetSpeed, ref dampVelocity, time);
+        rb.velocity = new Vector2(x, rb.velocity.y);
+    }
+
+    void OnGround()
+    {
+        hasDashed = false;
+        hasJumped = false;
+        hasDoubleJump = false;
+    }
+
+    //根据输入和当前朝向获取dir
+    void GetInputDir()
+    {
+        var oldDir = inputDir;
+        if (moveRightCommand) { inputDir.x = 1; face = 1; }
+        else if (MoveLeftCommand) { inputDir.x = -1; face = -1; }
+        else inputDir.x = 0;
+
+        if (moveUpCommand) inputDir.y = 1;
+        else if (moveDownCommand) inputDir.y = -1;
+        else inputDir.y = 0;
+
+        if (inputDir == Vector2.zero)
         {
             if (onGround)
             {
-                dir.x = face;
+                inputDir.x = face;
             }
             else
             {
-                dir.y = 1;
+                inputDir.y = rb.velocity.y >= 0 ? 1 : -1;
             }
         }
 
-        if(dir != oldDir)
+        if (inputDir != oldDir)
         {
-            onChangeDir?.Invoke(dir);
+            onChangeDir?.Invoke(inputDir);
         }
     }
 
-    public bool IsOnGround()
-    {
-        return Physics2D.OverlapBox((Vector2)transform.position + bottomOffset, bottomSize, 0, groundLayer);
-    }
+    public bool IsOnGround() => Physics2D.OverlapBox((Vector2)transform.position + bottomOffset, bottomSize, 0, groundLayer);
 
     public bool IsNextWall()
     {
-        nextLeftWall = Physics2D.OverlapBox((Vector2)transform.position + leftOffset, size, 0, groundLayer);
-        nextRightWall = Physics2D.OverlapBox((Vector2)transform.position + rightOffset, size, 0, groundLayer);
+        nextLeftWall = Physics2D.OverlapBox((Vector2)transform.position + leftOffset, sideSize, 0, groundLayer);
+        nextRightWall = Physics2D.OverlapBox((Vector2)transform.position + rightOffset, sideSize, 0, groundLayer);
         return nextLeftWall || nextRightWall;
     }
 
-    Vector2 GetActualDir(Vector2 velocity)
+    //根据速度获取实际运动方向
+    Vector2 GetMoveDir(Vector2 velocity)
     {
         float vx = velocity.x, vy = velocity.y;
         float ax = 0, ay = 0;
@@ -316,4 +641,48 @@ public class PlayerCharacter : Character
         }
         return new Vector2(ax, ay);
     }
+
+    void BetterJump()
+    {
+        if (betterJumping)
+        {
+            if (rb.velocity.y < 0)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+            }
+            else if (rb.velocity.y > 0 && !jumpCommand)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+            }
+        }
+        if (rb.velocity.y <= maxFallSpeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
+        }
+    }
+
+    void MoveInAir(float moveSpeed, float acc, float dec)
+    {
+        if (canMove)
+        {
+            if (moveRightCommand)
+            {
+                if (rb.velocity.x < moveSpeed) AccelerateSpeed(moveSpeed, acc);
+            }
+            else if (moveLeftCommand)
+            {
+                if (rb.velocity.x > -moveSpeed) AccelerateSpeed(-moveSpeed, acc);
+            }
+            else
+            {
+                AccelerateSpeed(0, dec);
+            }
+        }
+    }
+
+    private void OnGUI()
+    {
+        GUILayout.Button(curState);
+    }
+
 }

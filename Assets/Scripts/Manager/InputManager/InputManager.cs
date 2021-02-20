@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private List<ICommand> commands = new List<ICommand>();
-    private List<float> values = new List<float>();
+    public string jumpName = "Jump";
+    public string dashName = "Dash";
+    public string horName = "Horizontal";
+    public string verName = "Vertical";
 
-    public void AddCommand(ICommand c, float v)
+
+    private readonly List<ICommand> commands = new List<ICommand>();
+
+    public void AddCommand(ICommand c)
     {
         commands.Add(c);
-        values.Add(v);
     }
 
     public void ExecuteCommands()
     {
         for(int i = 0; i < commands.Count; i++)
         {
-            commands[i].Execute(values[i]);
+            commands[i].Execute();
         }
         commands.Clear();
-        values.Clear();
     }
     
 }

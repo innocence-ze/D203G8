@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     private PlayerCharacter pc;
 
 
-    private InputManager input;
-    ICommand jump, stopJump, dash, stopDash, hor, ver;
+    private InputManager ioM;
+    ICommand jump, stopJump, dash, stopDash, left, right, stopHor, up, down, stopVer;
 
     // Start is called before the first frame update
     void Start()
@@ -26,40 +26,52 @@ public class GameManager : MonoBehaviour
 
     void InitInputManager()
     {
-        input = GetComponent<InputManager>();
+        ioM = GetComponent<InputManager>();
         jump = new JumpCommand(pc);
         stopJump = new StopJumpCommand(pc);
         dash = new DashCommand(pc);
         stopDash = new StopDashCommand(pc);
-        hor = new MoveHorCommand(pc);
-        ver = new MoveVerCommand(pc);
+        left = new MoveLeftCommand(pc);
+        right = new MoveRightCommand(pc);
+        stopHor = new StopMoveHorCommand(pc);
+        up = new MoveUpCommand(pc);
+        down = new MoveDownCommand(pc);
+        stopVer = new StopMoveVerCommand(pc);
     }
 
     void UpdateInputManager()
     {
-        input.AddCommand(hor, Input.GetAxis("Horizontal"));
-        input.AddCommand(ver, Input.GetAxis("Vertical"));
+        var h = Input.GetAxis(ioM.horName);
+        var v = Input.GetAxis(ioM.verName);
 
-        if (Input.GetAxis("Jump") > 0 && !pc.JumpCommand)
+        if (h > 0.05f) ioM.AddCommand(right);
+        else if (h < -0.05f) ioM.AddCommand(left);
+        else ioM.AddCommand(stopHor);
+
+        if (v > 0.05f) ioM.AddCommand(up);
+        else if (v < -0.05f) ioM.AddCommand(down);
+        else ioM.AddCommand(stopVer);
+
+        if (Input.GetAxis(ioM.jumpName) > 0 && !pc.JumpCommand)
         {
-            input.AddCommand(jump, 1);
+            ioM.AddCommand(jump);
         }
-        if (Input.GetAxis("Jump") == 0 && pc.JumpCommand)
+        if (Input.GetAxis(ioM.jumpName) == 0 && pc.JumpCommand)
         {
-            input.AddCommand(stopJump, 0);
+            ioM.AddCommand(stopJump);
         }
 
-        if (Input.GetAxis("Dash") > 0 && !pc.DashCommand)
+        if (Input.GetAxis(ioM.dashName) > 0 && !pc.DashCommand)
         {
-            input.AddCommand(dash, 1);
+            ioM.AddCommand(dash);
         }
-        if (Input.GetAxis("Dash") == 0 && pc.DashCommand)
+        if (Input.GetAxis(ioM.dashName) == 0 && pc.DashCommand)
         {
-            input.AddCommand(stopDash, 0);
+            ioM.AddCommand(stopDash);
         }
 
 
-        input.ExecuteCommands();
+        ioM.ExecuteCommands();
     }
 
 }
