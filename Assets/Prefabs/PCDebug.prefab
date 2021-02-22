@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 3730586044886891294}
   - component: {fileID: 3730586044886891295}
   - component: {fileID: 3730586044886891285}
+  - component: {fileID: 17362400}
   m_Layer: 0
-  m_Name: PC 1
+  m_Name: PCDebug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,10 +152,14 @@ MonoBehaviour:
   OnAttack:
     m_PersistentCalls:
       m_Calls: []
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
   maxHp: 0
   curHp: 0
   recoverHp: 0
   frameSpeed: {x: 0, y: 0}
+  curState: 0
   onGround: 0
   groundLayer:
     serializedVersion: 2
@@ -168,27 +173,28 @@ MonoBehaviour:
   rightOffset: {x: 0.05, y: 0.05}
   sideSize: {x: 0.9, y: 0.9}
   canWallJump: 1
-  wallJumpSpeed: {x: 7, y: 6}
-  wallFallSpeed: -1
+  wallJumpSpeed: {x: 7, y: 5.75}
+  wallFallSpeed: -2.75
   canJump: 1
-  jumpSpeed: 10
+  jumpSpeed: 8.5
   jumpMoveSpeed: 6.5
   canDoubleJump: 1
-  doubleJumpSpeed: 10
+  doubleJumpSpeed: 7
   doubleJumpMoveSpeed: 6.5
-  fallMultiplier: 1.5
-  lowJumpMultiplier: 3
-  maxFallSpeed: -11.8
+  fallMultiplier: 7
+  lowJumpMultiplier: 1.9
+  maxFallSpeed: -12
   betterJumping: 1
   canMove: 1
-  moveSpeed: 6.5
-  accelerate: 70
+  moveSpeed: 7.5
+  accelerate: 80
   decelerate: 60
   moveDir: {x: 0, y: 0}
+  face: 1
   canDash: 1
   dashSpeed: 20
   dashXMultiplier: 1
-  dashDrag: 10
+  dashDrag: 7
   withoutDragDuration: 0.1
   stopDashSpeed: 6.5
   canRecoverEnergy: 1
@@ -254,6 +260,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &17362400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3730586044886891292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60cfd0993af20af45a3a17c0e234942c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOnGround: IsOnGround
+  isNextWall: IsNextWall
+  isFaceLeft: IsFaceLeft
+  isDash: IsDash
+  isJump: IsJump
+  isWallJump: IsWallJump
+  isDoubleJump: IsDoubleJump
+  isHurt: IsHurt
+  isAlive: IsAlive
+  horVelocity: HorizontalVelocity
+  verVelocity: VerticalVelocity
 --- !u!1 &3730586045778170910
 GameObject:
   m_ObjectHideFlags: 0

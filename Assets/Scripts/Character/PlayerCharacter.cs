@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
+    public enum PCState
+    {
+        Idle,
+        NextWall,
+        Fall,
+        Move,
+        Jump,
+        DoubleJump,
+        WallJump,
+        Dash,
+    };
+
     [Header("Frame Speed--帧速度")]
     [ConditionalShow(true)] public Vector2 frameSpeed;
+    [ConditionalShow(true)] public PCState curState;
 
     [Header("On Ground Trigger--触地判断")]
     [ConditionalShow(true)] public bool onGround;
@@ -50,7 +63,7 @@ public class PlayerCharacter : Character
     public float decelerate;
     [ConditionalShow(true)] public Vector2 moveDir;
     Vector2 inputDir = Vector2.zero;
-    int face = 1;
+    [ConditionalShow(true)] public int face = 1;
     float dampVelocity = 0;     //for smooth
 
     [Header("Dash 冲刺")]
@@ -69,9 +82,6 @@ public class PlayerCharacter : Character
     public float curDashEnergy;
     public float dashEnergyRecover;
     bool dashEnergyRecovering = false;
-
-    string curState;
-
 
     [Header("Command--命令")]
     bool jumpCommand = false;
@@ -142,8 +152,7 @@ public class PlayerCharacter : Character
 
     IEnumerator IdleState()
     {
-        curState = "idle";
-        Debug.Log(curState);
+        curState = PCState.Idle;
         onIdle?.Invoke();
         OnGround();
 
@@ -177,8 +186,7 @@ public class PlayerCharacter : Character
 
     IEnumerator MoveState()
     {
-        curState = "move";
-        Debug.Log(curState);
+        curState = PCState.Move;
         onMove?.Invoke(moveDir);
         OnGround();
         while (true)
@@ -224,8 +232,7 @@ public class PlayerCharacter : Character
 
     IEnumerator DashState()
     {
-        curState = "dash";
-        Debug.Log(curState);
+        curState = PCState.Dash;
         onDash?.Invoke(inputDir);
 
         canMove = false;
@@ -275,8 +282,7 @@ public class PlayerCharacter : Character
 
     IEnumerator JumpState()
     {
-        curState = "jump";
-        Debug.Log(curState);
+        curState = PCState.Jump;
         onJump?.Invoke();
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         isJumping = true;
@@ -326,8 +332,7 @@ public class PlayerCharacter : Character
 
     IEnumerator DoubleJumpState()
     {
-        curState = "doubleJump";
-        Debug.Log(curState);
+        curState = PCState.DoubleJump;
         onDoubleJump?.Invoke();
         isJumping = true;
         rb.velocity = new Vector2(rb.velocity.x, doubleJumpSpeed);
@@ -368,8 +373,7 @@ public class PlayerCharacter : Character
 
     IEnumerator NextWallState()
     {
-        curState = "nextWall";
-        Debug.Log(curState);
+        curState = PCState.NextWall;
         hasJumped = false;
         hasDoubleJump = false;
         while (true)
@@ -403,7 +407,7 @@ public class PlayerCharacter : Character
                 StartCoroutine(DashState());
                 yield break;
             }
-            if (canWallJump && jumpCommand && !isJumping)
+            if (WallJumpCondition)
             {
                 if (nextLeftWall && !nextRightWall) rb.velocity = wallJumpSpeed;
                 else if (nextRightWall && !nextLeftWall) rb.velocity = new Vector2(wallJumpSpeed.x * -1, wallJumpSpeed.y);
@@ -415,8 +419,7 @@ public class PlayerCharacter : Character
 
     IEnumerator WallJumpState()
     {
-        curState = "wallJump";
-        Debug.Log(curState);
+        curState = PCState.WallJump;
         isJumping = true;
         onWallJump?.Invoke();
         yield return continueState;
@@ -462,8 +465,7 @@ public class PlayerCharacter : Character
 
     IEnumerator FallState()
     {
-        curState = "fall";
-        Debug.Log(curState);
+        curState = PCState.Fall;
         onAir?.Invoke(-1);
         while (true)
         {
@@ -522,11 +524,13 @@ public class PlayerCharacter : Character
         dashEnergyRecovering = false;
     }
 
-    bool JumpCondition => !isJumping && jumpCommand && canJump && !hasJumped;
+    public bool JumpCondition => !isJumping && jumpCommand && canJump && !hasJumped;
 
-    bool DoubleJumpCondition => canDoubleJump && hasJumped && !hasDoubleJump && jumpCommand && !isJumping;
+    public bool DoubleJumpCondition => canDoubleJump && hasJumped && !hasDoubleJump && jumpCommand && !isJumping;
 
-    bool DashCondition => dashCommand && canDash && !hasDashed && !isDashing;
+    public bool WallJumpCondition => canWallJump && jumpCommand && !isJumping;
+
+    public bool DashCondition => dashCommand && canDash && !hasDashed && !isDashing;
 
     bool FallCondition => rb.velocity.y < 0 && !onGround && !nextWall;
 
@@ -600,6 +604,12 @@ public class PlayerCharacter : Character
             {
                 inputDir.y = rb.velocity.y >= 0 ? 1 : -1;
             }
+        }
+
+        if(nextWall && !onGround)
+        {
+            if (nextLeftWall && !nextRightWall) face = 1;
+            else if (nextRightWall && !nextLeftWall) face = -1;
         }
 
         if (inputDir != oldDir)
@@ -682,7 +692,7 @@ public class PlayerCharacter : Character
 
     private void OnGUI()
     {
-        GUILayout.Button(curState);
+        GUILayout.Button(curState.ToString());
     }
 
 }
