@@ -17,6 +17,7 @@ public abstract class Character : MonoBehaviour, IHurtable
     public bool invincible;
     public float invincibleTime;
     public float hurtRecoverTime; //硬直
+    public Vector2 bornPos;
 
     public bool IsAlive { get { return curHp > 0; } set { IsAlive = value; } }
     public bool getHurt;
@@ -25,6 +26,7 @@ public abstract class Character : MonoBehaviour, IHurtable
     protected virtual void Start()
     {
         curHp = maxHp;
+        bornPos = transform.position;
     }
 
     // Update is called once per frame

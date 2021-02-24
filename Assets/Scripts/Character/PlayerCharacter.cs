@@ -587,6 +587,7 @@ public class PlayerCharacter : Character
     {
         curState = PCState.Die;
         OnDie?.Invoke();
+        rb.velocity = Vector2.zero;
 
         while (true)
         {
@@ -594,6 +595,7 @@ public class PlayerCharacter : Character
             yield return continueState;
             if (IsAlive)
             {
+                transform.position = bornPos;
                 stateCoroutine = StartCoroutine(IdleState());
                 yield break;
             }
