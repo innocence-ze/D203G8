@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcEnemy : Enemy
+public abstract class NpcEnemy : Enemy
 {
     // Start is called before the first frame update
     void Start()
@@ -15,4 +15,7 @@ public class NpcEnemy : Enemy
     {
         
     }
+
+
+
 }

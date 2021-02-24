@@ -14,6 +14,8 @@ public class PlayerCharacter : Character
         DoubleJump,
         WallJump,
         Dash,
+        Hurt,
+        Die,
     };
 
     [Header("Frame Speed--帧速度")]
@@ -41,6 +43,7 @@ public class PlayerCharacter : Character
     public bool canJump;
     public float jumpSpeed;
     public float jumpMoveSpeed;
+    public float fallMoveSpeed;
     bool isJumping = false;
     bool hasJumped = false;
 
@@ -52,6 +55,7 @@ public class PlayerCharacter : Character
 
     [Header("Gravity--引力")]
     public float fallMultiplier;
+    public float jumpMultiplier;
     public float lowJumpMultiplier;
     public float maxFallSpeed;
     public bool betterJumping = true;
@@ -110,23 +114,20 @@ public class PlayerCharacter : Character
 
     Rigidbody2D rb;
     readonly WaitForFixedUpdate continueState = new WaitForFixedUpdate();
+    Coroutine stateCoroutine;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(IdleState());
+        stateCoroutine = StartCoroutine(IdleState());
+        curDashEnergy = maxDashEnergy;
     }
 
-    private void FixedUpdate()
+    protected override void Update()
     {
-        onGround = IsOnGround();
-        nextWall = IsNextWall();
-
-        frameSpeed = rb.velocity;
-        moveDir = GetMoveDir(rb.velocity);
-        GetInputDir();
-
+        base.Update();
         if (nextLeftWall && nextRightWall)
         {
             hasJumped = false;
@@ -147,6 +148,16 @@ public class PlayerCharacter : Character
         {
             StartCoroutine(DashEnergyRecovery());
         }
+    }
+
+    private void FixedUpdate()
+    {
+        onGround = IsOnGround();
+        nextWall = IsNextWall();
+
+        frameSpeed = rb.velocity;
+        moveDir = GetMoveDir(rb.velocity);
+        GetInputDir();
 
     }
 
@@ -163,22 +174,27 @@ public class PlayerCharacter : Character
             yield return continueState;
             if (JumpCondition)
             {
-                StartCoroutine(JumpState());
+                stateCoroutine = StartCoroutine(JumpState());
                 yield break;
             }
             if (DashCondition)
             {
-                StartCoroutine(DashState());
+                stateCoroutine = StartCoroutine(DashState());
                 yield break;
             }
             if (canMove && (MoveRightCommand || moveLeftCommand))
             {
-                StartCoroutine(MoveState());
+                stateCoroutine = StartCoroutine(MoveState());
                 yield break;
             }
             if (FallCondition)
             {
-                StartCoroutine(FallState());
+                stateCoroutine = StartCoroutine(FallState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                stateCoroutine = StartCoroutine(HurtState());
                 yield break;
             }
         }
@@ -209,22 +225,27 @@ public class PlayerCharacter : Character
 
             if (JumpCondition)
             {
-                StartCoroutine(JumpState());
+                stateCoroutine = StartCoroutine(JumpState());
                 yield break;
             }
             if (DashCondition)
             {
-                StartCoroutine(DashState());
+                stateCoroutine = StartCoroutine(DashState());
                 yield break;
             }
             if (!(moveLeftCommand || moveRightCommand))
             {
-                StartCoroutine(IdleState());
+                stateCoroutine = StartCoroutine(IdleState());
                 yield break;
             }
             if (FallCondition)
             {
-                StartCoroutine(FallState());
+                stateCoroutine = StartCoroutine(FallState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                stateCoroutine = StartCoroutine(HurtState());
                 yield break;
             }
         }
@@ -235,6 +256,7 @@ public class PlayerCharacter : Character
         curState = PCState.Dash;
         onDash?.Invoke(inputDir);
 
+        invincible = true;
         canMove = false;
         isDashing = true;
         rb.velocity = Vector2.zero;
@@ -301,7 +323,6 @@ public class PlayerCharacter : Character
 
             if (onGround)
             {
-                Debug.Log(1);
                 EndJump(IdleState());
                 yield break;
             }
@@ -325,6 +346,11 @@ public class PlayerCharacter : Character
             if (DoubleJumpCondition)
             {
                 EndJump(DoubleJumpState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                EndJump(HurtState());
                 yield break;
             }
         }
@@ -368,6 +394,11 @@ public class PlayerCharacter : Character
                 EndDoubleJump(DashState());
                 yield break;
             }
+            if (HurtCondition)
+            {
+                EndDoubleJump(HurtState());
+                yield break;
+            }
         }
     }
 
@@ -393,25 +424,30 @@ public class PlayerCharacter : Character
             yield return continueState;
             if (onGround)
             {
-                StartCoroutine(IdleState());
+                stateCoroutine = StartCoroutine(IdleState());
                 yield break;
             }
             else if (!nextWall || (nextLeftWall && nextRightWall))
             {
-                StartCoroutine(FallState());
+                stateCoroutine = StartCoroutine(FallState());
                 yield break;
             }
 
             if (DashCondition)
             {
-                StartCoroutine(DashState());
+                stateCoroutine = StartCoroutine(DashState());
                 yield break;
             }
             if (WallJumpCondition)
             {
                 if (nextLeftWall && !nextRightWall) rb.velocity = wallJumpSpeed;
                 else if (nextRightWall && !nextLeftWall) rb.velocity = new Vector2(wallJumpSpeed.x * -1, wallJumpSpeed.y);
-                StartCoroutine(WallJumpState());
+                stateCoroutine = StartCoroutine(WallJumpState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                stateCoroutine = StartCoroutine(HurtState());
                 yield break;
             }
         }
@@ -454,10 +490,9 @@ public class PlayerCharacter : Character
                 EndJump(DashState());
                 yield break;
             }
-
-            if (DoubleJumpCondition)
+            if (HurtCondition)
             {
-                EndJump(DoubleJumpState());
+                EndJump(HurtState());
                 yield break;
             }
         }
@@ -470,33 +505,96 @@ public class PlayerCharacter : Character
         while (true)
         {
             BetterJump();
-            MoveInAir(jumpMoveSpeed, accelerate, decelerate);
+            MoveInAir(fallMoveSpeed, accelerate, decelerate);
 
             yield return continueState;
             if (onGround)
             {
-                StartCoroutine(IdleState());
+                stateCoroutine = StartCoroutine(IdleState());
                 yield break;
             }
             else if (NextWallCondition)
             {
-                StartCoroutine(NextWallState());
+                stateCoroutine = StartCoroutine(NextWallState());
                 yield break;
             }
 
             if (DashCondition)
             {
-                StartCoroutine(DashState());
+                stateCoroutine = StartCoroutine(DashState());
                 yield break;
             }
             if (JumpCondition)
             {
-                StartCoroutine(JumpState());
+                stateCoroutine = StartCoroutine(JumpState());
                 yield break;
             }
             if (DoubleJumpCondition)
             {
-                StartCoroutine(DoubleJumpState());
+                stateCoroutine = StartCoroutine(DoubleJumpState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                stateCoroutine = StartCoroutine(HurtState());
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator HurtState()
+    {
+        getHurt = false;
+        curState = PCState.Hurt;
+        OnHurt?.Invoke((Vector2)hurtInfo[0] - (Vector2)transform.position);
+        GetHurt((float)hurtInfo[1]);
+        //受伤后无敌
+        StartCoroutine(InvincibleCoroutine());
+        //受伤后硬直时间
+        yield return new WaitForSeconds(hurtRecoverTime);
+        while (true)
+        {
+            yield return continueState;
+            if (!IsAlive)
+            {
+                stateCoroutine = StartCoroutine(DieState());
+                yield break;
+            }
+            else
+            {
+                if (onGround)
+                {
+                    stateCoroutine = StartCoroutine(IdleState());
+                    yield break;
+                }
+                else if (nextWall)
+                {
+                    stateCoroutine = StartCoroutine(NextWallState());
+                    yield break;
+                }
+                else
+                {
+                    if(rb.velocity.y > 0)
+                        rb.velocity = new Vector2(rb.velocity.x, 0);
+                    stateCoroutine = StartCoroutine(FallState());
+                    yield break;
+                }
+            }
+        }
+    }
+
+    IEnumerator DieState()
+    {
+        curState = PCState.Die;
+        OnDie?.Invoke();
+
+        while (true)
+        {
+
+            yield return continueState;
+            if (IsAlive)
+            {
+                stateCoroutine = StartCoroutine(IdleState());
                 yield break;
             }
         }
@@ -532,6 +630,8 @@ public class PlayerCharacter : Character
 
     public bool DashCondition => dashCommand && canDash && !hasDashed && !isDashing;
 
+    public bool HurtCondition => getHurt && !invincible;
+
     bool FallCondition => rb.velocity.y < 0 && !onGround && !nextWall;
 
     bool NextWallCondition
@@ -549,22 +649,23 @@ public class PlayerCharacter : Character
     {
         canMove = true;
         hasDashed = true;
+        invincible = false;
         rb.drag = 0;
-        StartCoroutine(nextState);
+        stateCoroutine = StartCoroutine(nextState);
     }
 
     void EndJump(IEnumerator nextState)
     {
         //isJumping = false;
         hasJumped = true;
-        StartCoroutine(nextState);
+        stateCoroutine = StartCoroutine(nextState);
     }
 
     void EndDoubleJump(IEnumerator nextState)
     {
         //isDoubleJumping = false;
         hasDoubleJump = true;
-        StartCoroutine(nextState);
+        stateCoroutine = StartCoroutine(nextState);
     }
 
     //x轴的加减速 rb.velocity.x
@@ -663,6 +764,10 @@ public class PlayerCharacter : Character
             else if (rb.velocity.y > 0 && !jumpCommand)
             {
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+            }
+            else
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpMultiplier - 1) * Time.fixedDeltaTime;
             }
         }
         if (rb.velocity.y <= maxFallSpeed)

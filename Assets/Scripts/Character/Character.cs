@@ -2,28 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour, IHurtable
 {
-    [SerializeField] Vec2Event OnHurt;
-    [SerializeField] SimpleEvent OnDie;
+    [SerializeField] protected Vec2Event OnHurt;
+    [SerializeField] protected SimpleEvent OnDie;
 
     [Header("HP--血量")]
     public float maxHp;
     public float curHp;
     public float recoverHp;
-    public bool IsAlive { get { return curHp > 0; } set { IsAlive = value; } }
 
+    [Header("Hurt--受伤")]
+    public object[] hurtInfo = new object[2];//0:攻击者方向, 1:伤害
+    public bool invincible;
+    public float invincibleTime;
+    public float hurtRecoverTime; //硬直
+
+    public bool IsAlive { get { return curHp > 0; } set { IsAlive = value; } }
+    public bool getHurt;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         curHp = maxHp;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        
+        if(!invincible && !getHurt && curHp < maxHp)
+        {
+            curHp += recoverHp * Time.deltaTime;
+        }
+    }
+
+    protected IEnumerator InvincibleCoroutine()
+    {
+        invincible = true;
+        yield return new WaitForSeconds(invincibleTime);
+        invincible = false;
     }
 
     public void GetHurt(float hurt)
@@ -38,4 +55,17 @@ public abstract class Character : MonoBehaviour
         }
     }
 
+    public void SetHurtInfo(object[] info)
+    {
+        if (invincible)
+            return;
+        getHurt = true;
+        info.CopyTo(hurtInfo, 0);
+    }
+}
+
+
+public interface IHurtable
+{
+    void SetHurtInfo(object[] info);
 }

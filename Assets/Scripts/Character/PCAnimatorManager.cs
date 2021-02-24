@@ -30,13 +30,14 @@ public class PCAnimatorManager : MonoBehaviour
         anim.SetFloat(verVelocity, pc.frameSpeed.y);
         anim.SetFloat(horVelocity, pc.frameSpeed.x);
         anim.SetBool(isFaceLeft, pc.face == -1);
-        anim.SetBool(isAlive, pc.curHp > 0);
+        anim.SetBool(isAlive, pc.IsAlive);
         anim.SetBool(isOnGround, pc.onGround);
         anim.SetBool(isNextWall, pc.nextWall);
         anim.SetBool(isJump, pc.curState == PlayerCharacter.PCState.Jump);
         anim.SetBool(isDoubleJump, pc.curState == PlayerCharacter.PCState.DoubleJump);
         anim.SetBool(isDash, pc.curState == PlayerCharacter.PCState.Dash);
         anim.SetBool(isWallJump, pc.curState == PlayerCharacter.PCState.WallJump);
+        anim.SetBool(isHurt, pc.curState == PlayerCharacter.PCState.Hurt);
     }
 
 }
