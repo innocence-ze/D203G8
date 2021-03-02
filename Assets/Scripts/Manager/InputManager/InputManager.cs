@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     public string dashName = "Dash";
     public string horName = "Horizontal";
     public string verName = "Vertical";
-
+    public string attackName = "Attack";
 
     private readonly List<ICommand> commands = new List<ICommand>();
 

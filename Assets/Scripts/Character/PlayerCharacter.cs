@@ -16,6 +16,7 @@ public class PlayerCharacter : Character
         Dash,
         Hurt,
         Die,
+        Attack,
     };
 
     [Header("Frame Speed--帧速度")]
@@ -67,7 +68,7 @@ public class PlayerCharacter : Character
     public float decelerate;
     [ConditionalShow(true)] public Vector2 moveDir;
     Vector2 inputDir = Vector2.zero;
-    [ConditionalShow(true)] public int face = 1;
+    [ConditionalShow(true)] public int face = 1; //left -1, right 1
     float dampVelocity = 0;     //for smooth
 
     [Header("Dash 冲刺")]
@@ -87,6 +88,20 @@ public class PlayerCharacter : Character
     public float dashEnergyRecover;
     bool dashEnergyRecovering = false;
 
+    [Header("Attack--攻击")]
+    public bool canAttack;
+    public float attackMoveSpeed;
+    public List<float> attackDamages = new List<float>();
+    public List<Vector2> attackPosOffsets = new List<Vector2>();
+    public List<float> attackRadius = new List<float>();
+    public LayerMask attackableLayer;
+    public float comboInterval;//多长时间重置连击
+    [ConditionalShow(true)] public int comboNum = 0;
+    List<Collider2D> totalHitCollider = new List<Collider2D>();
+    bool inCombo = false;
+    bool nextCombo = false;
+    [ConditionalShow(true)] public float attackAnimNormalizedTime;
+
     [Header("Command--命令")]
     bool jumpCommand = false;
     bool dashCommand = false;
@@ -94,23 +109,26 @@ public class PlayerCharacter : Character
     bool moveRightCommand = false;
     bool moveUpCommand = false;
     bool moveDownCommand = false;
+    bool attackCommand = false;
     public bool JumpCommand { set { jumpCommand = value; } get { return jumpCommand; } }
     public bool DashCommand { set { dashCommand = value; } get { return dashCommand; } }
     public bool MoveLeftCommand { set { moveLeftCommand = value; if (value) moveRightCommand = !value; } get { return moveLeftCommand; } }
     public bool MoveRightCommand { set { moveRightCommand = value; if (value) MoveLeftCommand = !value; } get { return moveRightCommand; } }
     public bool MoveUpCommand { set { moveUpCommand = value; if (value) moveDownCommand = !value; } get { return moveUpCommand; } }
     public bool MoveDownCommand { set { moveDownCommand = value; if (value) moveUpCommand = !value; } get { return moveDownCommand; } }
+    public bool AttackCommand { set { attackCommand = value; } get { return attackCommand; } }
 
     [Header("Event List")]
     [SerializeField] SimpleEvent onJump;
     [SerializeField] SimpleEvent onDoubleJump;
     [SerializeField] SimpleEvent onWallJump;
     [SerializeField] FloatEvent onAir;
-    [SerializeField] FloatEvent onLand;
     [SerializeField] Vec2Event onDash;
     [SerializeField] Vec2Event onMove;
     [SerializeField] Vec2Event onChangeDir;
     [SerializeField] SimpleEvent onIdle;
+    [SerializeField] IntEvent onAttack;//开始攻击时，无论是否攻击到
+    [SerializeField] SimpleEvent onAttackObj;//攻击到物体时
 
     Rigidbody2D rb;
     readonly WaitForFixedUpdate continueState = new WaitForFixedUpdate();
@@ -142,6 +160,11 @@ public class PlayerCharacter : Character
         if (!dashCommand)
         {
             isDashing = false;
+        }
+
+        if (AttackCommand)
+        {
+            nextCombo = true;
         }
 
         if (canRecoverEnergy && !dashEnergyRecovering)
@@ -197,6 +220,11 @@ public class PlayerCharacter : Character
                 stateCoroutine = StartCoroutine(HurtState());
                 yield break;
             }
+            if (AttackCondition)
+            {
+                StartCoroutine(Attack01State());
+                yield break;
+            }
         }
     }
 
@@ -246,6 +274,11 @@ public class PlayerCharacter : Character
             if (HurtCondition)
             {
                 stateCoroutine = StartCoroutine(HurtState());
+                yield break;
+            }
+            if (AttackCondition)
+            {
+                StartCoroutine(Attack01State());
                 yield break;
             }
         }
@@ -317,7 +350,7 @@ public class PlayerCharacter : Character
                 hasJumped = true;
             }
             BetterJump();
-            MoveInAir(jumpMoveSpeed, accelerate, decelerate);
+            PlayerMove(jumpMoveSpeed, accelerate, decelerate);
 
             yield return continueState;
 
@@ -353,6 +386,11 @@ public class PlayerCharacter : Character
                 EndJump(HurtState());
                 yield break;
             }
+            if (AttackCondition)
+            {
+                EndJump(Attack01State());
+                yield break;
+            }
         }
     }
 
@@ -370,7 +408,7 @@ public class PlayerCharacter : Character
                 hasDoubleJump = true;
             }
             BetterJump();
-            MoveInAir(doubleJumpMoveSpeed, accelerate, decelerate);
+            PlayerMove(doubleJumpMoveSpeed, accelerate, decelerate);
 
             yield return continueState;
             if (onGround)
@@ -397,6 +435,11 @@ public class PlayerCharacter : Character
             if (HurtCondition)
             {
                 EndDoubleJump(HurtState());
+                yield break;
+            }
+            if (AttackCondition)
+            {
+                EndDoubleJump(Attack01State());
                 yield break;
             }
         }
@@ -495,6 +538,11 @@ public class PlayerCharacter : Character
                 EndJump(HurtState());
                 yield break;
             }
+            if (AttackCondition)
+            {
+                EndJump(Attack01State());
+                yield break;
+            }
         }
     }
 
@@ -505,7 +553,7 @@ public class PlayerCharacter : Character
         while (true)
         {
             BetterJump();
-            MoveInAir(fallMoveSpeed, accelerate, decelerate);
+            PlayerMove(fallMoveSpeed, accelerate, decelerate);
 
             yield return continueState;
             if (onGround)
@@ -539,6 +587,11 @@ public class PlayerCharacter : Character
                 stateCoroutine = StartCoroutine(HurtState());
                 yield break;
             }
+            if (AttackCondition)
+            {
+                StartCoroutine(Attack01State());
+                yield break;
+            }
         }
     }
 
@@ -546,7 +599,7 @@ public class PlayerCharacter : Character
     {
         getHurt = false;
         curState = PCState.Hurt;
-        OnHurt?.Invoke((Vector2)hurtInfo[0] - (Vector2)transform.position);
+        onHurt?.Invoke((Vector2)hurtInfo[0] - (Vector2)transform.position);
         GetHurt((float)hurtInfo[1]);
         //受伤后无敌
         StartCoroutine(InvincibleCoroutine());
@@ -586,7 +639,7 @@ public class PlayerCharacter : Character
     IEnumerator DieState()
     {
         curState = PCState.Die;
-        OnDie?.Invoke();
+        onDie?.Invoke();
         rb.velocity = Vector2.zero;
 
         while (true)
@@ -599,6 +652,180 @@ public class PlayerCharacter : Character
                 stateCoroutine = StartCoroutine(IdleState());
                 yield break;
             }
+        }
+    }
+
+    IEnumerator Attack01State()
+    {
+        EnterAttack(1);
+        var timer = StartCoroutine(ResetAttackTimer());
+        while (true)
+        {
+            InAttack(1);
+
+            yield return continueState;
+            if (NextComboCondition)
+            {
+                StopCoroutine(timer);
+                totalHitCollider.Clear();
+                StartCoroutine(Attack02State());
+                yield break;
+            }
+            if (JumpCondition)
+            {
+                EndAttack(JumpState());
+                yield break;
+            }
+            if (DoubleJumpCondition)
+            {
+                EndAttack(DoubleJumpState());
+                yield break;
+            }
+            if (DashCondition)
+            {
+                EndAttack(DashState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                EndAttack(HurtState());
+                yield break;
+            }
+            if (!inCombo)
+            {
+                if (onGround)
+                {
+                    EndAttack(IdleState());
+                    yield break;
+                }
+                if (NextWallCondition)
+                {
+                    EndAttack(NextWallState());
+                    yield break;
+                }
+                if (FallCondition)
+                {
+                    EndAttack(FallState());
+                    yield break;
+                }
+            }
+
+        }
+    }
+
+    IEnumerator Attack02State()
+    {
+        EnterAttack(2);
+        var timer = StartCoroutine(ResetAttackTimer());
+        while (true)
+        {
+            InAttack(2);
+
+            yield return continueState;
+            if (NextComboCondition)
+            {
+                StopCoroutine(timer);
+                totalHitCollider.Clear();
+                StartCoroutine(Attack03State());
+                yield break;
+            }
+            if (JumpCondition)
+            {
+                EndAttack(JumpState());
+                yield break;
+            }
+            if (DoubleJumpCondition)
+            {
+                EndAttack(DoubleJumpState());
+                yield break;
+            }
+            if (DashCondition)
+            {
+                EndAttack(DashState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                EndAttack(HurtState());
+                yield break;
+            }
+            if (!inCombo)
+            {
+                if (onGround)
+                {
+                    EndAttack(IdleState());
+                    yield break;
+                }
+                if (NextWallCondition)
+                {
+                    EndAttack(NextWallState());
+                    yield break;
+                }
+                if (FallCondition)
+                {
+                    EndAttack(FallState());
+                    yield break;
+                }
+            }
+
+        }
+    }
+
+    IEnumerator Attack03State()
+    {
+        EnterAttack(3);
+        var timer = StartCoroutine(ResetAttackTimer());
+        while (true)
+        {
+            InAttack(3);
+
+            yield return continueState;
+            if (NextComboCondition)
+            {
+                StopCoroutine(timer);
+                totalHitCollider.Clear();
+                StartCoroutine(Attack01State());
+                yield break;
+            }
+            if (JumpCondition)
+            {
+                EndAttack(JumpState());
+                yield break;
+            }
+            if (DoubleJumpCondition)
+            {
+                EndAttack(DoubleJumpState());
+                yield break;
+            }
+            if (DashCondition)
+            {
+                EndAttack(DashState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                EndAttack(HurtState());
+                yield break;
+            }
+            if (!inCombo)
+            {
+                if (onGround)
+                {
+                    EndAttack(IdleState());
+                    yield break;
+                }
+                if (NextWallCondition)
+                {
+                    EndAttack(NextWallState());
+                    yield break;
+                }
+                if (FallCondition)
+                {
+                    EndAttack(FallState());
+                    yield break;
+                }
+            }
+
         }
     }
 
@@ -624,6 +851,13 @@ public class PlayerCharacter : Character
         dashEnergyRecovering = false;
     }
 
+    IEnumerator ResetAttackTimer()
+    {
+        inCombo = true;
+        yield return new WaitForSeconds(comboInterval);
+        inCombo = false;
+    }
+
     public bool JumpCondition => !isJumping && jumpCommand && canJump && !hasJumped;
 
     public bool DoubleJumpCondition => canDoubleJump && hasJumped && !hasDoubleJump && jumpCommand && !isJumping;
@@ -647,6 +881,70 @@ public class PlayerCharacter : Character
         }
     }
 
+    bool AttackCondition => canAttack && attackCommand;
+
+    bool NextComboCondition => nextCombo && inCombo && attackAnimNormalizedTime > 0.9;
+
+    void EnterAttack(int attackNum)
+    {
+        nextCombo = false;
+        curState = PCState.Attack;
+        comboNum = attackNum;
+        onAttack?.Invoke(attackNum);
+    }
+
+    void InAttack(int attackNum)
+    {
+        BetterJump();
+        PlayerMove(attackMoveSpeed, accelerate, decelerate);
+
+        //物理判断
+        Collider2D[] coll = Physics2D.OverlapCircleAll(AttackPos(attackNum), attackRadius[attackNum - 1], attackableLayer);
+
+        for (int i = 0; i < coll.Length; i++)
+        {
+            if (!CompareAttackObject(totalHitCollider, coll[i]))
+            {
+                totalHitCollider.Add(coll[i]);
+                onAttackObj?.Invoke();
+
+                var enemy = GetComponent<IHurtable>();
+                if (enemy != null)
+                {
+                    enemy.SetHurtInfo(new object[2]
+                    {
+                        (Vector2)transform.position,
+                        attackDamages[attackNum-1]
+                    });
+                }
+            }
+        }
+    }
+
+    Vector2 AttackPos(int attackNum)
+    {
+        if(face == -1)
+        {
+            return (Vector2)transform.position + new Vector2(-attackPosOffsets[attackNum - 1].x, attackPosOffsets[attackNum - 1].y);
+        }
+        else
+        {
+            return (Vector2)transform.position + attackPosOffsets[attackNum - 1];
+        }
+    }
+
+    bool CompareAttackObject(List<Collider2D> total, Collider2D other)
+    {
+        for(int i = 0; i < total.Count; i++)
+        {
+            if(total[i] == other)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void EndDash(IEnumerator nextState)
     {
         canMove = true;
@@ -668,6 +966,14 @@ public class PlayerCharacter : Character
         //isDoubleJumping = false;
         hasDoubleJump = true;
         stateCoroutine = StartCoroutine(nextState);
+    }
+
+    void EndAttack(IEnumerator nextState)
+    {
+        comboNum = 0;
+        inCombo = false;
+        totalHitCollider.Clear();
+        StartCoroutine(nextState);
     }
 
     //x轴的加减速 rb.velocity.x
@@ -778,7 +1084,7 @@ public class PlayerCharacter : Character
         }
     }
 
-    void MoveInAir(float moveSpeed, float acc, float dec)
+    void PlayerMove(float moveSpeed, float acc, float dec)
     {
         if (canMove)
         {

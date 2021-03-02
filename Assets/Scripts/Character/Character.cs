@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour, IHurtable
 {
-    [SerializeField] protected Vec2Event OnHurt;
-    [SerializeField] protected SimpleEvent OnDie;
+    [SerializeField] protected Vec2Event onHurt;
+    [SerializeField] protected SimpleEvent onDie;
 
     [Header("HP--血量")]
     public float maxHp;
@@ -69,5 +69,16 @@ public abstract class Character : MonoBehaviour, IHurtable
 
 public interface IHurtable
 {
+    /// <summary>
+    /// 设置伤害信息
+    /// info长度：2,
+    /// 0--攻击者方向
+    /// 1--伤害量
+    /// </summary>
+    /// <param name="info">
+    /// 长度：2
+    /// 0--攻击者方向
+    /// 1--伤害量
+    /// </param>
     void SetHurtInfo(object[] info);
 }

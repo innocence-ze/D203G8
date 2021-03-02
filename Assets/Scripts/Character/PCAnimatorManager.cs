@@ -18,12 +18,17 @@ public class PCAnimatorManager : MonoBehaviour
     public string isAlive;
     public string horVelocity;
     public string verVelocity;
+    public string ComboNum;
+    public string AttackNormalizedTime;
 
+    
     void Awake()
     {
         pc = GetComponent<PlayerCharacter>();
         anim = GetComponent<Animator>();
     }
+
+    int oldCombolNum =0;
 
     void Update()
     {
@@ -38,6 +43,17 @@ public class PCAnimatorManager : MonoBehaviour
         anim.SetBool(isDash, pc.curState == PlayerCharacter.PCState.Dash);
         anim.SetBool(isWallJump, pc.curState == PlayerCharacter.PCState.WallJump);
         anim.SetBool(isHurt, pc.curState == PlayerCharacter.PCState.Hurt);
+        anim.SetInteger(ComboNum, pc.comboNum);
+
+        if (oldCombolNum != pc.comboNum)
+        {
+            oldCombolNum = pc.comboNum;
+            pc.attackAnimNormalizedTime = 0;
+        }
+        if (pc.comboNum != 0)
+            pc.attackAnimNormalizedTime += Time.deltaTime;
+
+        //pc.attackAnimNormalizedTime = anim.GetFloat(AttackNormalizedTime);
     }
 
 }

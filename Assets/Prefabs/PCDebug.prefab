@@ -146,18 +146,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffea04e1eb712942bd6c805c25659b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnHurt:
+  onHurt:
     m_PersistentCalls:
       m_Calls: []
-  OnAttack:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDie:
+  onDie:
     m_PersistentCalls:
       m_Calls: []
   maxHp: 0
   curHp: 0
   recoverHp: 0
+  invincible: 0
+  invincibleTime: 0
+  hurtRecoverTime: 0
+  bornPos: {x: 0, y: 0}
+  getHurt: 0
   frameSpeed: {x: 0, y: 0}
   curState: 0
   onGround: 0
@@ -178,10 +180,12 @@ MonoBehaviour:
   canJump: 1
   jumpSpeed: 8.5
   jumpMoveSpeed: 6.5
+  fallMoveSpeed: 0
   canDoubleJump: 1
   doubleJumpSpeed: 7
   doubleJumpMoveSpeed: 6.5
   fallMultiplier: 7
+  jumpMultiplier: 0
   lowJumpMultiplier: 1.9
   maxFallSpeed: -12
   betterJumping: 1
@@ -202,6 +206,17 @@ MonoBehaviour:
   maxDashEnergy: 90
   curDashEnergy: 0
   dashEnergyRecover: 0
+  canAttack: 0
+  attackMoveSpeed: 0
+  attackDamages: []
+  attackPosOffsets: []
+  attackRadius: []
+  attackableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  comboInterval: 0
+  comboNum: 0
+  attackAnimNormalizedTime: 0
   onJump:
     m_PersistentCalls:
       m_Calls: []
@@ -212,9 +227,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onAir:
-    m_PersistentCalls:
-      m_Calls: []
-  onLand:
     m_PersistentCalls:
       m_Calls: []
   onDash:
@@ -239,6 +251,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onIdle:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttackObj:
     m_PersistentCalls:
       m_Calls: []
 --- !u!95 &3730586044886891285
@@ -283,6 +301,8 @@ MonoBehaviour:
   isAlive: IsAlive
   horVelocity: HorizontalVelocity
   verVelocity: VerticalVelocity
+  ComboNum: ComboNum
+  AttackNormalizedTime: AttackNormalizedTime
 --- !u!1 &3730586045778170910
 GameObject:
   m_ObjectHideFlags: 0

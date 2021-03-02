@@ -5,6 +5,9 @@ using UnityEngine;
 public class Spike : MonoBehaviour
 {
     public float hurtAmount;
+    public SimpleEvent OnIdle;
+    public SimpleEvent OnEnter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +25,13 @@ public class Spike : MonoBehaviour
         var h = collision.GetComponent<IHurtable>();
         if (h != null)
         {
-            object[] o = new object[2];
-            o[0] = (Vector2)transform.position;
-            o[1] = hurtAmount;
+            OnEnter?.Invoke();
 
-            h.SetHurtInfo(o);
+            h.SetHurtInfo(new object[2]
+            {
+                (Vector2)transform.position,
+                hurtAmount
+            });
         }
     }
 }

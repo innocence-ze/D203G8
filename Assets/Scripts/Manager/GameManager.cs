@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
 
     private InputManager ioM;
-    ICommand jump, stopJump, dash, stopDash, left, right, stopHor, up, down, stopVer;
+    ICommand jump, stopJump, dash, stopDash, left, right, stopHor, up, down, stopVer, attack, stopAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
         up = new MoveUpCommand(pc);
         down = new MoveDownCommand(pc);
         stopVer = new StopMoveVerCommand(pc);
+        attack = new AttackCommand(pc);
+        stopAttack = new StopAttackCommand(pc);
     }
 
     void UpdateInputManager()
@@ -70,6 +72,14 @@ public class GameManager : MonoBehaviour
             ioM.AddCommand(stopDash);
         }
 
+        if(Input.GetAxis(ioM.attackName) > 0 && !pc.AttackCommand)
+        {
+            ioM.AddCommand(attack);
+        }
+        if(Input.GetAxis(ioM.attackName) == 0 && pc.AttackCommand)
+        {
+            ioM.AddCommand(stopAttack);
+        }
 
         ioM.ExecuteCommands();
     }

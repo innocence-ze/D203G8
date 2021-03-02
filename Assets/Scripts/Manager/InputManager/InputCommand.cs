@@ -179,3 +179,37 @@ public class StopMoveVerCommand : ICommand
 
     public void Undo() { }
 }
+
+public class AttackCommand : ICommand
+{
+    private readonly PlayerCharacter pc;
+
+    public AttackCommand(PlayerCharacter pc)
+    {
+        this.pc = pc;
+    }
+
+    public void Execute()
+    {
+        pc.AttackCommand = true;
+    }
+
+    public void Undo() { }
+}
+
+public class StopAttackCommand : ICommand
+{
+    private readonly PlayerCharacter pc;
+
+    public StopAttackCommand(PlayerCharacter pc)
+    {
+        this.pc = pc;
+    }
+
+    public void Execute()
+    {
+        pc.AttackCommand = false;
+    }
+
+    public void Undo() { }
+}
