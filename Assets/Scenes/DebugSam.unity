@@ -935,6 +935,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
+      propertyPath: canMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: dashSpeed
       value: 25
       objectReference: {fileID: 0}
@@ -944,15 +948,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: accelerate
-      value: 85
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: decelerate
-      value: 45
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: maxFallSpeed
       value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
+      propertyPath: fallMoveSpeed
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: wallFallSpeed
@@ -4066,7 +4074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 995747270392621338, guid: d6221c1bc45d4664381bb3038c576bae, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 995747270392621338, guid: d6221c1bc45d4664381bb3038c576bae, type: 3}
       propertyPath: m_LocalPosition.x
