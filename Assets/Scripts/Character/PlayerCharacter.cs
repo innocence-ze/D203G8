@@ -16,7 +16,9 @@ public class PlayerCharacter : Character
         Dash,
         Hurt,
         Die,
-        Attack,
+        Attack1,
+        Attack2,
+        Attack3,
     };
 
     [Header("Frame Speed--帧速度")]
@@ -68,8 +70,6 @@ public class PlayerCharacter : Character
     public float decelerate;
     [ConditionalShow(true)] public Vector2 moveDir;
     Vector2 inputDir = Vector2.zero;
-    [ConditionalShow(true)] public int face = 1; //left -1, right 1
-    float dampVelocity = 0;     //for smooth
 
     [Header("Dash 冲刺")]
     public bool canDash;
@@ -92,7 +92,8 @@ public class PlayerCharacter : Character
     public bool canAttack;
     public float attackMoveSpeed;
     public List<float> attackDamages = new List<float>();
-    public List<Vector2> attackPosOffsets = new List<Vector2>();
+    public List<Transform> attackPos = new List<Transform>();
+    private List<Vector3> attackPoints = new List<Vector3>();
     public List<float> attackRadius = new List<float>();
     public LayerMask attackableLayer;
     public float comboInterval;//多长时间重置连击
@@ -128,19 +129,22 @@ public class PlayerCharacter : Character
     [SerializeField] Vec2Event onChangeDir;
     [SerializeField] SimpleEvent onIdle;
     [SerializeField] IntEvent onAttack;//开始攻击时，无论是否攻击到
-    [SerializeField] SimpleEvent onAttackObj;//攻击到物体时
+    [SerializeField] Vec2Event onAttackObj;//攻击到物体时
 
-    Rigidbody2D rb;
-    readonly WaitForFixedUpdate continueState = new WaitForFixedUpdate();
     Coroutine stateCoroutine;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         stateCoroutine = StartCoroutine(IdleState());
         curDashEnergy = maxDashEnergy;
+
+        for(int i = 0; i < attackPos.Count; i++)
+        {
+            attackPoints[i] = attackPos[i].position;
+        }
+        onChangeDir.AddListener(ChangeAttackPos);
     }
 
     protected override void Update()
@@ -601,6 +605,7 @@ public class PlayerCharacter : Character
         curState = PCState.Hurt;
         onHurt?.Invoke((Vector2)hurtInfo[0] - (Vector2)transform.position);
         GetHurt((float)hurtInfo[1]);
+        rb.velocity = Vector2.zero;
         //受伤后无敌
         StartCoroutine(InvincibleCoroutine());
         //受伤后硬直时间
@@ -888,7 +893,7 @@ public class PlayerCharacter : Character
     void EnterAttack(int attackNum)
     {
         nextCombo = false;
-        curState = PCState.Attack;
+        curState = PCState.Attack1 + attackNum - 1;
         comboNum = attackNum;
         onAttack?.Invoke(attackNum);
     }
@@ -899,16 +904,16 @@ public class PlayerCharacter : Character
         PlayerMove(attackMoveSpeed, accelerate, decelerate);
 
         //物理判断
-        Collider2D[] coll = Physics2D.OverlapCircleAll(AttackPos(attackNum), attackRadius[attackNum - 1], attackableLayer);
+        Collider2D[] coll = Physics2D.OverlapCircleAll(attackPoints[attackNum], attackRadius[attackNum - 1], attackableLayer);
 
         for (int i = 0; i < coll.Length; i++)
         {
             if (!CompareAttackObject(totalHitCollider, coll[i]))
             {
                 totalHitCollider.Add(coll[i]);
-                onAttackObj?.Invoke();
+                onAttackObj?.Invoke(coll[i].transform.position);
 
-                var enemy = GetComponent<IHurtable>();
+                var enemy = coll[i].GetComponent<IHurtable>();
                 if (enemy != null)
                 {
                     enemy.SetHurtInfo(new object[2]
@@ -921,15 +926,14 @@ public class PlayerCharacter : Character
         }
     }
 
-    Vector2 AttackPos(int attackNum)
+    void ChangeAttackPos(Vector2 dir)
     {
-        if(face == -1)
+        if (dir.x != 0)
         {
-            return (Vector2)transform.position + new Vector2(-attackPosOffsets[attackNum - 1].x, attackPosOffsets[attackNum - 1].y);
-        }
-        else
-        {
-            return (Vector2)transform.position + attackPosOffsets[attackNum - 1];
+            for(int i = 0; i < attackPos.Count; i++)
+            {
+                attackPoints[i] = dir.x > 0 ? attackPos[i].position : new Vector3(-attackPos[i].position.x, attackPos[i].position.y, attackPos[i].position.z);
+            }
         }
     }
 
@@ -980,6 +984,7 @@ public class PlayerCharacter : Character
     void AccelerateSpeed(float targetSpeed, float accelerate)
     {
         float time = Mathf.Abs(targetSpeed - rb.velocity.x) / accelerate;
+        float dampVelocity = 0;
         var x = Mathf.SmoothDamp(rb.velocity.x, targetSpeed, ref dampVelocity, time);
         rb.velocity = new Vector2(x, rb.velocity.y);
     }
