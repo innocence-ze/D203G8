@@ -22,11 +22,17 @@ public abstract class Character : MonoBehaviour, IHurtable
     public bool IsAlive { get { return curHp > 0; } set { IsAlive = value; } }
     public bool getHurt;
 
+    protected readonly WaitForFixedUpdate continueState = new WaitForFixedUpdate();
+    [HideInInspector]public int face = 1; //left -1, right 1
+    protected Rigidbody2D rb;
+
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         curHp = maxHp;
         bornPos = transform.position;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
