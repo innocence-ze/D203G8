@@ -1,5 +1,97 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2139433874926562636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6859977876617777650}
+  - component: {fileID: 7899958153402081248}
+  m_Layer: 0
+  m_Name: Point Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6859977876617777650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139433874926562636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.64}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3730586044886891282}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &7899958153402081248
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139433874926562636}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.9777904, b: 0.9575472, a: 1}
+  m_Intensity: 0.33
+  m_Range: 3.3
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &3730586044886891292
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3730586045778170897}
+  - {fileID: 6859977876617777650}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -152,7 +245,7 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls: []
-  maxHp: 0
+  maxHp: 100
   curHp: 0
   recoverHp: 0
   invincible: 0
@@ -160,6 +253,7 @@ MonoBehaviour:
   hurtRecoverTime: 0
   bornPos: {x: 0, y: 0}
   getHurt: 0
+  face: 1
   frameSpeed: {x: 0, y: 0}
   curState: 0
   onGround: 0
@@ -175,28 +269,27 @@ MonoBehaviour:
   rightOffset: {x: 0.05, y: 0.05}
   sideSize: {x: 0.9, y: 0.9}
   canWallJump: 1
-  wallJumpSpeed: {x: 7, y: 5.75}
-  wallFallSpeed: -2.75
+  wallJumpSpeed: {x: 10, y: 11}
+  wallFallSpeed: -3.2
   canJump: 1
-  jumpSpeed: 8.5
+  jumpSpeed: 21
   jumpMoveSpeed: 6.5
-  fallMoveSpeed: 0
+  fallMoveSpeed: 8
   canDoubleJump: 1
-  doubleJumpSpeed: 7
+  doubleJumpSpeed: 21
   doubleJumpMoveSpeed: 6.5
-  fallMultiplier: 7
-  jumpMultiplier: 0
-  lowJumpMultiplier: 1.9
-  maxFallSpeed: -12
+  fallMultiplier: 8
+  jumpMultiplier: 5.5
+  lowJumpMultiplier: 13
+  maxFallSpeed: -16
   betterJumping: 1
   canMove: 1
-  moveSpeed: 7.5
-  accelerate: 80
-  decelerate: 60
+  moveSpeed: 7.2
+  accelerate: 95
+  decelerate: 90
   moveDir: {x: 0, y: 0}
-  face: 1
   canDash: 1
-  dashSpeed: 20
+  dashSpeed: 25
   dashXMultiplier: 1
   dashDrag: 7
   withoutDragDuration: 0.1
@@ -209,7 +302,7 @@ MonoBehaviour:
   canAttack: 0
   attackMoveSpeed: 0
   attackDamages: []
-  attackPosOffsets: []
+  attackPos: []
   attackRadius: []
   attackableLayer:
     serializedVersion: 2
