@@ -93,7 +93,6 @@ public class PlayerCharacter : Character
     public float attackMoveSpeed;
     public List<float> attackDamages = new List<float>();
     public List<Transform> attackPos = new List<Transform>();
-    private List<Vector3> attackPoints = new List<Vector3>();
     public List<float> attackRadius = new List<float>();
     public LayerMask attackableLayer;
     public float comboInterval;//多长时间重置连击
@@ -140,10 +139,6 @@ public class PlayerCharacter : Character
         stateCoroutine = StartCoroutine(IdleState());
         curDashEnergy = maxDashEnergy;
 
-        for(int i = 0; i < attackPos.Count; i++)
-        {
-            attackPoints[i] = attackPos[i].position;
-        }
         onChangeDir.AddListener(ChangeAttackPos);
     }
 
@@ -904,7 +899,7 @@ public class PlayerCharacter : Character
         PlayerMove(attackMoveSpeed, accelerate, decelerate);
 
         //物理判断
-        Collider2D[] coll = Physics2D.OverlapCircleAll(attackPoints[attackNum], attackRadius[attackNum - 1], attackableLayer);
+        Collider2D[] coll = Physics2D.OverlapCircleAll(attackPos[attackNum].position, attackRadius[attackNum - 1], attackableLayer);
 
         for (int i = 0; i < coll.Length; i++)
         {
@@ -928,11 +923,11 @@ public class PlayerCharacter : Character
 
     void ChangeAttackPos(Vector2 dir)
     {
-        if (dir.x != 0)
+        if (dir.x * attackPos[0].localPosition.x < 0)
         {
             for(int i = 0; i < attackPos.Count; i++)
             {
-                attackPoints[i] = dir.x > 0 ? attackPos[i].position : new Vector3(-attackPos[i].position.x, attackPos[i].position.y, attackPos[i].position.z);
+                attackPos[i].localPosition = new Vector3(-attackPos[i].localPosition.x, attackPos[i].localPosition.y, 0);
             }
         }
     }
@@ -1022,8 +1017,13 @@ public class PlayerCharacter : Character
 
         if(nextWall && !onGround)
         {
+            int oldface = face;
             if (nextLeftWall && !nextRightWall) face = 1;
             else if (nextRightWall && !nextLeftWall) face = -1;
+            if (oldface != face)
+            {
+                inputDir = new Vector2(face, -1);
+            }
         }
 
         if (inputDir != oldDir)
@@ -1111,6 +1111,20 @@ public class PlayerCharacter : Character
     private void OnGUI()
     {
         GUILayout.Button(curState.ToString());
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube((Vector2)transform.position + leftOffset, sideSize);
+        Gizmos.DrawWireCube((Vector2)transform.position + rightOffset, sideSize);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube((Vector2)transform.position + bottomOffset, bottomSize);
+
+        for(int i = 0; i < attackPos.Count; i++)
+        { 
+            Gizmos.DrawWireSphere(attackPos[i].position, attackRadius[i]);
+        }
     }
 
 }

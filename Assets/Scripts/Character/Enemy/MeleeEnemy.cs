@@ -38,4 +38,10 @@ public class MeleeEnemy : NpcEnemy
             }
         }
     }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawWireSphere(attackPos.position, attackRange);
+    }
 }

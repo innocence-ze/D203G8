@@ -215,4 +215,13 @@ public abstract class NpcEnemy : Enemy
 
     }
 
+    protected virtual void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(new Vector2(chaseLeftBoundary, transform.position.y), new Vector2(chaseRightBoundary, transform.position.y));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, new Vector2(detectiveRange * 2, detectiveRange * 2));
+        Gizmos.color = Color.red;
+        
+    }
+
 }
