@@ -368,21 +368,21 @@ MonoBehaviour:
   wallJumpSpeed: {x: 10, y: 11}
   wallFallSpeed: -3.2
   canJump: 1
-  jumpSpeed: 17
+  jumpSpeed: 21
   jumpMoveSpeed: 6.5
-  fallMoveSpeed: 6
+  fallMoveSpeed: 8
   canDoubleJump: 1
-  doubleJumpSpeed: 16
+  doubleJumpSpeed: 21
   doubleJumpMoveSpeed: 6.5
-  fallMultiplier: 6
-  jumpMultiplier: 3.8
-  lowJumpMultiplier: 7.5
-  maxFallSpeed: -13
+  fallMultiplier: 8
+  jumpMultiplier: 5.5
+  lowJumpMultiplier: 13
+  maxFallSpeed: -16
   betterJumping: 1
   canMove: 1
-  moveSpeed: 7.2
-  accelerate: 90
-  decelerate: 80
+  moveSpeed: 7.4
+  accelerate: 95
+  decelerate: 90
   moveDir: {x: 0, y: 0}
   canDash: 1
   dashSpeed: 25
