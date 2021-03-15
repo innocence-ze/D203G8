@@ -130,14 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1108513126706937368, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.792
-      objectReference: {fileID: 0}
-    - target: {fileID: 1108513126706937368, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 3730586044886891282, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -185,138 +177,6 @@ PrefabInstance:
     - target: {fileID: 3730586044886891292, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: m_Name
       value: PCDebug
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891292, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891292, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: curHp
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: maxHp
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: getHurt
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: canAttack
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: recoverHp
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: comboInterval
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: fallMoveSpeed
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: invincibleTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: jumpMultiplier
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackMoveSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: hurtRecoverTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: wallJumpSpeed.x
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: wallJumpSpeed.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackPos.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackableLayer.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackPoints.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackRadius.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackAnimNormalizedTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackDamages.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackRadius.Array.data[0]
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackRadius.Array.data[1]
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackRadius.Array.data[2]
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: attackPosOffsets.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: OnHurt.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: OnHurt.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: OnHurt.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586045778170910, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6811307510467319250, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.141
-      objectReference: {fileID: 0}
-    - target: {fileID: 6811307510467319250, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.235
-      objectReference: {fileID: 0}
-    - target: {fileID: 8831302898243271742, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8831302898243271742, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.181
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
@@ -3559,6 +3419,9 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls: []
+  onChangeDir:
+    m_PersistentCalls:
+      m_Calls: []
   maxHp: 0
   curHp: 0
   recoverHp: 0
@@ -3579,6 +3442,7 @@ MonoBehaviour:
   attackRange: 0
   afterAttackFreezeTime: 0
   attackInterval: 0
+  attackPos: {fileID: 0}
   onPatrol:
     m_PersistentCalls:
       m_Calls: []
@@ -3597,12 +3461,8 @@ MonoBehaviour:
   onRecover:
     m_PersistentCalls:
       m_Calls: []
-  onChangeDir:
-    m_PersistentCalls:
-      m_Calls: []
   state: 0
   Bullet: {fileID: 0}
-  shotPos: {fileID: 0}
 --- !u!61 &2023004016
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4064,6 +3924,9 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls: []
+  onChangeDir:
+    m_PersistentCalls:
+      m_Calls: []
   maxHp: 10
   curHp: 10
   recoverHp: 1
@@ -4073,19 +3936,20 @@ MonoBehaviour:
   bornPos: {x: 0, y: 0}
   getHurt: 0
   face: 1
-  patrolSpeed: 0
+  patrolSpeed: 3
   patrolPos:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - 4
+  - -2
   detectiveRange: 5
-  chaseSpeed: 0
+  chaseSpeed: 5
   chaseLeftBoundary: -5
-  chaseRightBoundary: 5
+  chaseRightBoundary: 7
   canAttack: 1
   attackable: 1
-  attackRange: 3
+  attackRange: 1
   afterAttackFreezeTime: 0
-  attackInterval: 0
+  attackInterval: 0.5
+  attackPos: {fileID: 2032998950}
   onPatrol:
     m_PersistentCalls:
       m_Calls: []
@@ -4104,15 +3968,11 @@ MonoBehaviour:
   onRecover:
     m_PersistentCalls:
       m_Calls: []
-  onChangeDir:
-    m_PersistentCalls:
-      m_Calls: []
   state: 0
-  attackPos: {fileID: 2032998950}
   attackableLayer:
     serializedVersion: 2
     m_Bits: 1024
-  attackDamage: 3
+  attackDamage: 5
 --- !u!61 &2036328249
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4196,7 +4056,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036328247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -0.19, z: -4.131148}
+  m_LocalPosition: {x: 0.73, y: -0.22, z: -4.131148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 997427588}
@@ -4214,7 +4074,7 @@ Animator:
   m_GameObject: {fileID: 2036328247}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ea161045f7242f49bd312681629e2be, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

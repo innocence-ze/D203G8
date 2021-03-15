@@ -6,6 +6,7 @@ public abstract class Character : MonoBehaviour, IHurtable
 {
     [SerializeField] protected Vec2Event onHurt;
     [SerializeField] protected SimpleEvent onDie;
+    [SerializeField] protected Vec2Event onChangeDir;
 
     [Header("HP--血量")]
     public float maxHp;
@@ -23,7 +24,7 @@ public abstract class Character : MonoBehaviour, IHurtable
     public bool getHurt;
 
     protected readonly WaitForFixedUpdate continueState = new WaitForFixedUpdate();
-    [HideInInspector]public int face = 1; //left -1, right 1
+    [ConditionalShow(true)]public int face = 1; //left -1, right 1
     protected Rigidbody2D rb;
 
 

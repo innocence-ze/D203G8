@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MeleeEnemy : NpcEnemy
 {
-    public Transform attackPos;
     public LayerMask attackableLayer;
     public float attackDamage;
 

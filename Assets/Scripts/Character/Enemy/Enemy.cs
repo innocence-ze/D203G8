@@ -7,7 +7,7 @@ public abstract class Enemy : Character
     protected Transform target;
     [Header("Patrol--巡逻")]
     public float patrolSpeed;
-    public List<Vector3> patrolPos = new List<Vector3>();
+    public List<float> patrolPos = new List<float>();
     protected int targetIndex = 0;
     [Header("Chase--追击")]
     public float detectiveRange;
@@ -19,9 +19,10 @@ public abstract class Enemy : Character
     public bool canAttack = true;
     public bool attackable = true;
     public float attackRange;
-    public float afterAttackFreezeTime;
-    public float attackInterval;
+    public float afterAttackFreezeTime;//攻击后的僵硬时间
+    public float attackInterval;//两次攻击的间隔时间
     protected bool inAttack;
+    public Transform attackPos;
 
     [Header("Event")]
     public SimpleEvent onPatrol;
@@ -30,12 +31,22 @@ public abstract class Enemy : Character
     public Vec2Event OnAttackObj;
     public SimpleEvent onBack;
     public SimpleEvent onRecover;
-    public FloatEvent onChangeDir;
 
     protected override void Start()
     {
         base.Start();
         target = FindObjectOfType<PlayerCharacter>().transform;
+        onChangeDir.AddListener(ChangeAttackPos);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (rb.velocity.x * face < 0)
+        {
+            face = -face;
+            onChangeDir?.Invoke(new Vector2(face,0));
+        }
     }
 
     public bool ChaseCondition => face * (target.position.x - transform.position.x) <= detectiveRange && face * (target.position.x - transform.position.x) > 0 && Mathf.Abs(target.position.y - transform.position.y) < detectiveRange;
@@ -50,6 +61,15 @@ public abstract class Enemy : Character
         inAttack = false;
         yield return new WaitForSeconds(attackInterval - afterAttackFreezeTime);
         attackable = true;
+    }
+
+    //根据朝向变更攻击位置
+    public void ChangeAttackPos(Vector2 dir)
+    {
+        if(dir.x * attackPos.localPosition.x < 0)
+        {
+            attackPos.localPosition = new Vector3(-attackPos.localPosition.x, attackPos.localPosition.y, attackPos.localPosition.z);
+        }
     }
 
 }

@@ -90,11 +90,11 @@ public class GameManager : MonoBehaviour
             ioM.AddCommand(stopDash);
         }
 
-        if(Input.GetAxis(ioM.attackName) > 0 && !pc.AttackCommand)
+        if(Input.GetButtonDown(ioM.attackName) && !pc.AttackCommand)
         {
             ioM.AddCommand(attack);
         }
-        if(Input.GetAxis(ioM.attackName) == 0 && pc.AttackCommand)
+        if(!Input.GetButtonDown(ioM.attackName) && pc.AttackCommand)
         {
             ioM.AddCommand(stopAttack);
         }

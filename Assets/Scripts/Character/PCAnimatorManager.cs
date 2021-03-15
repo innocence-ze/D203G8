@@ -6,6 +6,7 @@ public class PCAnimatorManager : MonoBehaviour
 {
     PlayerCharacter pc;
     Animator anim;
+    SpriteRenderer sr;
 
     public string isOnGround;
     public string isNextWall;
@@ -26,6 +27,7 @@ public class PCAnimatorManager : MonoBehaviour
     {
         pc = GetComponent<PlayerCharacter>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     int oldCombolNum =0;
@@ -33,7 +35,7 @@ public class PCAnimatorManager : MonoBehaviour
     void Update()
     {
         anim.SetFloat(verVelocity, pc.frameSpeed.y);
-        anim.SetFloat(horVelocity, pc.frameSpeed.x);
+        anim.SetFloat(horVelocity,Mathf.Abs(pc.frameSpeed.x));
         anim.SetBool(isFaceLeft, pc.face == -1);
         anim.SetBool(isAlive, pc.IsAlive);
         anim.SetBool(isOnGround, pc.onGround);
@@ -50,10 +52,10 @@ public class PCAnimatorManager : MonoBehaviour
             oldCombolNum = pc.comboNum;
             pc.attackAnimNormalizedTime = 0;
         }
-        if (pc.comboNum != 0)
-            pc.attackAnimNormalizedTime += Time.deltaTime;
 
-        //pc.attackAnimNormalizedTime = anim.GetFloat(AttackNormalizedTime);
+        pc.attackAnimNormalizedTime = anim.GetFloat(AttackNormalizedTime);
+
+        sr.flipX = pc.face == -1;
     }
 
 }

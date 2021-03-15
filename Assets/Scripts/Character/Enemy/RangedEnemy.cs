@@ -6,7 +6,6 @@ using UnityEngine;
 public class RangedEnemy : NpcEnemy
 {
     public GameObject Bullet;
-    public Transform shotPos;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -23,7 +22,7 @@ public class RangedEnemy : NpcEnemy
 
     protected override void InAttack()
     {
-        Instantiate(Bullet, shotPos.position, Quaternion.identity);
+        Instantiate(Bullet, attackPos.position, Quaternion.identity);
         Bullet.GetComponent<EnemyBullet>().direction =  (target.position - transform.position).normalized;
     }
 }

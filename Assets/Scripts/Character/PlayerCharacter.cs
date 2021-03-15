@@ -98,8 +98,8 @@ public class PlayerCharacter : Character
     public float comboInterval;//多长时间重置连击
     [ConditionalShow(true)] public int comboNum = 0;
     List<Collider2D> totalHitCollider = new List<Collider2D>();
-    bool inCombo = false;
-    bool nextCombo = false;
+    [ConditionalShow(true)] [SerializeField] bool inCombo = false;
+    [ConditionalShow(true)] [SerializeField] bool nextCombo = false;
     [ConditionalShow(true)] public float attackAnimNormalizedTime;
 
     [Header("Command--命令")]
@@ -125,7 +125,6 @@ public class PlayerCharacter : Character
     [SerializeField] FloatEvent onAir;
     [SerializeField] Vec2Event onDash;
     [SerializeField] Vec2Event onMove;
-    [SerializeField] Vec2Event onChangeDir;
     [SerializeField] SimpleEvent onIdle;
     [SerializeField] IntEvent onAttack;//开始攻击时，无论是否攻击到
     [SerializeField] Vec2Event onAttackObj;//攻击到物体时
@@ -899,7 +898,7 @@ public class PlayerCharacter : Character
         PlayerMove(attackMoveSpeed, accelerate, decelerate);
 
         //物理判断
-        Collider2D[] coll = Physics2D.OverlapCircleAll(attackPos[attackNum].position, attackRadius[attackNum - 1], attackableLayer);
+        Collider2D[] coll = Physics2D.OverlapCircleAll(attackPos[attackNum - 1].position, attackRadius[attackNum - 1], attackableLayer);
 
         for (int i = 0; i < coll.Length; i++)
         {
@@ -921,6 +920,7 @@ public class PlayerCharacter : Character
         }
     }
 
+    //转身时，修改attack的localpos
     void ChangeAttackPos(Vector2 dir)
     {
         if (dir.x * attackPos[0].localPosition.x < 0)
