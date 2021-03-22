@@ -95,28 +95,31 @@ public class PlayerCharacter : Character
     public List<Transform> attackPos = new List<Transform>();
     public List<float> attackRadius = new List<float>();
     public LayerMask attackableLayer;
-    public float comboInterval;//多长时间重置连击
     [ConditionalShow(true)] public int comboNum = 0;
     List<Collider2D> totalHitCollider = new List<Collider2D>();
     [ConditionalShow(true)] [SerializeField] bool inCombo = false;
-    [ConditionalShow(true)] [SerializeField] bool nextCombo = false;
     [ConditionalShow(true)] public float attackAnimNormalizedTime;
+    public bool nextCombo = false;
 
     [Header("Command--命令")]
-    bool jumpCommand = false;
-    bool dashCommand = false;
     bool moveLeftCommand = false;
     bool moveRightCommand = false;
     bool moveUpCommand = false;
     bool moveDownCommand = false;
-    bool attackCommand = false;
-    public bool JumpCommand { set { jumpCommand = value; } get { return jumpCommand; } }
-    public bool DashCommand { set { dashCommand = value; } get { return dashCommand; } }
     public bool MoveLeftCommand { set { moveLeftCommand = value; if (value) moveRightCommand = !value; } get { return moveLeftCommand; } }
     public bool MoveRightCommand { set { moveRightCommand = value; if (value) MoveLeftCommand = !value; } get { return moveRightCommand; } }
     public bool MoveUpCommand { set { moveUpCommand = value; if (value) moveDownCommand = !value; } get { return moveUpCommand; } }
     public bool MoveDownCommand { set { moveDownCommand = value; if (value) moveUpCommand = !value; } get { return moveDownCommand; } }
-    public bool AttackCommand { set { attackCommand = value; } get { return attackCommand; } }
+    public bool JumpCommand { get; set; }
+    public bool DashCommand { private get => GetCommand("Dash"); set => SetCommand("Dash"); }
+    public bool AttackCommand { 
+        private get => GetCommand("Attack"); 
+        set => SetCommand("Attack"); }
+
+    HashSet<string> commandSet = new HashSet<string>();
+    void ClearCommandSet() => commandSet.Clear();
+    bool GetCommand(string command) => commandSet.Remove(command);
+    public void SetCommand(string command) => commandSet.Add(command);
 
     [Header("Event List")]
     [SerializeField] SimpleEvent onJump;
@@ -143,6 +146,14 @@ public class PlayerCharacter : Character
 
     protected override void Update()
     {
+        if (commandSet.Count != 0)
+        {
+            foreach(var c in commandSet)
+            {
+                Debug.Log(c);
+            }
+        }
+
         base.Update();
         if (nextLeftWall && nextRightWall)
         {
@@ -150,19 +161,9 @@ public class PlayerCharacter : Character
             hasDoubleJump = false;
         }
 
-        if (!jumpCommand)
+        if (!JumpCommand)
         {
             isJumping = false;
-        }
-
-        if (!dashCommand)
-        {
-            isDashing = false;
-        }
-
-        if (AttackCommand)
-        {
-            nextCombo = true;
         }
 
         if (canRecoverEnergy && !dashEnergyRecovering)
@@ -182,17 +183,23 @@ public class PlayerCharacter : Character
 
     }
 
+
+    /////////////////////////////////////////////////////
+    /// 状态机
+    /////////////////////////////////////////////////////
+
+
     IEnumerator IdleState()
     {
-        curState = PCState.Idle;
+        OnEnterState(PCState.Idle);
         onIdle?.Invoke();
         OnGround();
 
         while (true)
         {
             AccelerateSpeed(0, decelerate);
-
             yield return continueState;
+
             if (JumpCondition)
             {
                 stateCoroutine = StartCoroutine(JumpState());
@@ -228,7 +235,7 @@ public class PlayerCharacter : Character
 
     IEnumerator MoveState()
     {
-        curState = PCState.Move;
+        OnEnterState(PCState.Move);
         onMove?.Invoke(moveDir);
         OnGround();
         while (true)
@@ -284,7 +291,7 @@ public class PlayerCharacter : Character
 
     IEnumerator DashState()
     {
-        curState = PCState.Dash;
+        OnEnterState(PCState.Dash);
         onDash?.Invoke(inputDir);
 
         invincible = true;
@@ -335,7 +342,7 @@ public class PlayerCharacter : Character
 
     IEnumerator JumpState()
     {
-        curState = PCState.Jump;
+        OnEnterState(PCState.Jump);
         onJump?.Invoke();
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         isJumping = true;
@@ -343,7 +350,7 @@ public class PlayerCharacter : Character
 
         while (true)
         {
-            if (!jumpCommand)
+            if (!JumpCommand)
             {
                 hasJumped = true;
             }
@@ -394,14 +401,14 @@ public class PlayerCharacter : Character
 
     IEnumerator DoubleJumpState()
     {
-        curState = PCState.DoubleJump;
+        OnEnterState(PCState.DoubleJump);
         onDoubleJump?.Invoke();
         isJumping = true;
         rb.velocity = new Vector2(rb.velocity.x, doubleJumpSpeed);
 
         while (true)
         {
-            if (!jumpCommand)
+            if (!JumpCommand)
             {
                 hasDoubleJump = true;
             }
@@ -445,7 +452,7 @@ public class PlayerCharacter : Character
 
     IEnumerator NextWallState()
     {
-        curState = PCState.NextWall;
+        OnEnterState(PCState.NextWall);
         hasJumped = false;
         hasDoubleJump = false;
         while (true)
@@ -496,13 +503,13 @@ public class PlayerCharacter : Character
 
     IEnumerator WallJumpState()
     {
-        curState = PCState.WallJump;
+        OnEnterState(PCState.WallJump);
         isJumping = true;
         onWallJump?.Invoke();
         yield return continueState;
         while (true)
         {
-            if (!jumpCommand)
+            if (!JumpCommand)
             {
                 hasJumped = true;
             }
@@ -546,7 +553,7 @@ public class PlayerCharacter : Character
 
     IEnumerator FallState()
     {
-        curState = PCState.Fall;
+        OnEnterState(PCState.Fall);
         onAir?.Invoke(-1);
         while (true)
         {
@@ -596,7 +603,7 @@ public class PlayerCharacter : Character
     IEnumerator HurtState()
     {
         getHurt = false;
-        curState = PCState.Hurt;
+        OnEnterState(PCState.Hurt);
         onHurt?.Invoke((Vector2)hurtInfo[0] - (Vector2)transform.position);
         GetHurt((float)hurtInfo[1]);
         rb.velocity = Vector2.zero;
@@ -626,7 +633,7 @@ public class PlayerCharacter : Character
                 }
                 else
                 {
-                    if(rb.velocity.y > 0)
+                    if (rb.velocity.y > 0)
                         rb.velocity = new Vector2(rb.velocity.x, 0);
                     stateCoroutine = StartCoroutine(FallState());
                     yield break;
@@ -637,7 +644,7 @@ public class PlayerCharacter : Character
 
     IEnumerator DieState()
     {
-        curState = PCState.Die;
+        OnEnterState(PCState.Die);
         onDie?.Invoke();
         rb.velocity = Vector2.zero;
 
@@ -656,14 +663,15 @@ public class PlayerCharacter : Character
 
     IEnumerator Attack01State()
     {
+        comboNum = 1;
         EnterAttack(1);
         var timer = StartCoroutine(ResetAttackTimer());
         while (true)
         {
             InAttack(1);
 
-            yield return continueState;
-            if (NextComboCondition)
+            yield return 0;
+            if (comboNum == 2)
             {
                 StopCoroutine(timer);
                 totalHitCollider.Clear();
@@ -720,8 +728,8 @@ public class PlayerCharacter : Character
         {
             InAttack(2);
 
-            yield return continueState;
-            if (NextComboCondition)
+            yield return 0;
+            if (comboNum == 3)
             {
                 StopCoroutine(timer);
                 totalHitCollider.Clear();
@@ -778,8 +786,8 @@ public class PlayerCharacter : Character
         {
             InAttack(3);
 
-            yield return continueState;
-            if (NextComboCondition)
+            yield return 0;
+            if (comboNum == 1)
             {
                 StopCoroutine(timer);
                 totalHitCollider.Clear();
@@ -850,20 +858,30 @@ public class PlayerCharacter : Character
         dashEnergyRecovering = false;
     }
 
+    //重置连击时间
     IEnumerator ResetAttackTimer()
     {
         inCombo = true;
-        yield return new WaitForSeconds(comboInterval);
+        while (attackAnimNormalizedTime < 1)
+        {
+            yield return 0;
+        }
         inCombo = false;
     }
 
-    public bool JumpCondition => !isJumping && jumpCommand && canJump && !hasJumped;
 
-    public bool DoubleJumpCondition => canDoubleJump && hasJumped && !hasDoubleJump && jumpCommand && !isJumping;
+    //////////////////////////////////////////////////////////////
+    ///进入状态机的条件
+    //////////////////////////////////////////////////////////////
 
-    public bool WallJumpCondition => canWallJump && jumpCommand && !isJumping;
 
-    public bool DashCondition => dashCommand && canDash && !hasDashed && !isDashing;
+    public bool JumpCondition => !isJumping && JumpCommand && canJump && !hasJumped;
+
+    public bool DoubleJumpCondition => canDoubleJump && hasJumped && !hasDoubleJump && JumpCommand && !isJumping;
+
+    public bool WallJumpCondition => canWallJump && JumpCommand && !isJumping;
+
+    public bool DashCondition => DashCommand && canDash && !hasDashed && !isDashing;
 
     public bool HurtCondition => getHurt && !invincible;
 
@@ -880,15 +898,23 @@ public class PlayerCharacter : Character
         }
     }
 
-    bool AttackCondition => canAttack && attackCommand;
+    bool AttackCondition => canAttack && AttackCommand;
 
-    bool NextComboCondition => nextCombo && inCombo && attackAnimNormalizedTime > 0.9;
+
+    /////////////////////////////////////////////////////////////////
+    ///进入状态机的动作
+    /////////////////////////////////////////////////////////////////
+
+
+    void OnEnterState(PCState cur)
+    {
+        curState = cur;
+        ClearCommandSet();
+    }
 
     void EnterAttack(int attackNum)
     {
-        nextCombo = false;
-        curState = PCState.Attack1 + attackNum - 1;
-        comboNum = attackNum;
+        OnEnterState(PCState.Attack1 + attackNum - 1);
         onAttack?.Invoke(attackNum);
     }
 
@@ -920,35 +946,18 @@ public class PlayerCharacter : Character
         }
     }
 
-    //转身时，修改attack的localpos
-    void ChangeAttackPos(Vector2 dir)
-    {
-        if (dir.x * attackPos[0].localPosition.x < 0)
-        {
-            for(int i = 0; i < attackPos.Count; i++)
-            {
-                attackPos[i].localPosition = new Vector3(-attackPos[i].localPosition.x, attackPos[i].localPosition.y, 0);
-            }
-        }
-    }
 
-    bool CompareAttackObject(List<Collider2D> total, Collider2D other)
-    {
-        for(int i = 0; i < total.Count; i++)
-        {
-            if(total[i] == other)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+    ////////////////////////////////////////////////////////////////////////////////////////
+    ///结束状态机的动作
+    ////////////////////////////////////////////////////////////////////////////////////////
+
 
     void EndDash(IEnumerator nextState)
     {
         canMove = true;
         hasDashed = true;
         invincible = false;
+        isDashing = false;
         rb.drag = 0;
         stateCoroutine = StartCoroutine(nextState);
     }
@@ -973,6 +982,34 @@ public class PlayerCharacter : Character
         inCombo = false;
         totalHitCollider.Clear();
         StartCoroutine(nextState);
+    }
+
+
+
+
+
+    //转身时，修改attack的localpos
+    void ChangeAttackPos(Vector2 dir)
+    {
+        if (dir.x * attackPos[0].localPosition.x < 0)
+        {
+            for (int i = 0; i < attackPos.Count; i++)
+            {
+                attackPos[i].localPosition = new Vector3(-attackPos[i].localPosition.x, attackPos[i].localPosition.y, 0);
+            }
+        }
+    }
+
+    bool CompareAttackObject(List<Collider2D> total, Collider2D other)
+    {
+        for (int i = 0; i < total.Count; i++)
+        {
+            if (total[i] == other)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     //x轴的加减速 rb.velocity.x
@@ -1015,7 +1052,7 @@ public class PlayerCharacter : Character
             }
         }
 
-        if(nextWall && !onGround)
+        if (nextWall && !onGround)
         {
             int oldface = face;
             if (nextLeftWall && !nextRightWall) face = 1;
@@ -1074,7 +1111,7 @@ public class PlayerCharacter : Character
             {
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
             }
-            else if (rb.velocity.y > 0 && !jumpCommand)
+            else if (rb.velocity.y > 0 && !JumpCommand)
             {
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
             }
@@ -1108,9 +1145,24 @@ public class PlayerCharacter : Character
         }
     }
 
+
+    public void GotoNextCombo(int nextCombo)
+    {
+        if (AttackCondition)
+        {
+            Debug.Log(nextCombo);
+            comboNum = nextCombo;
+        }
+    }
+
+
+#if UNITY_EDITOR
     private void OnGUI()
     {
         GUILayout.Button(curState.ToString());
+        GUILayout.Label($"inCombo:{inCombo}");
+        GUILayout.Label($"Combo:{comboNum}");
+        GUILayout.Label($"AttTime:{attackAnimNormalizedTime}");
     }
 
     private void OnDrawGizmos()
@@ -1121,10 +1173,10 @@ public class PlayerCharacter : Character
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube((Vector2)transform.position + bottomOffset, bottomSize);
 
-        for(int i = 0; i < attackPos.Count; i++)
-        { 
+        for (int i = 0; i < attackPos.Count; i++)
+        {
             Gizmos.DrawWireSphere(attackPos[i].position, attackRadius[i]);
         }
     }
-
+#endif
 }

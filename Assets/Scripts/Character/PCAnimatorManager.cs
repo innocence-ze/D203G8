@@ -30,8 +30,6 @@ public class PCAnimatorManager : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    int oldCombolNum =0;
-
     void Update()
     {
         anim.SetFloat(verVelocity, pc.frameSpeed.y);
@@ -45,17 +43,16 @@ public class PCAnimatorManager : MonoBehaviour
         anim.SetBool(isDash, pc.curState == PlayerCharacter.PCState.Dash);
         anim.SetBool(isWallJump, pc.curState == PlayerCharacter.PCState.WallJump);
         anim.SetBool(isHurt, pc.curState == PlayerCharacter.PCState.Hurt);
+
+        
         anim.SetInteger(ComboNum, pc.comboNum);
 
-        if (oldCombolNum != pc.comboNum)
-        {
-            oldCombolNum = pc.comboNum;
-            pc.attackAnimNormalizedTime = 0;
-        }
 
         pc.attackAnimNormalizedTime = anim.GetFloat(AttackNormalizedTime);
 
         sr.flipX = pc.face == -1;
     }
+
+
 
 }
