@@ -8,74 +8,6 @@ public interface ICommand
     void Undo();
 }
 
-public class JumpCommand : ICommand
-{
-    private readonly PlayerCharacter pc;
-
-    public JumpCommand(PlayerCharacter pc)
-    {
-        this.pc = pc;
-    }
-
-    public void Execute()
-    {
-        pc.JumpCommand = true;
-    }
-
-    public void Undo(){ }
-}
-
-public class StopJumpCommand : ICommand
-{
-    private readonly PlayerCharacter pc;
-
-    public StopJumpCommand(PlayerCharacter pc)
-    {
-        this.pc = pc;
-    }
-
-    public void Execute()
-    {
-        pc.JumpCommand = false;
-    }
-
-    public void Undo(){ }
-}
-
-public class DashCommand : ICommand
-{
-    private readonly PlayerCharacter pc;
-
-    public DashCommand(PlayerCharacter pc)
-    {
-        this.pc = pc;
-    }
-
-    public void Execute()
-    {
-        pc.DashCommand = true;
-    }
-
-    public void Undo() { }
-}
-
-public class StopDashCommand : ICommand
-{
-    private readonly PlayerCharacter pc;
-
-    public StopDashCommand(PlayerCharacter pc)
-    {
-        this.pc = pc;
-    }
-
-    public void Execute()
-    {
-        pc.DashCommand = false;
-    }
-
-    public void Undo() { }
-}
-
 public class MoveLeftCommand : ICommand
 {
     private readonly PlayerCharacter pc;
@@ -180,6 +112,57 @@ public class StopMoveVerCommand : ICommand
     public void Undo() { }
 }
 
+public class JumpCommand : ICommand
+{
+    private readonly PlayerCharacter pc;
+
+    public JumpCommand(PlayerCharacter pc)
+    {
+        this.pc = pc;
+    }
+
+    public void Execute()
+    {
+        pc.JumpCommand = true;
+    }
+
+    public void Undo(){ }
+}
+
+public class StopJumpCommand : ICommand
+{
+    private readonly PlayerCharacter pc;
+
+    public StopJumpCommand(PlayerCharacter pc)
+    {
+        this.pc = pc;
+    }
+
+    public void Execute()
+    {
+        pc.JumpCommand = false;
+    }
+
+    public void Undo(){ }
+}
+
+public class DashCommand : ICommand
+{
+    private readonly PlayerCharacter pc;
+
+    public DashCommand(PlayerCharacter pc)
+    {
+        this.pc = pc;
+    }
+
+    public void Execute()
+    {
+        pc.DashCommand = true;
+    }
+
+    public void Undo() { }
+}
+
 public class AttackCommand : ICommand
 {
     private readonly PlayerCharacter pc;
@@ -191,24 +174,7 @@ public class AttackCommand : ICommand
 
     public void Execute()
     {
-        pc.AttackCommand = true;
-    }
-
-    public void Undo() { }
-}
-
-public class StopAttackCommand : ICommand
-{
-    private readonly PlayerCharacter pc;
-
-    public StopAttackCommand(PlayerCharacter pc)
-    {
-        this.pc = pc;
-    }
-
-    public void Execute()
-    {
-        pc.AttackCommand = false;
+       pc.AttackCommand = true;
     }
 
     public void Undo() { }

@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if(singleton == null)
+            if (singleton == null)
             {
                 singleton = FindObjectOfType<GameManager>();
             }
-            if(singleton == null)
+            if (singleton == null)
             {
                 Debug.LogError("Cannot find Game Manager");
             }
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
 
     private InputManager ioM;
-    ICommand jump, stopJump, dash, stopDash, left, right, stopHor, up, down, stopVer, attack, stopAttack;
+    ICommand jump, stopJump, dash, left, right, stopHor, up, down, stopVer, attack;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
         jump = new JumpCommand(pc);
         stopJump = new StopJumpCommand(pc);
         dash = new DashCommand(pc);
-        stopDash = new StopDashCommand(pc);
         left = new MoveLeftCommand(pc);
         right = new MoveRightCommand(pc);
         stopHor = new StopMoveHorCommand(pc);
@@ -56,7 +55,6 @@ public class GameManager : MonoBehaviour
         down = new MoveDownCommand(pc);
         stopVer = new StopMoveVerCommand(pc);
         attack = new AttackCommand(pc);
-        stopAttack = new StopAttackCommand(pc);
     }
 
     void UpdateInputManager()
@@ -72,31 +70,28 @@ public class GameManager : MonoBehaviour
         else if (v < -0.05f) ioM.AddCommand(down);
         else ioM.AddCommand(stopVer);
 
-        if (Input.GetAxis(ioM.jumpName) > 0 && !pc.JumpCommand)
+        if (Input.GetAxis(ioM.jumpName) > 0)
         {
-            ioM.AddCommand(jump);
+            if (!pc.JumpCommand)
+            {
+                ioM.AddCommand(jump);
+            }
         }
-        if (Input.GetAxis(ioM.jumpName) == 0 && pc.JumpCommand)
+        else
         {
-            ioM.AddCommand(stopJump);
+            if (pc.JumpCommand)
+            {
+                ioM.AddCommand(stopJump);
+            }
         }
 
-        if (Input.GetAxis(ioM.dashName) > 0 && !pc.DashCommand)
+        if (Input.GetButtonDown(ioM.dashName))
         {
             ioM.AddCommand(dash);
         }
-        if (Input.GetAxis(ioM.dashName) == 0 && pc.DashCommand)
-        {
-            ioM.AddCommand(stopDash);
-        }
-
-        if(Input.GetAxis(ioM.attackName) > 0 && !pc.AttackCommand)
+        if (Input.GetButtonDown(ioM.attackName))
         {
             ioM.AddCommand(attack);
-        }
-        if(Input.GetAxis(ioM.attackName) == 0 && pc.AttackCommand)
-        {
-            ioM.AddCommand(stopAttack);
         }
 
         ioM.ExecuteCommands();

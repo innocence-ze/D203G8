@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MeleeEnemy : NpcEnemy
 {
-    public Transform attackPos;
     public LayerMask attackableLayer;
     public float attackDamage;
 
@@ -37,5 +36,11 @@ public class MeleeEnemy : NpcEnemy
                 }) ;
             }
         }
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 }

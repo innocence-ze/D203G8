@@ -7,11 +7,11 @@ public class CheckPoint : MonoBehaviour
     public SimpleEvent OnIdle;
     public SimpleEvent OnActive;
 
-    public Vector3 respawnPos;
 
     // Start is called before the first frame update
     void Start()
     {
+        OnActive.AddListener(OnDestory);
         OnIdle?.Invoke();
     }
 
@@ -21,9 +21,14 @@ public class CheckPoint : MonoBehaviour
         
         if (collision.gameObject == GameManager.Singleton.pc.gameObject)
         {
+            GameManager.Singleton.pc.bornPos = transform.position;
             OnActive?.Invoke();
-            GameManager.Singleton.pc.bornPos = respawnPos;
         }
     }
 
+
+    void OnDestory()
+    {
+        Destroy(gameObject);
+    }
 }

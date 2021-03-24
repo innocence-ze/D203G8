@@ -25,10 +25,11 @@ public abstract class NpcEnemy : Enemy
         onPatrol?.Invoke();
         while (true)
         {
-            var dir = patrolPos[targetIndex] - transform.position;
-            if (dir.x > 0) { rb.velocity = patrolSpeed * Vector2.right; }
+
+            var dir = patrolPos[targetIndex] - transform.position.x;
+            if (dir > 0) { rb.velocity = patrolSpeed * Vector2.right; }
             else { rb.velocity = patrolSpeed * Vector2.left; }
-            if (dir.sqrMagnitude < 0.01f)
+            if (dir < 0.1f && dir > -0.1f)
             {
                 targetIndex = (targetIndex + 1) % patrolPos.Count;
             }
@@ -118,7 +119,7 @@ public abstract class NpcEnemy : Enemy
         {
             rb.velocity = (bornPos - (Vector2)transform.position).x > 0 ? Vector2.right * patrolSpeed : Vector2.left * patrolSpeed;
             yield return continueState;
-            if(Vector3.SqrMagnitude(bornPos - (Vector2)transform.position) < 0.01)
+            if(Mathf.Abs(bornPos.x - transform.position.x) < 0.05f)
             {
                 invincible = false;
                 if (curHp < maxHp)
@@ -213,6 +214,15 @@ public abstract class NpcEnemy : Enemy
     protected virtual void InAttack()
     {
 
+    }
+
+    protected virtual void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(new Vector2(chaseLeftBoundary, transform.position.y), new Vector2(chaseRightBoundary, transform.position.y));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, new Vector2(detectiveRange * 2, detectiveRange * 2));
+        Gizmos.color = Color.red;
+        
     }
 
 }
