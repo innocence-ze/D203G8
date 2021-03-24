@@ -20,7 +20,7 @@ public abstract class Character : MonoBehaviour, IHurtable
     public float hurtRecoverTime; //硬直
     public Vector2 bornPos;
 
-    public bool IsAlive { get { return curHp > 0; } set { IsAlive = value; } }
+    public bool IsAlive { get { return curHp > 0; } }
     public bool getHurt;
 
     protected readonly WaitForFixedUpdate continueState = new WaitForFixedUpdate();

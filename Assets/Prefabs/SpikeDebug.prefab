@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5367397976763309937}
   - component: {fileID: 5367397976763309902}
   - component: {fileID: 5367397976763309900}
-  - component: {fileID: 7531236480673667563}
+  - component: {fileID: 3141352119360418904}
   m_Layer: 0
   m_Name: SpikeDebug
   m_TagString: Untagged
@@ -102,16 +102,19 @@ MonoBehaviour:
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &7531236480673667563
-BoxCollider:
+--- !u!70 &3141352119360418904
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5367397976763309901}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9249041, y: 1.7747116, z: 1}
-  m_Center: {x: -0.007509589, y: 0.0075092316, z: 0}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0

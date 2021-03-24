@@ -21,6 +21,8 @@ public class PlayerCharacter : Character
         Attack3,
     };
 
+    public float rebornTime; //死亡后多久重生
+
     [Header("Frame Speed--帧速度")]
     [ConditionalShow(true)] public Vector2 frameSpeed;
     [ConditionalShow(true)] public PCState curState;
@@ -146,14 +148,6 @@ public class PlayerCharacter : Character
 
     protected override void Update()
     {
-        if (commandSet.Count != 0)
-        {
-            foreach(var c in commandSet)
-            {
-                Debug.Log(c);
-            }
-        }
-
         base.Update();
         if (nextLeftWall && nextRightWall)
         {
@@ -1153,6 +1147,11 @@ public class PlayerCharacter : Character
             Debug.Log(nextCombo);
             comboNum = nextCombo;
         }
+    }
+
+    public void Reborn()
+    {
+        curHp = maxHp;
     }
 
 
