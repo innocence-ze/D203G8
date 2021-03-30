@@ -641,6 +641,7 @@ public class PlayerCharacter : Character
         OnEnterState(PCState.Die);
         onDie?.Invoke();
         rb.velocity = Vector2.zero;
+        invincible = true;
 
         while (true)
         {
@@ -648,6 +649,7 @@ public class PlayerCharacter : Character
             yield return continueState;
             if (IsAlive)
             {
+                invincible = false;
                 transform.position = bornPos;
                 stateCoroutine = StartCoroutine(IdleState());
                 yield break;
@@ -1144,7 +1146,6 @@ public class PlayerCharacter : Character
     {
         if (AttackCondition)
         {
-            Debug.Log(nextCombo);
             comboNum = nextCombo;
         }
     }

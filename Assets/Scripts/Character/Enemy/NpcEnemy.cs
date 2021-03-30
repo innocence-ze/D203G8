@@ -66,10 +66,12 @@ public abstract class NpcEnemy : Enemy
             if (AttackCondition)
             {
                 StartCoroutine(AttackState());
+                yield break;
             }
             if (BackCondition)
             {
                 StartCoroutine(BackState());
+                yield break;
             }
             if (HurtCondition)
             {
@@ -99,6 +101,7 @@ public abstract class NpcEnemy : Enemy
                 else
                 {
                     StartCoroutine(ChaseState());
+                    yield break;
                 }
             }
             if (HurtCondition)
@@ -125,10 +128,12 @@ public abstract class NpcEnemy : Enemy
                 if (curHp < maxHp)
                 {
                     StartCoroutine(RecoverState());
+                    yield break;
                 }
                 else
                 {
                     StartCoroutine(PatrolState());
+                    yield break;
                 }
             }
 
@@ -155,10 +160,12 @@ public abstract class NpcEnemy : Enemy
             if (curHp >= maxHp)
             {
                 StartCoroutine(PatrolState());
+                yield break;
             }
             if (ChaseCondition)
             {
                 StartCoroutine(ChaseState());
+                yield break;
             }
 
             if (HurtCondition)

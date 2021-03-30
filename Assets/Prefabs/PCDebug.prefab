@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3730586044886891295}
   - component: {fileID: 3730586044886891285}
   - component: {fileID: 17362400}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PCDebug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 713209773
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 39d91257a38a6634b8653fac643cf315, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -129,7 +129,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -168,6 +168,7 @@ MonoBehaviour:
   bornPos: {x: 0, y: 0}
   getHurt: 0
   face: 1
+  rebornTime: 0
   frameSpeed: {x: 0, y: 0}
   curState: 0
   onGround: 0
@@ -315,7 +316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7306552840337662495}
   - component: {fileID: 7881334877617117310}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7888402473857385659}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Attack3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 994532783873816060}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Attack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2414273349577864466}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Attack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

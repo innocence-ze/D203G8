@@ -23,6 +23,7 @@ public abstract class Enemy : Character
     public float attackInterval;//两次攻击的间隔时间
     protected bool inAttack;
     public Transform attackPos;
+    public LayerMask attackableLayer;
 
     [Header("Event")]
     public SimpleEvent onPatrol;
@@ -49,9 +50,11 @@ public abstract class Enemy : Character
         }
     }
 
-    public bool ChaseCondition => face * (target.position.x - transform.position.x) <= detectiveRange && face * (target.position.x - transform.position.x) > 0 && Mathf.Abs(target.position.y - transform.position.y) < detectiveRange;
-    public bool AttackCondition => canAttack && attackable && Mathf.Abs(target.position.x - transform.position.x) <= attackRange && Mathf.Abs(target.position.y - transform.position.y) <= attackRange;
-    public bool BackCondition => transform.position.x < chaseLeftBoundary || transform.position.x > chaseRightBoundary || Mathf.Abs(target.position.x - transform.position.x) > detectiveRange;
+    Vector3 deltaPos { get { return target.position - transform.position; } }
+
+    public bool ChaseCondition => face * deltaPos.x <= detectiveRange && face * deltaPos.x > 0 && Mathf.Abs(deltaPos.y) < detectiveRange;
+    public bool AttackCondition => canAttack && attackable && Physics2D.OverlapCircle(attackPos.position, attackRange, attackableLayer);
+    public bool BackCondition => transform.position.x < chaseLeftBoundary || transform.position.x > chaseRightBoundary || (Mathf.Abs(deltaPos.x) > detectiveRange || Mathf.Abs(deltaPos.y) > detectiveRange);
     public bool HurtCondition => getHurt && !invincible;
     protected IEnumerator AttackIntervalTimer()
     {

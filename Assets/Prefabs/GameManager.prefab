@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8293785374021220646}
   - component: {fileID: 8293785374021220641}
   - component: {fileID: 8293785374021220640}
+  - component: {fileID: 7336096173282293163}
+  - component: {fileID: 2010560217782301465}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,6 +50,7 @@ MonoBehaviour:
   dashName: Dash
   horName: Horizontal
   verName: Vertical
+  attackName: Attack
 --- !u!114 &8293785374021220640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,3 +63,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e77547af127bbbe4fbea7f46c4afce15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pc: {fileID: 0}
+  dialogMgr: {fileID: 0}
+--- !u!114 &7336096173282293163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293785374021220643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223470caac99e794e880a7cd7e82d741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objPoolList: []
+--- !u!114 &2010560217782301465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293785374021220643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51310d9b3e185e43af899246fe22327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  typingSpeed: 0
+  talkingObject: {fileID: 0}
+  currentLine: 0
+  state: 0
+  OnTyping:
+    m_PersistentCalls:
+      m_Calls: []

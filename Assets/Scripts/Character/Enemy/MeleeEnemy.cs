@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MeleeEnemy : NpcEnemy
 {
-    public LayerMask attackableLayer;
     public float attackDamage;
 
     // Start is called before the first frame update
