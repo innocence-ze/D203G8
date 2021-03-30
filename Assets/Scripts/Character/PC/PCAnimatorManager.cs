@@ -21,6 +21,7 @@ public class PCAnimatorManager : MonoBehaviour
     public string verVelocity;
     public string ComboNum;
     public string AttackNormalizedTime;
+    public string isLand;
 
     
     void Awake()
@@ -43,6 +44,7 @@ public class PCAnimatorManager : MonoBehaviour
         anim.SetBool(isDash, pc.curState == PlayerCharacter.PCState.Dash);
         anim.SetBool(isWallJump, pc.curState == PlayerCharacter.PCState.WallJump);
         anim.SetBool(isHurt, pc.curState == PlayerCharacter.PCState.Hurt);
+        anim.SetBool(isLand, pc.isLanding);
 
         
         anim.SetInteger(ComboNum, pc.comboNum);

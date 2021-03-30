@@ -13,6 +13,7 @@ public class PlayerCharacter : Character
         Jump,
         DoubleJump,
         WallJump,
+        land,
         Dash,
         Hurt,
         Die,
@@ -49,6 +50,9 @@ public class PlayerCharacter : Character
     public float jumpSpeed;
     public float jumpMoveSpeed;
     public float fallMoveSpeed;
+    public float bigFallTime;
+    public bool isLanding;
+    float fallTime = 0;
     bool isJumping = false;
     bool hasJumped = false;
 
@@ -553,10 +557,19 @@ public class PlayerCharacter : Character
         {
             BetterJump();
             PlayerMove(fallMoveSpeed, accelerate, decelerate);
+            fallTime += Time.fixedDeltaTime;
 
             yield return continueState;
             if (onGround)
             {
+                if (fallTime >= bigFallTime)
+                {
+                    isLanding = true;
+                    fallTime = 0;
+                    stateCoroutine = StartCoroutine(LandState());
+                    yield break;
+                }
+                fallTime = 0;
                 stateCoroutine = StartCoroutine(IdleState());
                 yield break;
             }
@@ -579,6 +592,44 @@ public class PlayerCharacter : Character
             if (DoubleJumpCondition)
             {
                 stateCoroutine = StartCoroutine(DoubleJumpState());
+                yield break;
+            }
+            if (HurtCondition)
+            {
+                stateCoroutine = StartCoroutine(HurtState());
+                yield break;
+            }
+            if (AttackCondition)
+            {
+                StartCoroutine(Attack01State());
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator LandState()
+    {
+        while (true)
+        {
+            yield return continueState;
+            if (canMove && (MoveRightCommand || moveLeftCommand))
+            {
+                stateCoroutine = StartCoroutine(MoveState());
+                yield break;
+            }
+            if(!isLanding)
+            {
+                stateCoroutine = StartCoroutine(IdleState());
+                yield break;
+            }
+            if (DashCondition)
+            {
+                stateCoroutine = StartCoroutine(DashState());
+                yield break;
+            }
+            if (JumpCondition)
+            {
+                stateCoroutine = StartCoroutine(JumpState());
                 yield break;
             }
             if (HurtCondition)
@@ -1141,6 +1192,10 @@ public class PlayerCharacter : Character
         }
     }
 
+    public void FinishLand()
+    {
+        isLanding = false;
+    }
 
     public void GotoNextCombo(int nextCombo)
     {

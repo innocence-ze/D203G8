@@ -190,6 +190,8 @@ MonoBehaviour:
   jumpSpeed: 17
   jumpMoveSpeed: 6.5
   fallMoveSpeed: 6
+  bigFallTime: 1
+  isLanding: 0
   canDoubleJump: 1
   doubleJumpSpeed: 16
   doubleJumpMoveSpeed: 6.5
@@ -306,6 +308,7 @@ MonoBehaviour:
   verVelocity: VerticalVelocity
   ComboNum: ComboNum
   AttackNormalizedTime: AttackNormalizedTime
+  isLand: IsLand
 --- !u!1 &6969091236518448065
 GameObject:
   m_ObjectHideFlags: 0
