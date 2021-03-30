@@ -174,7 +174,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NextWall
-  m_Speed: 1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3068784814754162162}
@@ -189,7 +189,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 945d1f48cb1d2bf4fad58028424abc17, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsFaceLeft
@@ -382,6 +382,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-5243231443066660704
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: wallslide_rough
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 945d1f48cb1d2bf4fad58028424abc17, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-5077708307890355883
 AnimatorState:
   serializedVersion: 5
@@ -491,7 +517,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 8b9522d83de29a146b4e6deb445e3acb, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsFaceLeft
@@ -866,7 +892,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3edb11f26a5711044bddc3115ee43cbc, type: 2}
+  m_Motion: {fileID: 7400000, guid: 94802bafd702721489efe7df730a57e6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsFaceLeft
@@ -1002,7 +1028,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b3970883198b6a14b9cf5c5ecbb6d91c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3edb11f26a5711044bddc3115ee43cbc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsFaceLeft
@@ -1588,6 +1614,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -4672449123143675417}
     m_Position: {x: 70, y: 720, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5243231443066660704}
+    m_Position: {x: 105, y: 785, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -2112716709876954542}
@@ -1709,7 +1738,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Die
-  m_Speed: 1
+  m_Speed: 0.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5575581436865828138}
@@ -1722,7 +1751,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 137cc52e81737364cad604648a1d3476, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7c42b4fae960a374b9e08dc515922102, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsFaceLeft
@@ -2008,7 +2037,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2279f6157ab182c4fa084db4e754a7ec, type: 2}
+    m_Motion: {fileID: 7400000, guid: 2eb5f16bd095bf64db3dd98a3f002f79, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -2121,7 +2150,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: f47c0cf70acde0e4e99312ac09f558d7, type: 2}
+    m_Motion: {fileID: 7400000, guid: 6b95d924faa76f945a8ea864848788bb, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -2206,7 +2235,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1436077c2c851a2489376e217c79247d, type: 2}
+    m_Motion: {fileID: 7400000, guid: dedd4448a46f2db4fbe466a085f97b44, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1

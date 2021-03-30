@@ -1,7 +1,43 @@
 fileFormatVersion: 2
 guid: 3184e5cd2d27a8447b409b5647af9507
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 3613932094881329412
+    second: PC_Doublejump_0
+  - first:
+      213: 8502535803380716016
+    second: PC_Doublejump_1
+  - first:
+      213: 2734687976004174939
+    second: PC_Doublejump_2
+  - first:
+      213: -8996771297249852923
+    second: PC_Doublejump_3
+  - first:
+      213: -1476090892917306043
+    second: PC_Doublejump_4
+  - first:
+      213: 6108818382754785229
+    second: PC_Doublejump_5
+  - first:
+      213: -1746309476247678152
+    second: PC_Doublejump_6
+  - first:
+      213: 7750423427010612401
+    second: PC_Doublejump_7
+  - first:
+      213: 3950831914146374760
+    second: PC_Doublejump_8
+  - first:
+      213: -1477079561100352383
+    second: PC_Doublejump_9
+  - first:
+      213: 3241818521349005497
+    second: PC_Doublejump_10
+  - first:
+      213: -2974673651485823572
+    second: PC_Doublejump_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,12 +77,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -73,9 +109,297 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PC_Doublejump_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 423.33334
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 401f8c5c714472230800000000000000
+      internalID: 3613932094881329412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_1
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 0
+        width: 423.33334
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f15c8ac3431ff570800000000000000
+      internalID: 8502535803380716016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_2
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 0
+        width: 306
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b54c245a93093f520800000000000000
+      internalID: 2734687976004174939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_3
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 404
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5020efd0c2c052380800000000000000
+      internalID: -8996771297249852923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_4
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 0
+        width: 404
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d897f472fd38be0800000000000000
+      internalID: -1476090892917306043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_5
+      rect:
+        serializedVersion: 2
+        x: 1954
+        y: 0
+        width: 423
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc7a97504f1e6c450800000000000000
+      internalID: 6108818382754785229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_6
+      rect:
+        serializedVersion: 2
+        x: 2377
+        y: 0
+        width: 423
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 833db50a8ccd3c7e0800000000000000
+      internalID: -1746309476247678152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_7
+      rect:
+        serializedVersion: 2
+        x: 2798
+        y: 0
+        width: 423
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bc45d91b090f8b60800000000000000
+      internalID: 7750423427010612401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_8
+      rect:
+        serializedVersion: 2
+        x: 3221
+        y: 0
+        width: 367
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 864a8f981bc24d630800000000000000
+      internalID: 3950831914146374760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_9
+      rect:
+        serializedVersion: 2
+        x: 3587
+        y: 0
+        width: 423
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 184af9f07fb508be0800000000000000
+      internalID: -1477079561100352383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_10
+      rect:
+        serializedVersion: 2
+        x: 4019
+        y: 0
+        width: 423
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b02a4fe4c04dfc20800000000000000
+      internalID: 3241818521349005497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Doublejump_11
+      rect:
+        serializedVersion: 2
+        x: 4653
+        y: 0
+        width: 423.33334
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cad29701316d7b6d0800000000000000
+      internalID: -2974673651485823572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

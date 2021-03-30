@@ -1,7 +1,40 @@
 fileFormatVersion: 2
 guid: c6f0de9e73d9924499af379d12f790aa
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -4252783732490734032
+    second: PC_Attack3_0
+  - first:
+      213: -1882090979903734800
+    second: PC_Attack3_1
+  - first:
+      213: 6464440853262321669
+    second: PC_Attack3_2
+  - first:
+      213: 512868441422098468
+    second: PC_Attack3_3
+  - first:
+      213: 7891151880576046615
+    second: PC_Attack3_4
+  - first:
+      213: 8866854586363477471
+    second: PC_Attack3_5
+  - first:
+      213: -8705435769195071976
+    second: PC_Attack3_6
+  - first:
+      213: -1309094880731513547
+    second: PC_Attack3_8
+  - first:
+      213: 8332770801945378048
+    second: PC_Attack3_9
+  - first:
+      213: 4461096513008216289
+    second: PC_Attack3_10
+  - first:
+      213: 8109202487099837260
+    second: PC_Attack3_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,12 +74,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -73,9 +106,276 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PC_Attack3_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 465
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 036745e3ab31bf4c0800000000000000
+      internalID: -4252783732490734032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_1
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 0
+        width: 601
+        height: 552
+      alignment: 9
+      pivot: {x: 0.5477772, y: 0.49699092}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fbfedbb93871e5e0800000000000000
+      internalID: -1882090979903734800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_2
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 0
+        width: 637
+        height: 552
+      alignment: 9
+      pivot: {x: 0.63819623, y: 0.47291902}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 508493ab4be46b950800000000000000
+      internalID: 6464440853262321669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_3
+      rect:
+        serializedVersion: 2
+        x: 1751
+        y: 0
+        width: 566
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 420f87351231e1700800000000000000
+      internalID: 512868441422098468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_4
+      rect:
+        serializedVersion: 2
+        x: 2316
+        y: 0
+        width: 844
+        height: 552
+      alignment: 9
+      pivot: {x: 0.27958816, y: 0.51203585}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 716146683d0038d60800000000000000
+      internalID: 7891151880576046615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_5
+      rect:
+        serializedVersion: 2
+        x: 3160
+        y: 0
+        width: 769
+        height: 552
+      alignment: 9
+      pivot: {x: 0.36176658, y: 0.5090268}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fddfc3784456d0b70800000000000000
+      internalID: 8866854586363477471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_6
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 0
+        width: 625
+        height: 552
+      alignment: 9
+      pivot: {x: 0.332575, y: 0.49999988}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 816f5229a44103780800000000000000
+      internalID: -8705435769195071976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_8
+      rect:
+        serializedVersion: 2
+        x: 4754
+        y: 0
+        width: 744
+        height: 552
+      alignment: 9
+      pivot: {x: 0.31958073, y: 0.52515596}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53d37b0542925dde0800000000000000
+      internalID: -1309094880731513547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_9
+      rect:
+        serializedVersion: 2
+        x: 5616
+        y: 0
+        width: 624.6667
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00d73bc35e2f3a370800000000000000
+      internalID: 8332770801945378048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_10
+      rect:
+        serializedVersion: 2
+        x: 6376
+        y: 0
+        width: 625
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e8a69684aff8ed30800000000000000
+      internalID: 4461096513008216289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC_Attack3_11
+      rect:
+        serializedVersion: 2
+        x: 7001
+        y: 0
+        width: 487
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4bcc4792bca98070800000000000000
+      internalID: 8109202487099837260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
