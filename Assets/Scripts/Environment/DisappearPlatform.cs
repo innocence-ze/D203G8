@@ -19,13 +19,14 @@ public class DisappearPlatform : MonoBehaviour
     public float disappearTime;
     public float reappearTime;
     public float animTime;
+    public float delayTime;
 
     public bool disappear = false;
 
     public SimpleEvent onDisappear;
     public SimpleEvent onReappear;
 
-    WaitForSeconds disappearTimer, reappearTimer, animTimer;
+    WaitForSeconds disappearTimer, reappearTimer, animTimer, delayTimer;
 
     bool isDisappearing = false;
 
@@ -41,6 +42,7 @@ public class DisappearPlatform : MonoBehaviour
         reappearTimer = new WaitForSeconds(reappearTime);
         disappearTimer = new WaitForSeconds(disappearTime);
         animTimer = new WaitForSeconds(animTime);
+        delayTimer = new WaitForSeconds(delayTime);
 
         onDisappear.AddListener(Disappear);
         onReappear.AddListener(Reappear);
@@ -93,6 +95,8 @@ public class DisappearPlatform : MonoBehaviour
 
     IEnumerator IntervalCoroutine()
     {
+        yield return delayTimer;
+
         while (true)
         {
             yield return disappearTimer;
