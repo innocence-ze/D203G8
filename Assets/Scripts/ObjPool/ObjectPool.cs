@@ -18,7 +18,7 @@ public class ObjectPool : MonoBehaviour
     public float autoRecycleTime;
 
 
-    public virtual void Init(ObjectPoolMgr.AllocObj obj)
+    public virtual void Init(ObjectPoolManager.AllocObj obj)
     {
         prefab = obj.prefab;
         preAllocCount = obj.preAllocSize;

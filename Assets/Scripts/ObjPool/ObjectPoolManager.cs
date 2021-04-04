@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolMgr : MonoBehaviour
+public class ObjectPoolManager : MonoBehaviour
 {
 
-    private static ObjectPoolMgr s_singleton = null;
-    public static ObjectPoolMgr Singleton
+    private static ObjectPoolManager s_singleton = null;
+    public static ObjectPoolManager Singleton
     {
         get
         {
             if(s_singleton == null)
             {
-                s_singleton = FindObjectOfType<ObjectPoolMgr>();
+                s_singleton = FindObjectOfType<ObjectPoolManager>();
             }
             if(s_singleton == null)
             {
@@ -51,9 +51,16 @@ public class ObjectPoolMgr : MonoBehaviour
     /// <summary>
     /// 回收物体进入对应池子
     /// </summary>
-    public void Recycle(GameObject recycleObj)
+    public void Recycle(GameObject recycleObj, float recycleTime = 0)
     {
-        GetPool(recycleObj.GetComponent<PreInfo>().type).Recycle(recycleObj);
+        if(recycleTime == 0)
+        {
+            GetPool(recycleObj.GetComponent<PreInfo>().type).Recycle(recycleObj);
+        }
+        else
+        {
+            StartCoroutine(RecycleCoroutine(recycleObj, recycleTime));
+        }
     }
 
     /// <summary>
@@ -71,6 +78,12 @@ public class ObjectPoolMgr : MonoBehaviour
     {
         ObjectPool subPool = CreatePool(alloc.type);
         subPool.Init(alloc);
+    }
+
+    IEnumerator RecycleCoroutine(GameObject recycleObj, float time)
+    {
+        yield return new WaitForSeconds(time);
+        GetPool(recycleObj.GetComponent<PreInfo>().type).Recycle(recycleObj);
     }
 
     ObjectPool CreatePool(string type)

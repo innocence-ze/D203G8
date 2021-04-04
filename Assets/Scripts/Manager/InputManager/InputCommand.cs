@@ -179,3 +179,20 @@ public class AttackCommand : ICommand
 
     public void Undo() { }
 }
+
+public class InteractCommand : ICommand
+{
+    private readonly PlayerCharacter pc;
+
+    public InteractCommand(PlayerCharacter pc)
+    {
+        this.pc = pc;
+    }
+
+    public void Execute()
+    {
+        pc.InteractCommand = true;
+    }
+
+    public void Undo() { }
+}

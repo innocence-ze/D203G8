@@ -41,6 +41,7 @@ public class PlayerCharacter : Character
     public Vector2 leftOffset;
     public Vector2 rightOffset;
     public Vector2 sideSize;
+    public bool canNextWall;
     public bool canWallJump;
     public Vector2 wallJumpSpeed;
     public float wallFallSpeed;
@@ -118,12 +119,11 @@ public class PlayerCharacter : Character
     public bool MoveDownCommand { set { moveDownCommand = value; if (value) moveUpCommand = !value; } get { return moveDownCommand; } }
     public bool JumpCommand { get; set; }
     public bool DashCommand { private get => GetCommand("Dash"); set => SetCommand("Dash"); }
-    public bool AttackCommand { 
-        private get => GetCommand("Attack"); 
-        set => SetCommand("Attack"); }
+    public bool AttackCommand { private get => GetCommand("Attack"); set => SetCommand("Attack"); }
+    public bool InteractCommand { get => GetCommand("Interact"); set => SetCommand("Interact"); }
 
     HashSet<string> commandSet = new HashSet<string>();
-    void ClearCommandSet() => commandSet.Clear();
+    public void ClearCommandSet() => commandSet.Clear();
     bool GetCommand(string command) => commandSet.Remove(command);
     public void SetCommand(string command) => commandSet.Add(command);
 
@@ -140,6 +140,12 @@ public class PlayerCharacter : Character
 
     Coroutine stateCoroutine;
 
+    /// <summary>
+    /// walk, next wall, wall jump, jump, double jump, dash, attack
+    /// 走，贴墙，墙跳，跳，双跳，冲，攻击
+    /// </summary>
+    public bool[] Abilities { get; private set; }
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -148,6 +154,10 @@ public class PlayerCharacter : Character
         curDashEnergy = maxDashEnergy;
 
         onChangeDir.AddListener(ChangeAttackPos);
+        Abilities = new bool[7]
+        {
+            canMove, canNextWall, canWallJump, canJump, canDoubleJump, canDash, canAttack,
+        };
     }
 
     protected override void Update()
@@ -941,7 +951,7 @@ public class PlayerCharacter : Character
             bool l = nextLeftWall && !nextRightWall;
             bool r = !nextLeftWall && nextRightWall;
 
-            return rb.velocity.y < 0 && (l || r) && !onGround;
+            return rb.velocity.y < 0 && (l || r) && !onGround && canNextWall;
         }
     }
 
@@ -1210,6 +1220,36 @@ public class PlayerCharacter : Character
         curHp = maxHp;
     }
 
+    public void Lock()
+    {
+        canMove = canNextWall = canWallJump = canJump = canDoubleJump = canDash = canAttack = false;
+    }
+
+    public void Unlock()
+    {
+        canMove = Abilities[0];
+        canNextWall = Abilities[1]; 
+        canWallJump = Abilities[2]; 
+        canJump = Abilities[3];
+        canDoubleJump = Abilities[4]; 
+        canDash = Abilities[5]; 
+        canAttack = Abilities[6];
+    }
+
+    public void SetAbilities(int index, bool value)
+    {
+        if (index > 6 || index < 0)
+            return;
+        Abilities[index] = value;
+        Unlock();
+    }
+
+    public bool GetAbilities(int index)
+    {
+        if (index > 6 || index < 0)
+            return false;
+        return Abilities[index];
+    }
 
 #if UNITY_EDITOR
     private void OnGUI()

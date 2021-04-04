@@ -20,7 +20,7 @@ public class PreInfo : MonoBehaviour
     IEnumerator CountRecycle(float lifeTime)
     {
         yield return new WaitForSeconds(lifeTime);
-        ObjectPoolMgr.Singleton.Recycle(gameObject);
+        ObjectPoolManager.Singleton.Recycle(gameObject);
     }
 
 }

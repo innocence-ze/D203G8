@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UIManager))]
 [RequireComponent(typeof(InputManager))]
+[RequireComponent(typeof(DialogManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Singleton
@@ -26,14 +28,20 @@ public class GameManager : MonoBehaviour
     public PlayerCharacter pc;
 
 
-    private InputManager ioM;
-    ICommand jump, stopJump, dash, left, right, stopHor, up, down, stopVer, attack;
+    private InputManager ioMgr;
+    ICommand jump, stopJump, dash, left, right, stopHor, up, down, stopVer, attack, interact;
+
+    public UIManager uiMgr;
+
+    public DialogManager dialogMgr;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         pc = FindObjectOfType<PlayerCharacter>();
         InitInputManager();
+        InitUIManager();
+        InitDialogManager();
     }
 
     // Update is called once per frame
@@ -44,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void InitInputManager()
     {
-        ioM = GetComponent<InputManager>();
+        ioMgr = GetComponent<InputManager>();
         jump = new JumpCommand(pc);
         stopJump = new StopJumpCommand(pc);
         dash = new DashCommand(pc);
@@ -55,46 +63,59 @@ public class GameManager : MonoBehaviour
         down = new MoveDownCommand(pc);
         stopVer = new StopMoveVerCommand(pc);
         attack = new AttackCommand(pc);
+        interact = new InteractCommand(pc);
     }
 
     void UpdateInputManager()
     {
-        var h = Input.GetAxis(ioM.horName);
-        var v = Input.GetAxis(ioM.verName);
+        var h = Input.GetAxis(ioMgr.horName);
+        var v = Input.GetAxis(ioMgr.verName);
 
-        if (h > 0.05f) ioM.AddCommand(right);
-        else if (h < -0.05f) ioM.AddCommand(left);
-        else ioM.AddCommand(stopHor);
+        if (h > 0.05f) ioMgr.AddCommand(right);
+        else if (h < -0.05f) ioMgr.AddCommand(left);
+        else ioMgr.AddCommand(stopHor);
 
-        if (v > 0.05f) ioM.AddCommand(up);
-        else if (v < -0.05f) ioM.AddCommand(down);
-        else ioM.AddCommand(stopVer);
+        if (v > 0.05f) ioMgr.AddCommand(up);
+        else if (v < -0.05f) ioMgr.AddCommand(down);
+        else ioMgr.AddCommand(stopVer);
 
-        if (Input.GetAxis(ioM.jumpName) > 0)
+        if (Input.GetAxis(ioMgr.jumpName) > 0)
         {
             if (!pc.JumpCommand)
             {
-                ioM.AddCommand(jump);
+                ioMgr.AddCommand(jump);
             }
         }
         else
         {
             if (pc.JumpCommand)
             {
-                ioM.AddCommand(stopJump);
+                ioMgr.AddCommand(stopJump);
             }
         }
 
-        if (Input.GetButtonDown(ioM.dashName))
+        if (Input.GetButtonDown(ioMgr.dashName))
         {
-            ioM.AddCommand(dash);
+            ioMgr.AddCommand(dash);
         }
-        if (Input.GetButtonDown(ioM.attackName))
+        if (Input.GetButtonDown(ioMgr.attackName))
         {
-            ioM.AddCommand(attack);
+            ioMgr.AddCommand(attack);
         }
-
-        ioM.ExecuteCommands();
+        if (Input.GetButtonDown(ioMgr.interactName))
+        {
+            ioMgr.AddCommand(interact);
+        }
+        ioMgr.ExecuteCommands();
     }
 
+    void InitUIManager()
+    {
+        uiMgr = GetComponent<UIManager>();
+    }
+
+    void InitDialogManager()
+    {
+        dialogMgr = GetComponent<DialogManager>();
+    }
 }
