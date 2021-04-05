@@ -52,7 +52,6 @@ public class DialogManager : MonoBehaviour
         }
         if(state == State.off && isShowing)
         {
-            Debug.Log("off");
             OnOff?.Invoke();
             isShowing = false;
         }
@@ -82,7 +81,7 @@ public class DialogManager : MonoBehaviour
         ui = GameManager.Singleton.uiMgr.GetPanel<DialogPanel>();
         if(ui == null)
         {
-            ui = GameManager.Singleton.uiMgr.Open<DialogPanel>();
+            ui = GameManager.Singleton.uiMgr.ShowPanel<DialogPanel>();
         }
         state = State.typing;
     }

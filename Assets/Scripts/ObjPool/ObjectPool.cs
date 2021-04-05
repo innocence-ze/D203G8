@@ -64,9 +64,8 @@ public class ObjectPool : MonoBehaviour
 
     void CreateNewObj()
     {
-        var go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        GameObject go = Instantiate(prefab, transform);
         go.SetActive(false);
-        go.transform.parent = transform;
         var preInfo = go.AddComponent<PreInfo>();
         preInfo.type = objTypeString;
         preInfo.lifeTime = autoRecycleTime;

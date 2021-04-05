@@ -38,6 +38,7 @@ public class ObjectPoolManager : MonoBehaviour
         public int autoIncreaseCount;       //每次增加的对象数量
         public GameObject prefab;           //对象的应用
         public float autoRecycleTime;       //多久后自动回收
+        public Transform parent;            //挂在哪个父物体上，若为空直接挂在Mgr上
     }
 
     private void Awake()
@@ -76,7 +77,7 @@ public class ObjectPoolManager : MonoBehaviour
     /// </summary>
     public void Init(AllocObj alloc)
     {
-        ObjectPool subPool = CreatePool(alloc.type);
+        ObjectPool subPool = CreatePool(alloc.type, alloc.parent);
         subPool.Init(alloc);
     }
 
@@ -86,12 +87,12 @@ public class ObjectPoolManager : MonoBehaviour
         GetPool(recycleObj.GetComponent<PreInfo>().type).Recycle(recycleObj);
     }
 
-    ObjectPool CreatePool(string type)
+    ObjectPool CreatePool(string type, Transform parent = null)
     {
         string poolNameString = type + "Pool";
 
         GameObject subPool = new GameObject(poolNameString);
-        subPool.transform.parent = transform;
+        subPool.transform.parent = parent == null ? transform : parent;
         //创建对象池实例
         System.Type poolType = System.Type.GetType(poolNameString);
         ObjectPool returnPool = subPool.AddComponent(poolType) as ObjectPool;

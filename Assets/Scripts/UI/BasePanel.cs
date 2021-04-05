@@ -8,14 +8,38 @@ public class BasePanel : MonoBehaviour
     public ObjEvent OnShow;
     public SimpleEvent OnClose;
 
-    public void Init()
+    float timer = 0;
+
+    public virtual void Init() { OnInit?.Invoke(); }
+
+    public void Show(params object[] args)
     {
-        transform.parent = GameManager.Singleton.uiMgr.canvas;
+        gameObject.SetActive(true);
+        OnShow?.Invoke(args);
     }
 
-    public void Close()
+    public void Close(float closeTime = 0)
     {
-        GameManager.Singleton.uiMgr.Close(GetType().ToString());
+        OnClose?.Invoke();
+        if (closeTime != 0)
+        {
+            StartCoroutine(ClosePanel(closeTime));
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator ClosePanel(float t)
+    {
+        while (timer < t)
+        {
+            timer += Time.deltaTime;
+            yield return 0;
+        }
+        timer = 0;
+        gameObject.SetActive(false);
     }
 
 }

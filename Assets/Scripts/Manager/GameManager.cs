@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(UIManager))]
 [RequireComponent(typeof(InputManager))]
 [RequireComponent(typeof(DialogManager))]
 public class GameManager : MonoBehaviour
@@ -40,8 +39,12 @@ public class GameManager : MonoBehaviour
     {
         pc = FindObjectOfType<PlayerCharacter>();
         InitInputManager();
-        InitUIManager();
         InitDialogManager();
+
+
+
+
+        InitUIManager();
     }
 
     // Update is called once per frame
@@ -111,7 +114,9 @@ public class GameManager : MonoBehaviour
 
     void InitUIManager()
     {
-        uiMgr = GetComponent<UIManager>();
+        uiMgr = FindObjectOfType<UIManager>();
+        uiMgr.canvas = uiMgr.transform;
+        uiMgr.Init();
     }
 
     void InitDialogManager()

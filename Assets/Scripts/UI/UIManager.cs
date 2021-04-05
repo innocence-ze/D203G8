@@ -7,9 +7,21 @@ public class UIManager : MonoBehaviour
 
     public Transform canvas;
 
+    public List<GameObject> panels;
+
     public Dictionary<string, BasePanel> panelDic = new Dictionary<string, BasePanel>();
 
-    public T Open<T>(params object[] args) where T : BasePanel
+    public void Init()
+    {
+        for (int i = 0; i < panels.Count; i++)
+        {
+            var p = panels[i].GetComponent<BasePanel>();
+            p.Init();
+            panels[i].SetActive(false);
+        }
+    }
+
+    public T ShowPanel<T>(params object[] args) where T : BasePanel
     {
         string name = typeof(T).ToString();
         if (panelDic.ContainsKey(name))
@@ -17,19 +29,16 @@ public class UIManager : MonoBehaviour
             return null;
         }
 
-        T curPanel = ObjectPoolManager.Singleton.Utilize(name).GetComponent<T>();
-        curPanel.Init();
+        T curPanel = GetComponentInChildren<T>(true);
 
-        curPanel.OnInit?.Invoke();
-
-        curPanel.OnShow?.Invoke(args);
+        curPanel.Show(args);
 
         panelDic.Add(name, curPanel);
 
         return panelDic[name] as T;
     }
 
-    public void Close(string name, float closeTime = 0)
+    public void ClosePanel(string name, float closeTime = 0)
     {
         if (!panelDic.ContainsKey(name))
         {
@@ -37,16 +46,14 @@ public class UIManager : MonoBehaviour
         }
 
         var panel = panelDic[name];
-        if(panel == null)
+        if (panel == null)
         {
             return;
         }
 
-
-        panel.OnClose?.Invoke();
+        panel.Close(closeTime);
         panelDic.Remove(name);
 
-        ObjectPoolManager.Singleton.Recycle(panel.gameObject, closeTime);
     }
 
     public T GetPanel<T>() where T : BasePanel

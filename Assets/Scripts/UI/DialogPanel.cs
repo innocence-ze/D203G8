@@ -14,33 +14,22 @@ public class DialogPanel : BasePanel
     Graphic[] uiElements;
     float[] uiAlpha;
 
-    public StrEvent OnTyping;
-
-    private void Awake()
+    public override void Init()
     {
-        OnInit?.AddListener(InitDialogPanel);
-        OnShow?.AddListener(ShowDialogPanel);
-        OnClose?.AddListener(CloseDialogPanel);
+        OnInit.AddListener(InitDialogPanel);
+        OnShow.AddListener(ShowDialogPanel);
+        OnClose.AddListener(CloseDialogPanel);
         GameManager.Singleton.dialogMgr.OnTyping.AddListener(ShowDialog);
         GameManager.Singleton.dialogMgr.OnNextSentence.AddListener(ClearDialog);
         GameManager.Singleton.dialogMgr.OnOff.AddListener(RecycleDialogPanel);
+        base.Init();
     }
 
-    //显示到ui上
-    void ShowDialog(string dialog)
-    {
-        dialogContent.text = dialog;
-    }
-
-    void ClearDialog()
-    {
-        dialogContent.text = "";
-    }
-
+    //设置变量
     void InitDialogPanel()
     {
         dialogContent = transform.Find("DialogContent").GetComponent<TextMeshProUGUI>();
-
+        Debug.Log(1);
         uiElements = GetComponentsInChildren<Graphic>();
         uiAlpha = new float[uiElements.Length];
         for (int i = 0; i < uiElements.Length; i++)
@@ -67,8 +56,18 @@ public class DialogPanel : BasePanel
         }
     }
 
+    //显示到ui上
+    void ShowDialog(string dialog)
+    {
+        dialogContent.text = dialog;
+    }
+
+    void ClearDialog()
+    {
+        dialogContent.text = "";
+    }
     void RecycleDialogPanel()
     {
-        GameManager.Singleton.uiMgr.Close(GetType().ToString(), fadeTime);
+        GameManager.Singleton.uiMgr.ClosePanel(GetType().ToString(), fadeTime);
     }
 }
