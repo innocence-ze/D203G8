@@ -24,8 +24,10 @@ public abstract class Character : MonoBehaviour, IHurtable
     public bool getHurt;
 
     protected readonly WaitForFixedUpdate continueState = new WaitForFixedUpdate();
-    [ConditionalShow(true)]public int face = 1; //left -1, right 1
-    protected Rigidbody2D rb;
+    [ConditionalShow(true)] public int face = 1; //left -1, right 1
+    public Rigidbody2D rb { get; protected set; }
+
+    protected float velocityX;
 
 
     // Start is called before the first frame update
@@ -39,10 +41,7 @@ public abstract class Character : MonoBehaviour, IHurtable
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(!invincible && !getHurt && curHp < maxHp)
-        {
-            curHp += recoverHp * Time.deltaTime;
-        }
+
     }
 
     protected IEnumerator InvincibleCoroutine()
@@ -54,7 +53,7 @@ public abstract class Character : MonoBehaviour, IHurtable
 
     public void GetHurt(float hurt)
     {
-        if(curHp > hurt)
+        if (curHp > hurt)
         {
             curHp -= hurt;
         }

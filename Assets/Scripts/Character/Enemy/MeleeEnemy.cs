@@ -19,7 +19,7 @@ public class MeleeEnemy : NpcEnemy
         base.Update();
     }
 
-    protected override void InAttack()
+    public override void InAttack()
     {
         Collider2D[] coll = Physics2D.OverlapCircleAll(attackPos.position, attackRange, attackableLayer);
         for(int i = 0; i < coll.Length; i++)

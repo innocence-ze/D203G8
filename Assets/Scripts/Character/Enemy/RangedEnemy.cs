@@ -20,7 +20,7 @@ public class RangedEnemy : NpcEnemy
         base.Update();
     }
 
-    protected override void InAttack()
+    public override void InAttack()
     {
         Instantiate(Bullet, attackPos.position, Quaternion.identity);
         Bullet.GetComponent<EnemyBullet>().direction =  (target.position - transform.position).normalized;

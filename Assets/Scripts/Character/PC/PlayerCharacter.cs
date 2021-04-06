@@ -163,6 +163,10 @@ public class PlayerCharacter : Character
     protected override void Update()
     {
         base.Update();
+        if (!invincible && !getHurt && curHp < maxHp)
+        {
+            curHp += recoverHp * Time.deltaTime;
+        }
         if (nextLeftWall && nextRightWall)
         {
             hasJumped = false;
@@ -250,14 +254,14 @@ public class PlayerCharacter : Character
         {
             if (canMove && moveRightCommand && !nextRightWall)
             {
-                if (rb.velocity.x < moveSpeed)
+                if (velocityX < moveSpeed)
                 {
                     AccelerateSpeed(moveSpeed, accelerate);
                 }
             }
             else if (canMove && moveLeftCommand && !nextLeftWall)
             {
-                if (rb.velocity.x > -moveSpeed)
+                if (velocityX > -moveSpeed)
                 {
                     AccelerateSpeed(-moveSpeed, accelerate);
                 }
@@ -352,7 +356,7 @@ public class PlayerCharacter : Character
     {
         OnEnterState(PCState.Jump);
         onJump?.Invoke();
-        rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        rb.velocity = new Vector2(velocityX, jumpSpeed);
         isJumping = true;
         yield return continueState;
 
@@ -412,7 +416,7 @@ public class PlayerCharacter : Character
         OnEnterState(PCState.DoubleJump);
         onDoubleJump?.Invoke();
         isJumping = true;
-        rb.velocity = new Vector2(rb.velocity.x, doubleJumpSpeed);
+        rb.velocity = new Vector2(velocityX, doubleJumpSpeed);
 
         while (true)
         {
@@ -466,15 +470,15 @@ public class PlayerCharacter : Character
         while (true)
         {
 
-            rb.velocity = new Vector2(rb.velocity.x, wallFallSpeed);
+            rb.velocity = new Vector2(velocityX, wallFallSpeed);
             if (!nextLeftWall && MoveLeftCommand && canMove)
             {
-                if (rb.velocity.x > -moveSpeed) AccelerateSpeed(-moveSpeed, accelerate);
+                if (velocityX > -moveSpeed) AccelerateSpeed(-moveSpeed, accelerate);
             }
 
             if (!nextRightWall && MoveRightCommand && canMove)
             {
-                if (rb.velocity.x < moveSpeed) AccelerateSpeed(moveSpeed, accelerate);
+                if (velocityX < moveSpeed) AccelerateSpeed(moveSpeed, accelerate);
             }
 
             yield return continueState;
@@ -689,7 +693,7 @@ public class PlayerCharacter : Character
                 else
                 {
                     if (rb.velocity.y > 0)
-                        rb.velocity = new Vector2(rb.velocity.x, 0);
+                        rb.velocity = new Vector2(velocityX, 0);
                     stateCoroutine = StartCoroutine(FallState());
                     yield break;
                 }
@@ -703,6 +707,8 @@ public class PlayerCharacter : Character
         onDie?.Invoke();
         rb.velocity = Vector2.zero;
         invincible = true;
+        rb.gravityScale = 0;
+        GetComponent<Collider2D>().enabled = false;
 
         while (true)
         {
@@ -711,6 +717,8 @@ public class PlayerCharacter : Character
             if (IsAlive)
             {
                 invincible = false;
+                GetComponent<Collider2D>().enabled = true;
+                rb.gravityScale = 1;
                 transform.position = bornPos;
                 stateCoroutine = StartCoroutine(IdleState());
                 yield break;
@@ -725,8 +733,10 @@ public class PlayerCharacter : Character
         var timer = StartCoroutine(ResetAttackTimer());
         while (true)
         {
-            InAttack(1);
+            //InAttack(1);
 
+            BetterJump();
+            PlayerMove(attackMoveSpeed, accelerate, decelerate);
             yield return 0;
             if (comboNum == 2)
             {
@@ -783,8 +793,10 @@ public class PlayerCharacter : Character
         var timer = StartCoroutine(ResetAttackTimer());
         while (true)
         {
-            InAttack(2);
+            //InAttack(2);
 
+            BetterJump();
+            PlayerMove(attackMoveSpeed, accelerate, decelerate);
             yield return 0;
             if (comboNum == 3)
             {
@@ -841,8 +853,10 @@ public class PlayerCharacter : Character
         var timer = StartCoroutine(ResetAttackTimer());
         while (true)
         {
-            InAttack(3);
+            //InAttack(3);
 
+            BetterJump();
+            PlayerMove(attackMoveSpeed, accelerate, decelerate);
             yield return 0;
             if (comboNum == 1)
             {
@@ -975,13 +989,11 @@ public class PlayerCharacter : Character
         onAttack?.Invoke(attackNum);
     }
 
-    void InAttack(int attackNum)
+    public void InAttack(int attackNum)
     {
-        BetterJump();
-        PlayerMove(attackMoveSpeed, accelerate, decelerate);
-
         //物理判断
         Collider2D[] coll = Physics2D.OverlapCircleAll(attackPos[attackNum - 1].position, attackRadius[attackNum - 1], attackableLayer);
+
 
         for (int i = 0; i < coll.Length; i++)
         {
@@ -1069,13 +1081,13 @@ public class PlayerCharacter : Character
         return false;
     }
 
-    //x轴的加减速 rb.velocity.x
+    //x轴的加减速 velocityX
     void AccelerateSpeed(float targetSpeed, float accelerate)
     {
-        float time = Mathf.Abs(targetSpeed - rb.velocity.x) / accelerate;
+        float time = Mathf.Abs(targetSpeed - velocityX) / accelerate;
         float dampVelocity = 0;
-        var x = Mathf.SmoothDamp(rb.velocity.x, targetSpeed, ref dampVelocity, time);
-        rb.velocity = new Vector2(x, rb.velocity.y);
+        velocityX = Mathf.SmoothDamp(velocityX, targetSpeed, ref dampVelocity, time);
+        rb.velocity = new Vector2(velocityX, rb.velocity.y);
     }
 
     void OnGround()
@@ -1179,7 +1191,7 @@ public class PlayerCharacter : Character
         }
         if (rb.velocity.y <= maxFallSpeed)
         {
-            rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
+            rb.velocity = new Vector2(velocityX, maxFallSpeed);
         }
     }
 
@@ -1189,11 +1201,11 @@ public class PlayerCharacter : Character
         {
             if (moveRightCommand)
             {
-                if (rb.velocity.x < moveSpeed) AccelerateSpeed(moveSpeed, acc);
+                if (velocityX < moveSpeed) AccelerateSpeed(moveSpeed, acc);
             }
             else if (moveLeftCommand)
             {
-                if (rb.velocity.x > -moveSpeed) AccelerateSpeed(-moveSpeed, acc);
+                if (velocityX > -moveSpeed) AccelerateSpeed(-moveSpeed, acc);
             }
             else
             {

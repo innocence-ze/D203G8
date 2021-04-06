@@ -19,9 +19,7 @@ public abstract class Enemy : Character
     public bool canAttack = true;
     public bool attackable = true;
     public float attackRange;
-    public float afterAttackFreezeTime;//攻击后的僵硬时间
     public float attackInterval;//两次攻击的间隔时间
-    protected bool inAttack;
     public Transform attackPos;
     public LayerMask attackableLayer;
 
@@ -43,7 +41,7 @@ public abstract class Enemy : Character
     protected override void Update()
     {
         base.Update();
-        if (rb.velocity.x * face < 0)
+        if (velocityX * face < 0)
         {
             face = -face;
             onChangeDir?.Invoke(new Vector2(face,0));
@@ -59,10 +57,7 @@ public abstract class Enemy : Character
     protected IEnumerator AttackIntervalTimer()
     {
         attackable = false;
-        inAttack = true;
-        yield return new WaitForSeconds(afterAttackFreezeTime);
-        inAttack = false;
-        yield return new WaitForSeconds(attackInterval - afterAttackFreezeTime);
+        yield return new WaitForSeconds(attackInterval);
         attackable = true;
     }
 

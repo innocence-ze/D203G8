@@ -25,7 +25,7 @@ public class EnemyDialogUI : MonoBehaviour
         dialogObject.text = self.gameObject.name;
         self.OnShow.AddListener(OnShow);
         self.OnOff.AddListener(OnOff);
-
+        self.OnTyping.AddListener(OnTyping);
 
         uiElements = GetComponentsInChildren<Graphic>();
         uiAlpha = new float[uiElements.Length];
@@ -50,5 +50,10 @@ public class EnemyDialogUI : MonoBehaviour
         {
             uiElements[i].DOFade(0, fadeTime);
         }
+    }
+
+    void OnTyping(string content)
+    {
+        dialogContent.text = content;
     }
 }
