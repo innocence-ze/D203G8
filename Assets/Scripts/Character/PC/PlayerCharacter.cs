@@ -1084,9 +1084,9 @@ public class PlayerCharacter : Character
     //x轴的加减速 velocityX
     void AccelerateSpeed(float targetSpeed, float accelerate)
     {
-        float time = Mathf.Abs(targetSpeed - velocityX) / accelerate;
+        float time = Mathf.Abs(targetSpeed - rb.velocity.x) / accelerate;
         float dampVelocity = 0;
-        velocityX = Mathf.SmoothDamp(velocityX, targetSpeed, ref dampVelocity, time);
+        velocityX = Mathf.SmoothDamp(rb.velocity.x, targetSpeed, ref dampVelocity, time);
         rb.velocity = new Vector2(velocityX, rb.velocity.y);
     }
 
