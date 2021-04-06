@@ -11,9 +11,10 @@ public class TalkableEnemy : MonoBehaviour
         typing,
         show,
         waiting,
+        close,
     };
 
-    BubbleState state = BubbleState.off;
+    [SerializeField]BubbleState state = BubbleState.off;
 
     //气泡中的内容
     public DialogData data;
@@ -35,13 +36,11 @@ public class TalkableEnemy : MonoBehaviour
     public SimpleEvent OnShow;
     public SimpleEvent OnOff;
 
-
     // Start is called before the first frame update
     void Start()
     {
         uiPanel = transform.GetComponentInChildren<EnemyDialogUI>();
-        StartCoroutine(ChangeDialog());
-        OnTyping.AddListener(ShowDialog);
+        state = BubbleState.off;
     }
 
     // Update is called once per frame
@@ -77,12 +76,6 @@ public class TalkableEnemy : MonoBehaviour
         OnShow?.Invoke();
     }
 
-    //显示到ui上
-    void ShowDialog(string dialog) 
-    {
-        uiPanel.dialogContent.text = dialog;
-    }
-
     //打字
     void UpdateContentString()
     {
@@ -102,5 +95,12 @@ public class TalkableEnemy : MonoBehaviour
             timerValue = 0;
             return;
         }
+    }
+
+    public void OnDie()
+    {
+        state = BubbleState.close;
+        StopAllCoroutines();
+        OnOff?.Invoke();
     }
 }

@@ -29,7 +29,6 @@ public class DialogPanel : BasePanel
     void InitDialogPanel()
     {
         dialogContent = transform.Find("DialogContent").GetComponent<TextMeshProUGUI>();
-        Debug.Log(1);
         uiElements = GetComponentsInChildren<Graphic>();
         uiAlpha = new float[uiElements.Length];
         for (int i = 0; i < uiElements.Length; i++)

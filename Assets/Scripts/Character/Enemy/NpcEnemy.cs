@@ -7,28 +7,30 @@ public abstract class NpcEnemy : Enemy
 {
     public enum NpcEnemyState
     {
-        patrol,
-        chase,
-        attack,
-        back,
-        recover,
-        hurt,
-        die,
+        Patrol,
+        Chase,
+        Attack,
+        Back,
+        Recover,
+        Hurt,
+        Die,
     }
 
-    public NpcEnemyState state;
+    public NpcEnemyState curState;
+
+    bool hurted = false;
+    [SerializeField] bool attacking = false;
 
     //巡逻状态，朝着巡逻点数组的下一个地点移动
     protected IEnumerator PatrolState()
     {
-        state = NpcEnemyState.patrol;
+        curState = NpcEnemyState.Patrol;
         onPatrol?.Invoke();
         while (true)
         {
 
             var dir = patrolPos[targetIndex] - transform.position.x;
-            if (dir > 0) { rb.velocity = patrolSpeed * Vector2.right; }
-            else { rb.velocity = patrolSpeed * Vector2.left; }
+            SetVelocityX(patrolSpeed, dir);
             if (dir < 0.1f && dir > -0.1f)
             {
                 targetIndex = (targetIndex + 1) % patrolPos.Count;
@@ -53,13 +55,11 @@ public abstract class NpcEnemy : Enemy
     //追逐状态，追逐玩家，如果长时间没追到则放弃
     protected IEnumerator ChaseState()
     {
-        state = NpcEnemyState.chase;
+        curState = NpcEnemyState.Chase;
         onChase?.Invoke();
         while (true)
         {
-            var dir = target.position - transform.position;
-            if(dir.x > 0) { rb.velocity = chaseSpeed * Vector2.right; }
-            else { rb.velocity = chaseSpeed * Vector2.left; }
+            SetVelocityX(chaseSpeed, target.position.x - transform.position.x);
 
             yield return continueState;
 
@@ -84,15 +84,16 @@ public abstract class NpcEnemy : Enemy
     //攻击玩家一次
     protected IEnumerator AttackState()
     {
-        state = NpcEnemyState.attack;
+        attacking = true;
+        curState = NpcEnemyState.Attack;
         onAttack?.Invoke();
-        InAttack();
-        StartCoroutine(AttackIntervalTimer());
+        //InAttack();
         while (true)
         {
             yield return continueState;
-            if (!inAttack)
+            if (!attacking)
             {
+                StartCoroutine(AttackIntervalTimer());
                 if (BackCondition)
                 {
                     StartCoroutine(BackState());
@@ -115,14 +116,14 @@ public abstract class NpcEnemy : Enemy
     //没追到玩家后返回继续巡逻
     protected IEnumerator BackState()
     {
-        state = NpcEnemyState.back;
+        curState = NpcEnemyState.Back;
         invincible = true;
         onBack?.Invoke();
         while (true)
         {
-            rb.velocity = (bornPos - (Vector2)transform.position).x > 0 ? Vector2.right * patrolSpeed : Vector2.left * patrolSpeed;
+            SetVelocityX(patrolSpeed, bornPos.x - transform.position.x);
             yield return continueState;
-            if(Mathf.Abs(bornPos.x - transform.position.x) < 0.05f)
+            if (Mathf.Abs(bornPos.x - transform.position.x) < 0.05f)
             {
                 invincible = false;
                 if (curHp < maxHp)
@@ -148,7 +149,7 @@ public abstract class NpcEnemy : Enemy
     //在返回后如果残血则恢复血量
     protected IEnumerator RecoverState()
     {
-        state = NpcEnemyState.recover;
+        curState = NpcEnemyState.Recover;
         onRecover?.Invoke();
         while (true)
         {
@@ -179,11 +180,10 @@ public abstract class NpcEnemy : Enemy
     protected IEnumerator HurtState()
     {
         getHurt = false;
-        state = NpcEnemyState.hurt;
+        curState = NpcEnemyState.Hurt;
         onHurt?.Invoke((Vector2)hurtInfo[0] - (Vector2)transform.position);
         GetHurt((float)hurtInfo[1]);
         StartCoroutine(InvincibleCoroutine());
-        yield return new WaitForSeconds(hurtRecoverTime);
         while (true)
         {
             yield return continueState;
@@ -192,8 +192,9 @@ public abstract class NpcEnemy : Enemy
                 StartCoroutine(DieState());
                 yield break;
             }
-            else
+            else if (hurted)
             {
+                hurted = false;
                 StartCoroutine(ChaseState());
                 yield break;
             }
@@ -202,15 +203,16 @@ public abstract class NpcEnemy : Enemy
 
     IEnumerator DieState()
     {
-        state = NpcEnemyState.die;
+        curState = NpcEnemyState.Die;
         onDie?.Invoke();
         rb.velocity = Vector2.zero;
-
+        GetComponent<Collider2D>().enabled = false;
         while (true)
         {
             yield return continueState;
             if (IsAlive)
             {
+                GetComponent<Collider2D>().enabled = true;
                 transform.position = bornPos;
                 StartCoroutine(PatrolState());
                 yield break;
@@ -218,18 +220,36 @@ public abstract class NpcEnemy : Enemy
         }
     }
 
-    protected virtual void InAttack()
+    public void FinishHurted()
+    {
+        hurted = true;
+    }
+
+    public void FinishAttacked()
+    {
+        attacking = false;
+    }
+
+    public virtual void InAttack()
     {
 
     }
 
+    public void SetVelocityX(float maxSpeed, float dir)
+    {
+        velocityX = dir > 0 ? maxSpeed : -maxSpeed;
+        rb.velocity = velocityX * Vector2.right;
+    }
+
     protected virtual void OnDrawGizmos()
     {
+        Gizmos.DrawLine(new Vector2(patrolPos[0], transform.position.y + 0.3f), new Vector2(patrolPos[1], transform.position.y + 0.3f));
+        Gizmos.color = Color.green;
         Gizmos.DrawLine(new Vector2(chaseLeftBoundary, transform.position.y), new Vector2(chaseRightBoundary, transform.position.y));
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, new Vector2(detectiveRange * 2, detectiveRange * 2));
         Gizmos.color = Color.red;
-        
+
     }
 
 }
