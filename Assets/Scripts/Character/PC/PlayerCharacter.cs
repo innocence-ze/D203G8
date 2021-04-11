@@ -146,6 +146,17 @@ public class PlayerCharacter : Character
     /// </summary>
     public bool[] Abilities { get; private set; }
 
+    public enum PCAbilities
+    {
+        walk = 0,
+        nextWall,
+        wallJump,
+        jump,
+        doubleJump,
+        dash,
+        attack,
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -1256,11 +1267,22 @@ public class PlayerCharacter : Character
         Unlock();
     }
 
+    public void SetAbilities(PCAbilities a, bool value)
+    {
+        Abilities[(int)a] = value;
+        Unlock();
+    }
+
     public bool GetAbilities(int index)
     {
         if (index > 6 || index < 0)
             return false;
         return Abilities[index];
+    }
+
+    public bool GetAbilities(PCAbilities a)
+    {
+        return Abilities[(int)a];
     }
 
 #if UNITY_EDITOR
