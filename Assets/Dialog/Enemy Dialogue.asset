@@ -13,8 +13,18 @@ MonoBehaviour:
   m_Name: Enemy Dialogue
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: 
-  - dialogText: 
-  - dialogText: 
-  - dialogText: 
-  - dialogText: 
+  - dialogText: She knows that doesn't go there!
+  - dialogText: 'Is she trying to get at me? '
+  - dialogText: ' I swear if she doesn''t move that'
+  - dialogText: I can't believe she's she's pulling this shi
+  - dialogText: I can't stand this
+  - dialogText: Why did she have to pick today?!
+  - dialogText: How fucking disrespectful
+  - dialogText: I'm trying to work for my future and she's pulling this?!
+  - dialogText: I need to get this done and get out of here
+  - dialogText: I need to get out before I do something I regret... But I can't
+  - dialogText: Am I sweating? But it's freezing in here
+  - dialogText: I can't even look at her right now!
+  - dialogText: Can't ignore it! It's right there
+  - dialogText: This is actually ridiculous
+  - dialogText: How am I suppose to focus with all these pencils?

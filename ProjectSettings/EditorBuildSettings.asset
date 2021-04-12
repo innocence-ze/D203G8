@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DebugZeshi.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/Alpha/Level_1_blockout_Sam.unity
+    guid: 1247c8aacee71d4468ea3ca7242e767e
   - enabled: 1
     path: Assets/Scenes/Alpha/Main Menu.unity
     guid: cc61fadc8b6ac8d44acf9ac72984fe68
   - enabled: 1
-    path: Assets/Scenes/Alpha/Level_1_blockout_Sam.unity
-    guid: 1247c8aacee71d4468ea3ca7242e767e
+    path: Assets/Scenes/Alpha/ALPHA_SCENE_FULL.unity
+    guid: 882442046aca0664690f11aa7891da7a
+  - enabled: 1
+    path: Assets/Scenes/Alpha/End Menu.unity
+    guid: 91f7dc0862c77fb468dc97e6f34008b7
   m_configObjects: {}

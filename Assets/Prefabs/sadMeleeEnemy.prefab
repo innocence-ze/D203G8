@@ -504,7 +504,7 @@ MonoBehaviour:
       m_Calls: []
   curState: 0
   attacking: 0
-  attackDamage: 5
+  attackDamage: 1
 --- !u!95 &4130851572347207555
 Animator:
   serializedVersion: 3

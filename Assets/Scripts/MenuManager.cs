@@ -7,11 +7,16 @@ public class MenuManager : MonoBehaviour
 {
     public void LoadLevel()
     {
-        SceneManager.LoadScene("Level_1_blockout_Sam");
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void MainMenuLoad()
+    {
+        SceneManager.LoadScene(0);
     }
 }
