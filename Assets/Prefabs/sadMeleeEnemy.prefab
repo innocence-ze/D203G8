@@ -460,8 +460,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   maxHp: 1
-  curHp: 10
-  recoverHp: 1
+  curHp: 3
+  recoverHp: 0
   invincible: 0
   invincibleTime: 0
   hurtRecoverTime: 0
