@@ -367,7 +367,7 @@ public class PlayerCharacter : Character
     {
         OnEnterState(PCState.Jump);
         onJump?.Invoke();
-        rb.velocity = new Vector2(velocityX, jumpSpeed);
+        rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         isJumping = true;
         yield return continueState;
 
@@ -427,7 +427,7 @@ public class PlayerCharacter : Character
         OnEnterState(PCState.DoubleJump);
         onDoubleJump?.Invoke();
         isJumping = true;
-        rb.velocity = new Vector2(velocityX, doubleJumpSpeed);
+        rb.velocity = new Vector2(rb.velocity.x, doubleJumpSpeed);
 
         while (true)
         {
@@ -481,7 +481,7 @@ public class PlayerCharacter : Character
         while (true)
         {
 
-            rb.velocity = new Vector2(velocityX, wallFallSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, wallFallSpeed);
             if (!nextLeftWall && MoveLeftCommand && canMove)
             {
                 if (velocityX > -moveSpeed) AccelerateSpeed(-moveSpeed, accelerate);
@@ -704,7 +704,7 @@ public class PlayerCharacter : Character
                 else
                 {
                     if (rb.velocity.y > 0)
-                        rb.velocity = new Vector2(velocityX, 0);
+                        rb.velocity = new Vector2(rb.velocity.x, 0);
                     stateCoroutine = StartCoroutine(FallState());
                     yield break;
                 }
@@ -1202,7 +1202,7 @@ public class PlayerCharacter : Character
         }
         if (rb.velocity.y <= maxFallSpeed)
         {
-            rb.velocity = new Vector2(velocityX, maxFallSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
         }
     }
 
@@ -1243,12 +1243,12 @@ public class PlayerCharacter : Character
         curHp = maxHp;
     }
 
-    public void Lock()
+    public void LockAbilities()
     {
         canMove = canNextWall = canWallJump = canJump = canDoubleJump = canDash = canAttack = false;
     }
 
-    public void Unlock()
+    public void UnlockAbilities()
     {
         canMove = Abilities[0];
         canNextWall = Abilities[1]; 
@@ -1264,13 +1264,13 @@ public class PlayerCharacter : Character
         if (index > 6 || index < 0)
             return;
         Abilities[index] = value;
-        Unlock();
+        UnlockAbilities();
     }
 
     public void SetAbilities(PCAbilities a, bool value)
     {
         Abilities[(int)a] = value;
-        Unlock();
+        UnlockAbilities();
     }
 
     public bool GetAbilities(int index)
@@ -1283,6 +1283,20 @@ public class PlayerCharacter : Character
     public bool GetAbilities(PCAbilities a)
     {
         return Abilities[(int)a];
+    }
+
+    public bool[] ReadAbilities()
+    {
+        return Abilities;
+    }
+
+    public void WriteAbilities(bool[] abilities)
+    {
+        for(int i = 0; i < abilities.Length; i++)
+        {
+            Abilities[i] = abilities[i];
+        }
+        UnlockAbilities();
     }
 
 #if UNITY_EDITOR

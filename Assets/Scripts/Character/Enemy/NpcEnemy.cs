@@ -59,7 +59,15 @@ public abstract class NpcEnemy : Enemy
         onChase?.Invoke();
         while (true)
         {
-            SetVelocityX(chaseSpeed, target.position.x - transform.position.x);
+            var detx = target.position.x - transform.position.x;
+            if (Mathf.Abs(detx) > 0.2f)
+            {
+                SetVelocityX(chaseSpeed, detx);
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
 
             yield return continueState;
 
@@ -87,6 +95,7 @@ public abstract class NpcEnemy : Enemy
         attacking = true;
         curState = NpcEnemyState.Attack;
         onAttack?.Invoke();
+        rb.velocity = Vector2.zero;
         //InAttack();
         while (true)
         {
@@ -126,46 +135,7 @@ public abstract class NpcEnemy : Enemy
             if (Mathf.Abs(bornPos.x - transform.position.x) < 0.05f)
             {
                 invincible = false;
-                if (curHp < maxHp)
-                {
-                    StartCoroutine(RecoverState());
-                    yield break;
-                }
-                else
-                {
-                    StartCoroutine(PatrolState());
-                    yield break;
-                }
-            }
-
-            if (HurtCondition)
-            {
-                StartCoroutine(HurtState());
-                yield break;
-            }
-        }
-    }
-
-    //在返回后如果残血则恢复血量
-    protected IEnumerator RecoverState()
-    {
-        curState = NpcEnemyState.Recover;
-        onRecover?.Invoke();
-        while (true)
-        {
-            if (curHp < maxHp)
-            {
-                curHp += Time.deltaTime * recoverHp;
-            }
-            yield return continueState;
-            if (curHp >= maxHp)
-            {
                 StartCoroutine(PatrolState());
-                yield break;
-            }
-            if (ChaseCondition)
-            {
-                StartCoroutine(ChaseState());
                 yield break;
             }
 

@@ -310,6 +310,7 @@ MonoBehaviour:
   ComboNum: ComboNum
   AttackNormalizedTime: AttackNormalizedTime
   isLand: IsLand
+  isFall: IsFall
 --- !u!1 &6969091236518448065
 GameObject:
   m_ObjectHideFlags: 0
