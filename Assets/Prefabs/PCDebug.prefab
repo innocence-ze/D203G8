@@ -168,6 +168,7 @@ MonoBehaviour:
   bornPos: {x: 0, y: 0}
   getHurt: 0
   face: 1
+  data: {fileID: 11400000, guid: 92cfc52f41caec143897453226e63e61, type: 2}
   rebornTime: 0
   frameSpeed: {x: 0, y: 0}
   curState: 0

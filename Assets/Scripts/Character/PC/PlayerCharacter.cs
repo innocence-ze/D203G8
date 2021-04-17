@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
+    public PCData data;
     public enum PCState
     {
         Idle,
