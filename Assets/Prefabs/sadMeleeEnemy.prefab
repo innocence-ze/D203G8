@@ -459,7 +459,7 @@ MonoBehaviour:
   onChangeDir:
     m_PersistentCalls:
       m_Calls: []
-  maxHp: 1
+  maxHp: 3
   curHp: 3
   recoverHp: 0
   invincible: 0
