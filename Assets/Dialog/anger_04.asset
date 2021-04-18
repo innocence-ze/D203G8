@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: anger_04
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: How did those actions make you feel?
+  - dialogText: Was there anything you can think of that could have triggered this
+      emotion?
+  - dialogText: A pencilcase? Oh I see

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SadnessNar6
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: You never need to walk this alone remember, is there a support network
-      of friends or family?
+  - dialogText: Has this any any way effected anything in your life?
+  - dialogText: Like schools, friends or family...

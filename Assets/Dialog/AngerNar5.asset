@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: AngerNar5
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: Do you have any outlets? Like Exercise or a creative outlet?
+  - dialogText: Another way some people have relieved tension is through a creative
+      outlet
+  - dialogText: So drawing, or dancing etc, just any way that you can express yourself

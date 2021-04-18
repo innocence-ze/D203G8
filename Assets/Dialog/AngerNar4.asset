@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: AngerNar4
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: In hindsight is there anything you feel you could have done?
+  - dialogText: One way that some people have found useful in relieving tension is
+      exercise
+  - dialogText: So going for jogs, walking, or just kicking around a ball outside

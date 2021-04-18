@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: anger_05
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: 'Thank you so much for telling me this. '
+  - dialogText: If you remember and feel comfortable, whatkind of thoughts were going
+      through your head at this moment?

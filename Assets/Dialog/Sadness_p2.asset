@@ -13,8 +13,4 @@ MonoBehaviour:
   m_Name: Sadness_p2
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: I think we've made tremendous progress so far.  Is there anything
-      else you would like to talk about?
-  - dialogText: Oh I see, and where was this?
-  - dialogText: So what was going through your head at this moment?
-  - dialogText: It is okay to feel this way, you know?
+  - dialogText: Ah I see, do you often seclude yourself in your own room?

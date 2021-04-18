@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: anger_01
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: Hi, please, make yourself comfortable...
+  - dialogText: Hey there
+  - dialogText: It's nice to see you again
+  - dialogText: Feel free to take a seat when you're ready

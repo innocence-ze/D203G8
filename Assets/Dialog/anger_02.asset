@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: anger_02
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: What is your main concern today?
+  - dialogText: So I understand from your school that there was an altercation with
+      another pupil in class yesterday...
+  - dialogText: Do you want to talk about it?

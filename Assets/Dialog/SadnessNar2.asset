@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SadnessNar2
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: What were you feeling at this moment?
+  - dialogText: When you are outside your room and these thoughts begin, what kind
+      of thoughts go through your mind?

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: AngerNar1
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: Have you seen a pattern in your triggers?
+  - dialogText: So from the sounds of it you have felt this quite a few times before
+  - dialogText: Have you noticed a pattern in your triggers?

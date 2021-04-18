@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: anger_03
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: So, you said it happened in school?
-  - dialogText: 'How did it begin? '
+  - dialogText: Did this feeling come out of nowhere, were you having a bad day or
+      what brought on this feeling?
