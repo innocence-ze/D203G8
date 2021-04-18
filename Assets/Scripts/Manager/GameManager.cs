@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         InitInputManager();
         InitDialogManager();
 
-
+        pc.SetData();
 
 
         InitUIManager();

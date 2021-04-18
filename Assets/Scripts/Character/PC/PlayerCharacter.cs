@@ -145,7 +145,7 @@ public class PlayerCharacter : Character
     /// walk, next wall, wall jump, jump, double jump, dash, attack
     /// 走，贴墙，墙跳，跳，双跳，冲，攻击
     /// </summary>
-    public bool[] Abilities { get; private set; }
+    public bool[] Abilities = new bool[7];
 
     public enum PCAbilities
     {
@@ -164,12 +164,7 @@ public class PlayerCharacter : Character
         base.Start();
         stateCoroutine = StartCoroutine(IdleState());
         curDashEnergy = maxDashEnergy;
-
         onChangeDir.AddListener(ChangeAttackPos);
-        Abilities = new bool[7]
-        {
-            canMove, canNextWall, canWallJump, canJump, canDoubleJump, canDash, canAttack,
-        };
     }
 
     protected override void Update()
@@ -1260,7 +1255,7 @@ public class PlayerCharacter : Character
         canAttack = Abilities[6];
     }
 
-    public void SetAbilities(int index, bool value)
+    public void SetAbility(int index, bool value)
     {
         if (index > 6 || index < 0)
             return;
@@ -1268,36 +1263,54 @@ public class PlayerCharacter : Character
         UnlockAbilities();
     }
 
-    public void SetAbilities(PCAbilities a, bool value)
+    public void SetAbility(PCAbilities a, bool value)
     {
         Abilities[(int)a] = value;
         UnlockAbilities();
     }
 
-    public bool GetAbilities(int index)
+    public bool GetAbility(int index)
     {
         if (index > 6 || index < 0)
             return false;
         return Abilities[index];
     }
 
-    public bool GetAbilities(PCAbilities a)
+    public bool GetAbility(PCAbilities a)
     {
         return Abilities[(int)a];
     }
 
-    public bool[] ReadAbilities()
+    public bool[] GetAbilities()
     {
         return Abilities;
     }
 
-    public void WriteAbilities(bool[] abilities)
+    public void SetAbilities(bool[] abilities)
     {
         for(int i = 0; i < abilities.Length; i++)
         {
             Abilities[i] = abilities[i];
         }
         UnlockAbilities();
+    }
+
+    public void SetData()
+    {
+        maxHp = data.maxHP;
+        curHp = data.currentHP;
+        SetAbilities(data.Abilities);
+    }
+
+    public PCData GetData()
+    {
+        data.currentHP = curHp;
+        data.maxHP = maxHp;
+        for(int i = 0; i < data.Abilities.Length; i++)
+        {
+            data.Abilities[i] = GetAbilities()[i];
+        }
+        return data;
     }
 
 #if UNITY_EDITOR

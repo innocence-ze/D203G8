@@ -16,9 +16,9 @@ public class ChangePCAbilities : MonoBehaviour
         var pc = GameManager.Singleton.pc;
         if (collision.gameObject == pc.gameObject)
         {
-            if(pc.GetAbilities(ability) != value)
+            if(pc.GetAbility(ability) != value)
             {
-                pc.SetAbilities(ability, value);
+                pc.SetAbility(ability, value);
                 GetComponent<SpriteRenderer>().DOFade(0, 0.3f);
             }
         }
