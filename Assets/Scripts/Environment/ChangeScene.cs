@@ -13,7 +13,7 @@ public class ChangeScene : MonoBehaviour
     {
         if(collision.gameObject == GameManager.Singleton.pc.gameObject)
         {
-            GameManager.Singleton.pc.SetData();
+            GameManager.Singleton.pc.GetData();
             OnChangeScene?.Invoke();
             StartCoroutine(LoadAsyncScreen());
         }
