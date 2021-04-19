@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contents:
   - dialogText: Ah so you felt like it was a release of tension
-  - dialogText: In hindsight, is there anything ou feel you could have done to prevent
+  - dialogText: In hindsight, is there anything you feel you could have done to prevent
       this?

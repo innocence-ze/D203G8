@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: SadnessNar7
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: You never need to walk this alone
-  - dialogText: Is there a support network of friends or family?
+  - dialogText: Ah so you have felt isolated from a lot of people?

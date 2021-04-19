@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SadnessNar5
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: What kind of thoughts go through your head at that moment of time?
+  - dialogText: That must have felt absolutely awful.
+  - dialogText: Does this quick change from anger to sadness come on frequently?
