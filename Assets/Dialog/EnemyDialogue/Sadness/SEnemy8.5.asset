@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c88f4fd7ef3e5a4387a6d4a8e0f6f6b, type: 3}
-  m_Name: SEnemy8
+  m_Name: SEnemy8.5
   m_EditorClassIdentifier: 
   contents:
   - dialogText: I will probably give up anyway
