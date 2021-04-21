@@ -33,7 +33,6 @@ public abstract class Character : MonoBehaviour, IHurtable
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        curHp = maxHp;
         bornPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
     }

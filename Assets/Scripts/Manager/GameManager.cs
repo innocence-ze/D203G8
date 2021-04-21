@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(InputManager))]
 [RequireComponent(typeof(DialogManager))]
+[RequireComponent(typeof(RoomInfo))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Singleton
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public DialogManager dialogMgr;
 
+    public RoomInfo room;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -41,8 +44,11 @@ public class GameManager : MonoBehaviour
         InitInputManager();
         InitDialogManager();
 
-        pc.SetData();
+        InitRoomInfo();
 
+        pc.SetData();
+        if(RoomInfo.lastRoom!=-1)
+            pc.transform.position = room.roomEntranceDic[RoomInfo.lastRoom].transform.position;
 
         InitUIManager();
     }
@@ -122,5 +128,11 @@ public class GameManager : MonoBehaviour
     void InitDialogManager()
     {
         dialogMgr = GetComponent<DialogManager>();
+    }
+
+    void InitRoomInfo()
+    {
+        room = GetComponent<RoomInfo>();
+        room.InitRoomInfo();
     }
 }
