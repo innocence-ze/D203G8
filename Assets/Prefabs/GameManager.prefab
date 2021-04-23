@@ -67,6 +67,7 @@ MonoBehaviour:
   pc: {fileID: 0}
   uiMgr: {fileID: 0}
   dialogMgr: {fileID: 0}
+  room: {fileID: 0}
 --- !u!114 &535544569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,8 +82,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   ui: {fileID: 0}
-  typingSpeed: 2
-  dialogShowTime: 2
+  typingSpeed: 20
+  dialogShowTime: 1.5
   state: 0
   OnTyping:
     m_PersistentCalls:

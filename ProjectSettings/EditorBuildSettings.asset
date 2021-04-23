@@ -15,12 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Alpha/ALPHA_SCENE_FULL.unity
     guid: 882442046aca0664690f11aa7891da7a
   - enabled: 1
-    path: Assets/Scenes/Alpha/Main Menu.unity
-    guid: cc61fadc8b6ac8d44acf9ac72984fe68
-  - enabled: 1
-    path: Assets/Scenes/Alpha/End Menu.unity
-    guid: 91f7dc0862c77fb468dc97e6f34008b7
-  - enabled: 1
     path: Assets/Scenes/Beta/A00.unity
     guid: f4512246c54b4974eb96bc632278ad2b
   - enabled: 1
@@ -32,4 +26,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Beta/A03.unity
     guid: ddbbf16cb12590b4fbff832f11189f29
+  - enabled: 1
+    path: Assets/Scenes/Beta/A04.unity
+    guid: f5cc2e6ed53840c40a3cd553e8465288
+  - enabled: 1
+    path: Assets/Scenes/Beta/A05.unity
+    guid: d1a35ee32ad1b4a49a6ff64b9503450a
+  - enabled: 1
+    path: Assets/Scenes/Beta/A06.unity
+    guid: dbfc7efb2225d1a41a51881ded2d4792
+  - enabled: 1
+    path: Assets/Scenes/Beta/A07.unity
+    guid: 31e911b3940c7b842a91f8caade81be1
+  - enabled: 1
+    path: Assets/Scenes/Beta/A08.unity
+    guid: 2a1e8be732ce8734486cc55b407b3d0d
+  - enabled: 1
+    path: Assets/Scenes/Beta/A09.unity
+    guid: f12c2a3a17b67fe43aaa6f63b15458b1
+  - enabled: 1
+    path: Assets/Scenes/Beta/A10.unity
+    guid: 7ea5fa1635290bf4ca9bfc437cf72594
+  - enabled: 1
+    path: Assets/Scenes/Alpha/Main Menu.unity
+    guid: cc61fadc8b6ac8d44acf9ac72984fe68
+  - enabled: 1
+    path: Assets/Scenes/Alpha/End Menu.unity
+    guid: 91f7dc0862c77fb468dc97e6f34008b7
   m_configObjects: {}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: anger_03
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: Did this feeling come out of nowhere, were you having a bad day or
-      what brought on this feeling?
+  - dialogText: Did this feeling of anger come out of nowhere, were you having a
+      bad day or what brought on this feeling?

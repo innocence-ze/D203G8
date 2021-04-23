@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: anger_04
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: Was there anything you can think of that could have triggered this
-      emotion?
-  - dialogText: A pencilcase? Oh I see
+  - dialogText: Can you think of any specific triggers?
+  - dialogText: A pencilcase?
