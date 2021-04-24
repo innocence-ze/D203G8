@@ -29728,7 +29728,7 @@ PrefabInstance:
     - target: {fileID: 7319341936692933040, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 68d2e763b3430af4eba6445494e09acc, type: 3}
+      objectReference: {fileID: 21300000, guid: c2702fdc3d5fa394a908a733a43740dc, type: 3}
     - target: {fileID: 7679715383364703904, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: delayTime
       value: 0
@@ -30415,7 +30415,7 @@ PrefabInstance:
     - target: {fileID: 7319341936692933040, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 68d2e763b3430af4eba6445494e09acc, type: 3}
+      objectReference: {fileID: 21300000, guid: c2702fdc3d5fa394a908a733a43740dc, type: 3}
     - target: {fileID: 7679715383364703904, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: delayTime
       value: 1.5
