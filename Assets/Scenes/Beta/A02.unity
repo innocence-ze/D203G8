@@ -642,7 +642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8637463747467121837, guid: 7791a4946a89a674bbb010f952d831f3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -22.387966
+      value: -22.46
       objectReference: {fileID: 0}
     - target: {fileID: 8637463747467121837, guid: 7791a4946a89a674bbb010f952d831f3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1314,7 +1314,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 70
+  field of view: 73
   orthographic: 0
   orthographic size: 8
   m_Depth: -1
@@ -1953,15 +1953,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: 54.10495
+      value: 53.356384
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: -1.0615959
+      value: -1.2113123
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: 54.169273
+      value: 53.5205
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
@@ -2798,7 +2798,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 2012299427}
   m_Lens:
-    FieldOfView: 70
+    FieldOfView: 73
     OrthographicSize: 8
     NearClipPlane: 0.3
     FarClipPlane: 1000

@@ -222,7 +222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218706693}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.376404, y: 22.12464, z: 70.492836}
+  m_LocalPosition: {x: -21.464844, y: 22.14127, z: 70.492836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1132192628}
@@ -386,7 +386,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 70
+  field of view: 73
   orthographic: 0
   orthographic size: 8
   m_Depth: -1
@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 813108502}
   m_Lens:
-    FieldOfView: 70
+    FieldOfView: 73
     OrthographicSize: 8
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -2552,15 +2552,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: 3.7055511
+      value: 3.574768
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: -11.421059
+      value: -11.203056
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: 3.691307
+      value: 3.604103
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
@@ -2576,11 +2576,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: -11.027542
+      value: -10.983948
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671452, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: -11.426866
+      value: -11.208863
       objectReference: {fileID: 0}
     - target: {fileID: 6155828692157671453, guid: 96844ab9c4efb8e4db57c7aba11759cf, type: 3}
       propertyPath: m_Name
@@ -2734,6 +2734,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7679715383364703904, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: delayTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679715383364703904, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
+      propertyPath: disappear
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7679715383364703904, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}

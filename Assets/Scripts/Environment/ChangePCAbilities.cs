@@ -11,6 +11,8 @@ public class ChangePCAbilities : MonoBehaviour
 
     public SimpleEvent OnChangeAbility;
 
+    public GameObject panelUI;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var pc = GameManager.Singleton.pc;
@@ -20,8 +22,20 @@ public class ChangePCAbilities : MonoBehaviour
             {
                 pc.SetAbility(ability, value);
                 GetComponent<SpriteRenderer>().DOFade(0, 0.3f);
+
+                if (panelUI != null)
+                {
+                    panelUI.SetActive(true);
+                    StartCoroutine("TextDisappear");
+                }
             }
         }
     }
 
+    private IEnumerator TextDisappear()
+    {
+        yield return new WaitForSeconds(5);
+        panelUI.SetActive(false);
+        yield break;
+    }
 }
