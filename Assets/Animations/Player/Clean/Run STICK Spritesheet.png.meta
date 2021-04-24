@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: f3864c484329d174182a404e6153157f
+guid: c63e2a77794a7ad44ba16b17147d67e1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2857066139341187762
-    second: Run_WITHOUT_0
+      213: 3158892838294006632
+    second: Run STICK Spritesheet_0
   - first:
-      213: -887766550370588243
-    second: Run_WITHOUT_1
+      213: -7965113197835220236
+    second: Run STICK Spritesheet_1
   - first:
-      213: 361182040105745572
-    second: Run_WITHOUT_2
+      213: -4711890941722055239
+    second: Run STICK Spritesheet_2
   - first:
-      213: 1685109567516247764
-    second: Run_WITHOUT_3
+      213: 4407853397715192617
+    second: Run STICK Spritesheet_3
   - first:
-      213: 8191601421967495650
-    second: Run_WITHOUT_4
+      213: 8181057103006631060
+    second: Run STICK Spritesheet_4
   - first:
-      213: -1174215952776536486
-    second: Run_WITHOUT_5
+      213: 3578909930107215048
+    second: Run STICK Spritesheet_5
   - first:
-      213: 5811588513745989687
-    second: Run_WITHOUT_6
+      213: -4268423374324663588
+    second: Run STICK Spritesheet_6
   - first:
-      213: -5254453750745556799
-    second: Run_WITHOUT_7
+      213: -2841354070204724926
+    second: Run STICK Spritesheet_7
   - first:
-      213: 3421766254190922530
-    second: Run_WITHOUT_8
+      213: 97815591202163369
+    second: Run STICK Spritesheet_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -140,7 +140,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run_WITHOUT_0
+      name: Run STICK Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ba6a3f248656a720800000000000000
-      internalID: 2857066139341187762
+      spriteID: 86b2a06cc44a6db20800000000000000
+      internalID: 3158892838294006632
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_WITHOUT_1
+      name: Run STICK Spritesheet_1
       rect:
         serializedVersion: 2
         x: 720
@@ -175,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da9efa9a6050ea3f0800000000000000
-      internalID: -887766550370588243
+      spriteID: 4fa814f5fbb367190800000000000000
+      internalID: -7965113197835220236
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_WITHOUT_2
+      name: Run STICK Spritesheet_2
       rect:
         serializedVersion: 2
         x: 1440
@@ -196,14 +196,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4acf0cfd62d230500800000000000000
-      internalID: 361182040105745572
+      spriteID: 9bda64637200c9eb0800000000000000
+      internalID: -4711890941722055239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_WITHOUT_3
+      name: Run STICK Spritesheet_3
       rect:
         serializedVersion: 2
         x: 2160
@@ -217,14 +217,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d60b6b3936b26710800000000000000
-      internalID: 1685109567516247764
+      spriteID: 92b00d8bf47db2d30800000000000000
+      internalID: 4407853397715192617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_WITHOUT_4
+      name: Run STICK Spritesheet_4
       rect:
         serializedVersion: 2
         x: 2880
@@ -238,14 +238,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e115f1a71a6ea170800000000000000
-      internalID: 8191601421967495650
+      spriteID: 49485ef0714f88170800000000000000
+      internalID: 8181057103006631060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_WITHOUT_5
+      name: Run STICK Spritesheet_5
       rect:
         serializedVersion: 2
         x: 3600
@@ -259,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5e582defc854bfe0800000000000000
-      internalID: -1174215952776536486
+      spriteID: 8cc982b9e97daa130800000000000000
+      internalID: 3578909930107215048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_WITHOUT_6
+      name: Run STICK Spritesheet_6
       rect:
         serializedVersion: 2
         x: 4320
@@ -280,14 +280,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 730f19e46f8e6a050800000000000000
-      internalID: 5811588513745989687
+      spriteID: cda776e5e8383c4c0800000000000000
+      internalID: -4268423374324663588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_WITHOUT_7
+      name: Run STICK Spritesheet_7
       rect:
         serializedVersion: 2
         x: 5040
@@ -301,14 +301,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c8971a272e6417b0800000000000000
-      internalID: -5254453750745556799
+      spriteID: 249465cf68b7198d0800000000000000
+      internalID: -2841354070204724926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_WITHOUT_8
+      name: Run STICK Spritesheet_8
       rect:
         serializedVersion: 2
         x: 5760
@@ -322,8 +322,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22b0875674e8c7f20800000000000000
-      internalID: 3421766254190922530
+      spriteID: 9aa891f03c28b5100800000000000000
+      internalID: 97815591202163369
       vertices: []
       indices: 
       edges: []
