@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: AngerNar2
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: So coming back to the altercation, you said a lot of thoughts were
-      going through your head, what made it go from thoughts to actions?
+  - dialogText: It's okay we don't need to talk about it if you don't want to
