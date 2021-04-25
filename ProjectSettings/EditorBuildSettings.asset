@@ -48,7 +48,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Beta/A10.unity
     guid: 7ea5fa1635290bf4ca9bfc437cf72594
   - enabled: 1
-    path: Assets/Scenes/Alpha/Main Menu.unity
+    path: Assets/Scenes/Beta/Main Menu.unity
     guid: cc61fadc8b6ac8d44acf9ac72984fe68
   - enabled: 1
     path: Assets/Scenes/Alpha/End Menu.unity
