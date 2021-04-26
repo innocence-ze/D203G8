@@ -6,6 +6,7 @@ public class CheckPoint : MonoBehaviour
 {
     public SimpleEvent OnIdle;
     public SimpleEvent OnActive;
+    public Material litMat;
 
 
     // Start is called before the first frame update
@@ -29,6 +30,8 @@ public class CheckPoint : MonoBehaviour
 
     void OnDestory()
     {
-        Destroy(gameObject);
+        this.gameObject.GetComponent<SpriteRenderer>().material = litMat;
+        
+        //Destroy(gameObject);
     }
 }

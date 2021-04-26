@@ -28377,11 +28377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 74.674515
+      value: 74.94
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -43.65
+      value: -43.69
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34092,11 +34092,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 69.5
+      value: 68.56
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -81.95
+      value: -82.07
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -35838,11 +35838,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 74.674515
+      value: 76.54
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -68.331894
+      value: -67.98
       objectReference: {fileID: 0}
     - target: {fileID: 5239233035281785881, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -35879,6 +35879,10 @@ PrefabInstance:
     - target: {fileID: 5239233035281785884, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
       propertyPath: m_Name
       value: CheckPoint (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079174049043426657, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}
+      propertyPath: m_FlipX
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35506af7d7ddb2148bfff777a4d4f1ec, type: 3}

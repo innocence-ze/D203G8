@@ -1,34 +1,31 @@
 fileFormatVersion: 2
-guid: c63e2a77794a7ad44ba16b17147d67e1
+guid: 3ca91110d09d41843a0b56bb628c3d09
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3158892838294006632
-    second: Run STICK Spritesheet_0
+      213: 7149236136462282800
+    second: Jump_WITH_0
   - first:
-      213: -7965113197835220236
-    second: Run STICK Spritesheet_1
+      213: 2928174829301638933
+    second: Jump_WITH_1
   - first:
-      213: -4711890941722055239
-    second: Run STICK Spritesheet_2
+      213: -4223543056385785088
+    second: Jump_WITH_2
   - first:
-      213: 4407853397715192617
-    second: Run STICK Spritesheet_3
+      213: -3298300260806023316
+    second: Jump_WITH_3
   - first:
-      213: 8181057103006631060
-    second: Run STICK Spritesheet_4
+      213: 782680020972869528
+    second: Jump_WITH_4
   - first:
-      213: 3578909930107215048
-    second: Run STICK Spritesheet_5
+      213: -4841265554614085574
+    second: Jump_WITH_5
   - first:
-      213: -4268423374324663588
-    second: Run STICK Spritesheet_6
+      213: -4974354868087511841
+    second: Jump_WITH_6
   - first:
-      213: -2841354070204724926
-    second: Run STICK Spritesheet_7
-  - first:
-      213: 97815591202163369
-    second: Run STICK Spritesheet_8
+      213: -4768244021661734257
+    second: Jump_WITH_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -140,190 +137,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run STICK Spritesheet_0
+      name: Jump_WITH_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 720
-        height: 540
+        width: 669
+        height: 794
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86b2a06cc44a6db20800000000000000
-      internalID: 3158892838294006632
+      spriteID: 03078394360373360800000000000000
+      internalID: 7149236136462282800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_1
+      name: Jump_WITH_1
       rect:
         serializedVersion: 2
-        x: 720
+        x: 669
         y: 0
-        width: 720
-        height: 540
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 669
+        height: 794
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fa814f5fbb367190800000000000000
-      internalID: -7965113197835220236
+      spriteID: 517a3cc3e77f2a820800000000000000
+      internalID: 2928174829301638933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_2
+      name: Jump_WITH_2
       rect:
         serializedVersion: 2
-        x: 1440
+        x: 1338
         y: 0
-        width: 720
-        height: 540
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 669
+        height: 794
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bda64637200c9eb0800000000000000
-      internalID: -4711890941722055239
+      spriteID: 003ce8ea7f5f265c0800000000000000
+      internalID: -4223543056385785088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_3
+      name: Jump_WITH_3
       rect:
         serializedVersion: 2
-        x: 2160
+        x: 2007
         y: 0
-        width: 720
-        height: 540
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 669
+        height: 794
+      alignment: 9
+      pivot: {x: 0.5, y: 0.38}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92b00d8bf47db2d30800000000000000
-      internalID: 4407853397715192617
+      spriteID: c67241053651a32d0800000000000000
+      internalID: -3298300260806023316
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_4
+      name: Jump_WITH_4
       rect:
         serializedVersion: 2
-        x: 2880
+        x: 2676
         y: 0
-        width: 720
-        height: 540
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 669
+        height: 794
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49485ef0714f88170800000000000000
-      internalID: 8181057103006631060
+      spriteID: 89712ee0553acda00800000000000000
+      internalID: 782680020972869528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_5
+      name: Jump_WITH_5
       rect:
         serializedVersion: 2
-        x: 3600
+        x: 3345
         y: 0
-        width: 720
-        height: 540
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 669
+        height: 794
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cc982b9e97daa130800000000000000
-      internalID: 3578909930107215048
+      spriteID: a3894e1d0ae50dcb0800000000000000
+      internalID: -4841265554614085574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_6
+      name: Jump_WITH_6
       rect:
         serializedVersion: 2
-        x: 4320
+        x: 4014
         y: 0
-        width: 720
-        height: 540
+        width: 669
+        height: 794
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cda776e5e8383c4c0800000000000000
-      internalID: -4268423374324663588
+      spriteID: fd4a8ec4a9a87fab0800000000000000
+      internalID: -4974354868087511841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_7
+      name: Jump_WITH_7
       rect:
         serializedVersion: 2
-        x: 5040
+        x: 4683
         y: 0
-        width: 720
-        height: 540
+        width: 669
+        height: 794
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 249465cf68b7198d0800000000000000
-      internalID: -2841354070204724926
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run STICK Spritesheet_8
-      rect:
-        serializedVersion: 2
-        x: 5760
-        y: 0
-        width: 720
-        height: 540
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9aa891f03c28b5100800000000000000
-      internalID: 97815591202163369
+      spriteID: f8ae876535bc3ddb0800000000000000
+      internalID: -4768244021661734257
       vertices: []
       indices: 
       edges: []

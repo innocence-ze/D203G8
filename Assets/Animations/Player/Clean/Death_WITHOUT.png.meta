@@ -1,34 +1,58 @@
 fileFormatVersion: 2
-guid: c63e2a77794a7ad44ba16b17147d67e1
+guid: 29120e31760503c4e9bb48ea7e434b9f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3158892838294006632
-    second: Run STICK Spritesheet_0
+      213: -463363052060822467
+    second: Death_WITHOUT_0
   - first:
-      213: -7965113197835220236
-    second: Run STICK Spritesheet_1
+      213: -6794535480512068759
+    second: Death_WITHOUT_1
   - first:
-      213: -4711890941722055239
-    second: Run STICK Spritesheet_2
+      213: -4113066762683236864
+    second: Death_WITHOUT_2
   - first:
-      213: 4407853397715192617
-    second: Run STICK Spritesheet_3
+      213: 3177112230236328016
+    second: Death_WITHOUT_3
   - first:
-      213: 8181057103006631060
-    second: Run STICK Spritesheet_4
+      213: 4646942732661929486
+    second: Death_WITHOUT_4
   - first:
-      213: 3578909930107215048
-    second: Run STICK Spritesheet_5
+      213: 9213334647370901378
+    second: Death_WITHOUT_5
   - first:
-      213: -4268423374324663588
-    second: Run STICK Spritesheet_6
+      213: 3590616967733585088
+    second: Death_WITHOUT_6
   - first:
-      213: -2841354070204724926
-    second: Run STICK Spritesheet_7
+      213: 5006251477255098291
+    second: Death_WITHOUT_7
   - first:
-      213: 97815591202163369
-    second: Run STICK Spritesheet_8
+      213: -5161695149004066112
+    second: Death_WITHOUT_8
+  - first:
+      213: 3843480737720641920
+    second: Death_WITHOUT_9
+  - first:
+      213: 8175658316848909614
+    second: Death_WITHOUT_10
+  - first:
+      213: -2091632448693323830
+    second: Death_WITHOUT_11
+  - first:
+      213: 6941037836092629082
+    second: Death_WITHOUT_12
+  - first:
+      213: -6592616216094621234
+    second: Death_WITHOUT_13
+  - first:
+      213: -6873433411943958831
+    second: Death_WITHOUT_14
+  - first:
+      213: -479032418859378511
+    second: Death_WITHOUT_15
+  - first:
+      213: 4017618239600516199
+    second: Death_WITHOUT_16
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -90,7 +114,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -102,7 +126,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 8192
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -114,7 +138,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 8192
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,7 +150,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 8192
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -140,7 +164,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run STICK Spritesheet_0
+      name: Death_WITHOUT_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86b2a06cc44a6db20800000000000000
-      internalID: 3158892838294006632
+      spriteID: d34bfd752cdc199f0800000000000000
+      internalID: -463363052060822467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_1
+      name: Death_WITHOUT_1
       rect:
         serializedVersion: 2
         x: 720
@@ -175,14 +199,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fa814f5fbb367190800000000000000
-      internalID: -7965113197835220236
+      spriteID: 9634a4ebaf5f4b1a0800000000000000
+      internalID: -6794535480512068759
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_2
+      name: Death_WITHOUT_2
       rect:
         serializedVersion: 2
         x: 1440
@@ -196,14 +220,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bda64637200c9eb0800000000000000
-      internalID: -4711890941722055239
+      spriteID: 00ebcc042937be6c0800000000000000
+      internalID: -4113066762683236864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_3
+      name: Death_WITHOUT_3
       rect:
         serializedVersion: 2
         x: 2160
@@ -217,14 +241,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92b00d8bf47db2d30800000000000000
-      internalID: 4407853397715192617
+      spriteID: 05019c68dbe571c20800000000000000
+      internalID: 3177112230236328016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_4
+      name: Death_WITHOUT_4
       rect:
         serializedVersion: 2
         x: 2880
@@ -238,14 +262,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49485ef0714f88170800000000000000
-      internalID: 8181057103006631060
+      spriteID: e06b5e77bc14d7040800000000000000
+      internalID: 4646942732661929486
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_5
+      name: Death_WITHOUT_5
       rect:
         serializedVersion: 2
         x: 3600
@@ -259,14 +283,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cc982b9e97daa130800000000000000
-      internalID: 3578909930107215048
+      spriteID: 28767552c075cdf70800000000000000
+      internalID: 9213334647370901378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_6
+      name: Death_WITHOUT_6
       rect:
         serializedVersion: 2
         x: 4320
@@ -280,14 +304,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cda776e5e8383c4c0800000000000000
-      internalID: -4268423374324663588
+      spriteID: 0c42046bb1f64d130800000000000000
+      internalID: 3590616967733585088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_7
+      name: Death_WITHOUT_7
       rect:
         serializedVersion: 2
         x: 5040
@@ -301,14 +325,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 249465cf68b7198d0800000000000000
-      internalID: -2841354070204724926
+      spriteID: 3bf801eb137c97540800000000000000
+      internalID: 5006251477255098291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run STICK Spritesheet_8
+      name: Death_WITHOUT_8
       rect:
         serializedVersion: 2
         x: 5760
@@ -322,8 +346,176 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9aa891f03c28b5100800000000000000
-      internalID: 97815591202163369
+      spriteID: 0c271cc1c99fd58b0800000000000000
+      internalID: -5161695149004066112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_WITHOUT_9
+      rect:
+        serializedVersion: 2
+        x: 6480
+        y: 0
+        width: 720
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08925e80e59c65530800000000000000
+      internalID: 3843480737720641920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_WITHOUT_10
+      rect:
+        serializedVersion: 2
+        x: 7200
+        y: 0
+        width: 720
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d4fb43ce5c57170800000000000000
+      internalID: 8175658316848909614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_WITHOUT_11
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 0
+        width: 720
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac734feae5709f2e0800000000000000
+      internalID: -2091632448693323830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_WITHOUT_12
+      rect:
+        serializedVersion: 2
+        x: 8640
+        y: 0
+        width: 720
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a50e8d00325835060800000000000000
+      internalID: 6941037836092629082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_WITHOUT_13
+      rect:
+        serializedVersion: 2
+        x: 9360
+        y: 0
+        width: 720
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec1433b0b725284a0800000000000000
+      internalID: -6592616216094621234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_WITHOUT_14
+      rect:
+        serializedVersion: 2
+        x: 10080
+        y: 0
+        width: 720
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d677c59ab8ac90a0800000000000000
+      internalID: -6873433411943958831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_WITHOUT_15
+      rect:
+        serializedVersion: 2
+        x: 10800
+        y: 0
+        width: 720
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b89df59d822a59f0800000000000000
+      internalID: -479032418859378511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_WITHOUT_16
+      rect:
+        serializedVersion: 2
+        x: 11520
+        y: 0
+        width: 720
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76cd48ea08271c730800000000000000
+      internalID: 4017618239600516199
       vertices: []
       indices: 
       edges: []
