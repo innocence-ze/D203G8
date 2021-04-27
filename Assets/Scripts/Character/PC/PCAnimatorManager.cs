@@ -24,6 +24,8 @@ public class PCAnimatorManager : MonoBehaviour
     public string isLand;
     public string isFall = "IsFall";
 
+    bool hasWeapon = false;
+
     void Awake()
     {
         pc = GetComponent<PlayerCharacter>();
@@ -33,6 +35,21 @@ public class PCAnimatorManager : MonoBehaviour
 
     void Update()
     {
+        if (hasWeapon != pc.canAttack)
+        {
+            hasWeapon = pc.canAttack;
+            if (hasWeapon)
+            {
+                anim.SetLayerWeight(1, 1);
+                anim.SetLayerWeight(0, 0);
+            }
+            else
+            {
+                anim.SetLayerWeight(1, 0);
+                anim.SetLayerWeight(0, 1);
+            }
+        }
+
         anim.SetFloat(verVelocity, pc.frameSpeed.y);
         anim.SetFloat(horVelocity,Mathf.Abs(pc.frameSpeed.x));
         anim.SetBool(isFaceLeft, pc.face == -1);
