@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: anger_05
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: If you remember and feel comfortable, whatkind of thoughts were going
-      through your head at this moment?
+  - dialogText: If you remember and feel comfortable, what kind of thoughts were
+      going through your head at this moment?
