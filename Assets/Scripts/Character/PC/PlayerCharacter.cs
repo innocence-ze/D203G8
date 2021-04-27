@@ -165,6 +165,8 @@ public class PlayerCharacter : Character
         stateCoroutine = StartCoroutine(IdleState());
         curDashEnergy = maxDashEnergy;
         onChangeDir.AddListener(ChangeAttackPos);
+
+        onChangeHp.AddListener(GameManager.Singleton.uiMgr.GetPanel<HealthPanel>().ChangeHealth);
     }
 
     protected override void Update()
@@ -1237,6 +1239,8 @@ public class PlayerCharacter : Character
     public void Reborn()
     {
         curHp = maxHp;
+
+        onChangeHp?.Invoke((int)curHp);
     }
 
     public void LockAbilities()
@@ -1295,6 +1299,7 @@ public class PlayerCharacter : Character
         UnlockAbilities();
     }
 
+    //从本地设置数据到玩家
     public void SetData()
     {
         maxHp = data.maxHP;
@@ -1302,6 +1307,7 @@ public class PlayerCharacter : Character
         SetAbilities(data.Abilities);
     }
 
+    //获取数据存到本地
     public PCData GetData()
     {
         data.currentHP = curHp;

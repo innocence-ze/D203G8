@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour, IHurtable
 {
+    [SerializeField] protected IntEvent onChangeHp;
     [SerializeField] protected Vec2Event onHurt;
     [SerializeField] protected SimpleEvent onDie;
     [SerializeField] protected Vec2Event onChangeDir;
@@ -60,6 +61,7 @@ public abstract class Character : MonoBehaviour, IHurtable
         {
             curHp = 0;
         }
+        onChangeHp?.Invoke((int)curHp);
     }
 
     public void SetHurtInfo(object[] info)

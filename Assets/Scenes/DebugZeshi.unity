@@ -130,22 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 994532783873816060, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.771
-      objectReference: {fileID: 0}
-    - target: {fileID: 994532783873816060, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.043
-      objectReference: {fileID: 0}
-    - target: {fileID: 2414273349577864466, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 2414273349577864466, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.067
-      objectReference: {fileID: 0}
     - target: {fileID: 3730586044886891282, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -193,18 +177,6 @@ PrefabInstance:
     - target: {fileID: 3730586044886891292, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
       propertyPath: m_Name
       value: PCDebug
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730586044886891295, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: canNextWall
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7888402473857385659, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.818
-      objectReference: {fileID: 0}
-    - target: {fileID: 7888402473857385659, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.136
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209feaabb03c2c545800e5b11fb2e6f2, type: 3}
@@ -3388,6 +3360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bce4069d7b09f4d8e53c99d8bc707c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onChangeHp:
+    m_PersistentCalls:
+      m_Calls: []
   onHurt:
     m_PersistentCalls:
       m_Calls: []

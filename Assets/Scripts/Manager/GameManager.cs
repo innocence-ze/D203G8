@@ -47,8 +47,9 @@ public class GameManager : MonoBehaviour
         InitRoomInfo();
 
         pc.SetData();
-        if(RoomInfo.lastRoom!=-1)
+        if (room.roomEntranceDic.ContainsKey(RoomInfo.lastRoom))
             pc.transform.position = room.roomEntranceDic[RoomInfo.lastRoom].transform.position;
+        
 
         InitUIManager();
     }
@@ -123,6 +124,7 @@ public class GameManager : MonoBehaviour
         uiMgr = FindObjectOfType<UIManager>();
         uiMgr.canvas = uiMgr.transform;
         uiMgr.Init();
+        uiMgr.ShowPanel<HealthPanel>();
     }
 
     void InitDialogManager()

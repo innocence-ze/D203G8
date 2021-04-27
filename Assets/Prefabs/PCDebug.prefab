@@ -150,6 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffea04e1eb712942bd6c805c25659b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onChangeHp:
+    m_PersistentCalls:
+      m_Calls: []
   onHurt:
     m_PersistentCalls:
       m_Calls: []
@@ -266,6 +269,7 @@ MonoBehaviour:
   onAttackObj:
     m_PersistentCalls:
       m_Calls: []
+  Abilities: 00000000000000
 --- !u!95 &3730586044886891285
 Animator:
   serializedVersion: 3

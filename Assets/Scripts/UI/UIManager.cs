@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//通过mgr来和外部交互
 public class UIManager : MonoBehaviour
 {
 
     public Transform canvas;
 
-    public List<GameObject> panels;
+    public List<GameObject> panels = new List<GameObject>();
 
     public Dictionary<string, BasePanel> panelDic = new Dictionary<string, BasePanel>();
 
