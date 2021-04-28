@@ -996,8 +996,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<align=\"center\">ABILITY<align=\"left\">\n\n  RUN\t\tDASH\n  JUMP\t\tDOUBLE
-    JUMP\n  ATTACK\t\tWALL BOUNCE\n "
+  m_text: "<align=\"center\">PLAYER ABILITIES<align=\"left\">\n\n  RUN\t\tDASH\n 
+    JUMP\t\tDOUBLE JUMP\n  ATTACK\t\tWALL BOUNCE\n "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -5016,7 +5016,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<align=\"center\">CTRL<align=\"left\">\n\n  move\t\tWASD / \u2191\u2190\u2193\u2192\n 
+  m_text: "<align=\"center\">CONTROLS<align=\"left\">\n\n  move\t\tWASD / \u2191\u2190\u2193\u2192\n 
     jump\t\tspace\n  dash\t\tleft shift\n  attack\t\tx\n "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
