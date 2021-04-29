@@ -42,9 +42,9 @@ public class HealthPanel : BasePanel
 
     void InitHealthPanel()
     {
-        face = transform.Find("face").GetComponent<Image>();
+        face = transform.Find("bar/face").GetComponent<Image>();
         uiElements = GetComponentsInChildren<Graphic>();
-        ChangeHealth(10);
+        ChangeHealth((int)GameManager.Singleton.pc.curHp);
     }
 
     void ShowHealthPanel(object[] args)
