@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95919d42e371ea4bbce605510d8ce4f, type: 3}
   m_Name: PcData
   m_EditorClassIdentifier: 
-  currentHP: 8
+  currentHP: 7
   maxHP: 10
-  Abilities: 01000001010000
+  Abilities: 01000001010001

@@ -23187,7 +23187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4130851572347207561, guid: 4d32d078c451613408f7451d6c913dcf, type: 3}
       propertyPath: m_Name
-      value: meleeEnemy (2)
+      value: Angry thought
       objectReference: {fileID: 0}
     - target: {fileID: 4130851572352320152, guid: 4d32d078c451613408f7451d6c913dcf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29728,7 +29728,7 @@ PrefabInstance:
     - target: {fileID: 7319341936692933040, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c2702fdc3d5fa394a908a733a43740dc, type: 3}
+      objectReference: {fileID: 21300000, guid: 4fc9a3855a736c542914013163b560df, type: 3}
     - target: {fileID: 7679715383364703904, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: delayTime
       value: 0
@@ -30415,7 +30415,7 @@ PrefabInstance:
     - target: {fileID: 7319341936692933040, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c2702fdc3d5fa394a908a733a43740dc, type: 3}
+      objectReference: {fileID: 21300000, guid: 4fc9a3855a736c542914013163b560df, type: 3}
     - target: {fileID: 7679715383364703904, guid: 56a16da33f7030a49ad95badb57ee27d, type: 3}
       propertyPath: delayTime
       value: 1.5

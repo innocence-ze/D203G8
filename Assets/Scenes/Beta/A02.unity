@@ -508,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 3014633512023760090, guid: 1238c22257b6db6468bb6598552d71be, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2452635794437320441, guid: b63a287aa95a6c8439180a2c22c28d38, type: 3}
+      objectReference: {fileID: -948210449577481803, guid: df97d1302474c164ea7ed85613910d50, type: 3}
     - target: {fileID: 3787184841576098133, guid: 1238c22257b6db6468bb6598552d71be, type: 3}
       propertyPath: m_Name
       value: AfterStepDisappear (2)
@@ -2699,7 +2699,7 @@ PrefabInstance:
     - target: {fileID: 3014633512023760090, guid: 1238c22257b6db6468bb6598552d71be, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8752984816967808646, guid: b63a287aa95a6c8439180a2c22c28d38, type: 3}
+      objectReference: {fileID: 2853544330580278502, guid: df97d1302474c164ea7ed85613910d50, type: 3}
     - target: {fileID: 3787184841576098133, guid: 1238c22257b6db6468bb6598552d71be, type: 3}
       propertyPath: m_Name
       value: AfterStepDisappear
@@ -3056,7 +3056,7 @@ PrefabInstance:
     - target: {fileID: 3014633512023760090, guid: 1238c22257b6db6468bb6598552d71be, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8752984816967808646, guid: b63a287aa95a6c8439180a2c22c28d38, type: 3}
+      objectReference: {fileID: 2853544330580278502, guid: df97d1302474c164ea7ed85613910d50, type: 3}
     - target: {fileID: 3787184841576098133, guid: 1238c22257b6db6468bb6598552d71be, type: 3}
       propertyPath: m_Name
       value: AfterStepDisappear (1)

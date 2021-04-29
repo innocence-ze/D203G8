@@ -8,12 +8,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DebugZeshi.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/Beta/MasterScene01 - A00-A10.unity
-    guid: 1247c8aacee71d4468ea3ca7242e767e
-  - enabled: 0
-    path: Assets/Scenes/Alpha/ALPHA_SCENE_FULL.unity
-    guid: 882442046aca0664690f11aa7891da7a
   - enabled: 1
     path: Assets/Scenes/Beta/A00.unity
     guid: f4512246c54b4974eb96bc632278ad2b
@@ -47,12 +41,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Beta/A10.unity
     guid: 7ea5fa1635290bf4ca9bfc437cf72594
-  - enabled: 0
-    path: Assets/Scenes/Beta/Main Menu.unity
-    guid: cc61fadc8b6ac8d44acf9ac72984fe68
-  - enabled: 0
-    path: Assets/Scenes/Alpha/End Menu.unity
-    guid: 91f7dc0862c77fb468dc97e6f34008b7
   - enabled: 1
     path: Assets/Scenes/Beta/A11.unity
     guid: 8ec318bf556a90943bdf713086ef2918
@@ -89,4 +77,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Beta/B07.unity
     guid: a7032ff80c62dea47941e8c1f2b5e908
+  - enabled: 1
+    path: Assets/Scenes/Beta/A13 - 2.unity
+    guid: f925cf445734a574dbd0823da90e96f2
+  - enabled: 1
+    path: Assets/Scenes/Beta/B01 - S.unity
+    guid: 835dcdbba0fd47941a3bdc62b9c8687c
   m_configObjects: {}
