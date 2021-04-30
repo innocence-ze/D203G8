@@ -6,14 +6,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider2D))]
 public class ToolTip : MonoBehaviour
 {
-    public GameObject myPanel;
-    public Text myText;
     public string tooltipText;
     private bool entered;
 
     private void Start()
     {
-        myPanel.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,8 +19,7 @@ public class ToolTip : MonoBehaviour
         {
             if (!entered)
             {
-                myPanel.SetActive(true);
-                myText.text = tooltipText;
+                GameManager.Singleton.uiMgr.ShowPanel<ToolTipPanel>((object)tooltipText);
                 entered = true;
             }
         }
@@ -33,7 +29,7 @@ public class ToolTip : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            myPanel.SetActive(false);
+            GameManager.Singleton.uiMgr.ClosePanel(typeof(ToolTipPanel).ToString());
         }
     }
 }
