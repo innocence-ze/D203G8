@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class MainMenuSwitch : MonoBehaviour
 {
+    public PCData init, cur;
+
     public List<GameObject> panels;
     List<bool> panelState = new List<bool>();
 
@@ -49,10 +51,14 @@ public class MainMenuSwitch : MonoBehaviour
         Open(panelIndex);
     }
 
-    public void ScaleBG()
+    public void BeginGame(bool bstart)
     {
+        if(bstart)
+        {
+            cur.Copy(init);
+        }    
         transform.GetChild(0).DOMoveY(bgMove, bgTime);
-        transform.GetChild(0).DOScale(bgScale, bgTime).OnComplete(()=>UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(startSceneIndex));
+        transform.GetChild(0).DOScale(bgScale, bgTime).OnComplete(()=>UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(cur.continueSceneIndex));
     }
 
     public void Quit()

@@ -138,6 +138,7 @@ public class PlayerCharacter : Character
     [SerializeField] SimpleEvent onIdle;
     [SerializeField] IntEvent onAttack;//开始攻击时，无论是否攻击到
     [SerializeField] Vec2Event onAttackObj;//攻击到物体时
+    [SerializeField] SimpleEvent onLand;
 
     Coroutine stateCoroutine;
 
@@ -632,6 +633,7 @@ public class PlayerCharacter : Character
 
     IEnumerator LandState()
     {
+        onLand?.Invoke();
         while (true)
         {
             yield return continueState;
@@ -955,9 +957,9 @@ public class PlayerCharacter : Character
     //////////////////////////////////////////////////////////////
 
 
-    public bool JumpCondition => !isJumping && JumpCommand && canJump && !hasJumped;
+    public bool JumpCondition => !isJumping && JumpCommand && canJump && !hasJumped && onGround;
 
-    public bool DoubleJumpCondition => canDoubleJump && hasJumped && !hasDoubleJump && JumpCommand && !isJumping;
+    public bool DoubleJumpCondition => canDoubleJump && !hasDoubleJump && JumpCommand && !isJumping && !onGround;
 
     public bool WallJumpCondition => canWallJump && JumpCommand && !isJumping;
 
@@ -1305,10 +1307,15 @@ public class PlayerCharacter : Character
         maxHp = data.maxHP;
         curHp = data.currentHP;
         SetAbilities(data.Abilities);
+        bornPos = transform.position;
+        if(data.x != 0 || data.y != 0 || data.z != 0)
+        {
+            transform.position = new Vector3(data.x, data.y, data.z);
+        }
     }
 
     //获取数据存到本地
-    public PCData GetData()
+    public PCData GetData(int nextScene, float x = 0, float y = 0, float z = 0)
     {
         data.currentHP = curHp;
         data.maxHP = maxHp;
@@ -1316,6 +1323,10 @@ public class PlayerCharacter : Character
         {
             data.Abilities[i] = GetAbilities()[i];
         }
+        data.continueSceneIndex = nextScene;
+        data.x = x;
+        data.y = y;
+        data.z = z;
         return data;
     }
 

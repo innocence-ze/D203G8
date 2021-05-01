@@ -31,11 +31,15 @@ public abstract class Character : MonoBehaviour, IHurtable
     protected float velocityX;
 
 
+    void Awake()
+    {
+
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        bornPos = transform.position;
-        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame

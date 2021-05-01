@@ -35,7 +35,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerCharacter>().SetHurtInfo(new object[2] { transform.position, damage });
+            collision.GetComponent<PlayerCharacter>().SetHurtInfo(new object[2] { (Vector2)transform.position, damage });
             OnDistroy();
         }
     }

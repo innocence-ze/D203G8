@@ -34,6 +34,7 @@ public abstract class Enemy : Character
     protected override void Start()
     {
         base.Start();
+        bornPos = transform.position;
         target = FindObjectOfType<PlayerCharacter>().transform;
         onChangeDir.AddListener(ChangeAttackPos);
     }
