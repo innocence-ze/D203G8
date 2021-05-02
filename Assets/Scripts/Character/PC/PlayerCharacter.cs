@@ -1302,7 +1302,7 @@ public class PlayerCharacter : Character
     }
 
     //从本地设置数据到玩家
-    public void SetData()
+    public void LoadData()
     {
         maxHp = data.maxHP;
         curHp = data.currentHP;
@@ -1315,7 +1315,7 @@ public class PlayerCharacter : Character
     }
 
     //获取数据存到本地
-    public PCData GetData(int nextScene, float x = 0, float y = 0, float z = 0)
+    public PCData SaveData(int nextScene, float x = 0, float y = 0, float z = 0)
     {
         data.currentHP = curHp;
         data.maxHP = maxHp;

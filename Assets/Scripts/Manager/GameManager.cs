@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
         InitRoomInfo();
 
-        pc.SetData();
+        pc.LoadData();
         if (room.roomEntranceDic.ContainsKey(RoomInfo.lastRoom))
             pc.transform.position = room.roomEntranceDic[RoomInfo.lastRoom].transform.position;
         

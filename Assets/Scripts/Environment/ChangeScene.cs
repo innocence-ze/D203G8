@@ -9,11 +9,18 @@ public class ChangeScene : MonoBehaviour
 
     public SimpleEvent OnChangeScene;
 
+    private void Awake()
+    {
+        //因为没有考虑到mainmenu
+        sceneIndex += 1;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if(collision.gameObject == GameManager.Singleton.pc.gameObject)
         {
-            GameManager.Singleton.pc.GetData(sceneIndex);
+            GameManager.Singleton.pc.SaveData(sceneIndex);
             OnChangeScene?.Invoke();
             StartCoroutine(LoadAsyncScreen());
         }

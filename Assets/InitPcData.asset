@@ -15,4 +15,7 @@ MonoBehaviour:
   currentHP: 10
   maxHP: 10
   Abilities: 01000001010000
-  startSceneIndex: 0
+  continueSceneIndex: 1
+  x: 0
+  y: 0
+  z: 0

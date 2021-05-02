@@ -24,9 +24,10 @@ public class RoomInfo : MonoBehaviour
         roomEntranceDic = new Dictionary<int, GameObject>();
         for (int i = 0; i < entrances.Length; i++)
         {
-            if (!roomEntranceDic.ContainsKey(entrances[i].lastRoomIndex))
+            //因为忘记mainmenu了，所以要+1
+            if (!roomEntranceDic.ContainsKey(entrances[i].lastRoomIndex+1))
             {
-                roomEntranceDic.Add(entrances[i].lastRoomIndex, entrances[i].EntrancePos);
+                roomEntranceDic.Add(entrances[i].lastRoomIndex+1, entrances[i].EntrancePos);
             }
         }
         lastRoom = curRoom;

@@ -11,7 +11,7 @@ public class FunctionUI : MonoBehaviour
     {
         var p = GameManager.Singleton.pc.transform.position;
 
-        GameManager.Singleton.pc.GetData(SceneManager.GetActiveScene().buildIndex, p.x, p.y, p.z);
+        GameManager.Singleton.pc.SaveData(SceneManager.GetActiveScene().buildIndex, p.x, p.y, p.z);
         StartCoroutine(LoadAsyncScreen());
     }
 
