@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DebugZeshi.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f1687ad356f63004aa472cbcf400bf3f
+  - enabled: 1
     path: Assets/Scenes/Beta/A00.unity
     guid: f4512246c54b4974eb96bc632278ad2b
   - enabled: 1
@@ -87,6 +90,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Beta/B03 - 2.unity
     guid: 3213231e272a07e4897b37ae143041c0
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: f1687ad356f63004aa472cbcf400bf3f
+    path: Assets/Scenes/Beta/B07 - 2.unity
+    guid: c3754f08f816cb74e98a4756a73a4a9b
   m_configObjects: {}
