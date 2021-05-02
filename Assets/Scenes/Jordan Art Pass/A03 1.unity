@@ -2012,6 +2012,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stalagmite Five (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6424808622840726121, guid: 80a677ee2ff31bc438a7fe4aae4f2b3c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424808622840726121, guid: 80a677ee2ff31bc438a7fe4aae4f2b3c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1047446583
+      objectReference: {fileID: 0}
     - target: {fileID: 8997587195845268999, guid: 80a677ee2ff31bc438a7fe4aae4f2b3c, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -9283,6 +9291,14 @@ PrefabInstance:
     - target: {fileID: 695445012452451321, guid: 8e74092295a96b347a9084b8e0f809a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 972343662202235877, guid: 8e74092295a96b347a9084b8e0f809a2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 972343662202235877, guid: 8e74092295a96b347a9084b8e0f809a2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1047446583
       objectReference: {fileID: 0}
     - target: {fileID: 4254426390257780621, guid: 8e74092295a96b347a9084b8e0f809a2, type: 3}
       propertyPath: m_Name
@@ -47755,7 +47771,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3659422586868531171, guid: 76b49e487725fc84e936d5a728859596, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429015276698926231, guid: 76b49e487725fc84e936d5a728859596, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4488669178409913651, guid: 76b49e487725fc84e936d5a728859596, type: 3}
       propertyPath: m_Pivot.x
@@ -47848,6 +47868,10 @@ PrefabInstance:
     - target: {fileID: 4488669178409913663, guid: 76b49e487725fc84e936d5a728859596, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502084771559221892, guid: 76b49e487725fc84e936d5a728859596, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76b49e487725fc84e936d5a728859596, type: 3}
@@ -59252,8 +59276,16 @@ PrefabInstance:
       value: Stalagmite Five
       objectReference: {fileID: 0}
     - target: {fileID: 6424808622840726121, guid: 80a677ee2ff31bc438a7fe4aae4f2b3c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424808622840726121, guid: 80a677ee2ff31bc438a7fe4aae4f2b3c, type: 3}
       propertyPath: m_SortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424808622840726121, guid: 80a677ee2ff31bc438a7fe4aae4f2b3c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1047446583
       objectReference: {fileID: 0}
     - target: {fileID: 8997587195845268999, guid: 80a677ee2ff31bc438a7fe4aae4f2b3c, type: 3}
       propertyPath: m_RootOrder

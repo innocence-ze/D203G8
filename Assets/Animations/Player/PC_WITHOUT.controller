@@ -1036,7 +1036,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8b9522d83de29a146b4e6deb445e3acb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 69bb1c605a54624468092a9384b9c503, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsFaceLeft
@@ -2968,10 +2968,10 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 6b95d924faa76f945a8ea864848788bb, type: 2}
+    m_Motion: {fileID: 7400000, guid: da58dcb0ac685d04497a3a8392d58298, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 0.75
     m_CycleOffset: 0
     m_DirectBlendParameter: HorizontalVelocity
     m_Mirror: 0
@@ -3390,9 +3390,9 @@ AnimatorStateMachine:
   - {fileID: -3744278133729616550}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -2112716709876954542}
-    second: []
   - first: {fileID: -2505665030977416083}
+    second: []
+  - first: {fileID: -2112716709876954542}
     second: []
   - first: {fileID: 4848458730133329857}
     second: []
@@ -4618,7 +4618,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dash
-  m_Speed: 1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7592928110499681380}
@@ -4635,7 +4635,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d3610fffe8d6fb7428af092d4ca1d5bf, type: 2}
+  m_Motion: {fileID: 7400000, guid: 69bb1c605a54624468092a9384b9c503, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsFaceLeft
