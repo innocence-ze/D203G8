@@ -332,7 +332,7 @@ Transform:
   - {fileID: 1881682783}
   - {fileID: 1014311901}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &257826148
 PrefabInstance:
@@ -541,11 +541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4130851572347207554, guid: 54f63b5a72d588a43a737eef9c14e507, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 118.36395
+      value: 118.28
       objectReference: {fileID: 0}
     - target: {fileID: 4130851572347207554, guid: 54f63b5a72d588a43a737eef9c14e507, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 34.21
+      value: 34.11
       objectReference: {fileID: 0}
     - target: {fileID: 4130851572347207554, guid: 54f63b5a72d588a43a737eef9c14e507, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26831,7 +26831,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 535544569, guid: 6b91bb4d1fc6aa949a13a841ae334780, type: 3}
       propertyPath: typingSpeed
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 827416731824438389, guid: 6b91bb4d1fc6aa949a13a841ae334780, type: 3}
       propertyPath: entrances.Array.size
